@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment, useState } from "react";
 import style from "./HomeLayout.module.scss";
 import classNames from "classnames/bind";
+import Header from "~/app/Header";
 
 const cx = classNames.bind(style);
 const HomeLayout = ({ children }) => {
@@ -15,11 +16,9 @@ const HomeLayout = ({ children }) => {
           <FontAwesomeIcon icon={faSpinner} />
         </div>
       ) : (
-        <div className={"theme"}>
-          {/* <Header /> */}
-          <div className={cx("wrapper")}>
-            <div className={cx("container")}>{children}</div>
-          </div>
+        <div className={cx("wrapper")}>
+          <Header />
+          <div className={cx("container")}>{children}</div>
           {/* <Footer /> */}
         </div>
       )}

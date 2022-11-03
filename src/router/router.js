@@ -1,5 +1,6 @@
 import { HomeLayout } from "~/layout";
 import { HomePage } from "~/page";
+
 const router = [
   {
     path: "/",
