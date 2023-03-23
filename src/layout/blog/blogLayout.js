@@ -2,7 +2,7 @@ import { Footer } from "~/components/footer/Footer"
 import { HeaderBlog } from "./HeaderBlog"
 import { BlogLayoutLeft } from "./BlogLayoutLeft"
 
-const BlogLayout = ({ children }) => {
+export const BlogLayout = ({ children }) => {
   return (
     <div className="WrapperBlog">
       <HeaderBlog />
@@ -20,5 +20,3 @@ const BlogLayout = ({ children }) => {
     </div>
   )
 }
-
-export default BlogLayout
