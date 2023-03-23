@@ -175,6 +175,7 @@
 // ////////
 .contact-form{
     flex: 1;
+    
 }
 .ButtonContact{
     font-weight: 500;
@@ -187,4 +188,24 @@
 padding: 4px 10px;
 
 
+}
+
+@media (max-width:740px) {
+    .contact-form{
+        display: none;
+    }
+    .FooterBody{
+        width: 100vw;
+        display: flex;
+        align-items: center;
+    }
+    .footer_bg_one{
+        display: none;
+    }
+    .footer_bg_two{
+        display: none;
+    }
+    .dk-footer-box-info{
+        flex: 1;
+    }
 }

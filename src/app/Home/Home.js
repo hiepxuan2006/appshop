@@ -1,14 +1,12 @@
 import { useEffect, useState } from "react"
 import { Slider } from "~/components/Slider/Slider"
 import { DocTitle } from "~/helper/DocTitle"
-import { ListCategory } from "./ListCategory"
-import { MenuBottomMobile } from "./MenuBottomMobile"
-import { SliderProduct } from "./SliderProduct"
-import { getProducts } from "~/services/productService"
-import { SliderPost } from "./SliderPost"
 import { getCategories } from "~/services/categoryService"
+import { getProducts } from "~/services/productService"
+import { ListCategory } from "./ListCategory"
+import { SliderPost } from "./SliderPost"
+import { SliderProduct } from "./SliderProduct"
 export const Home = ({ isOpenPage }) => {
-  const [showPage, setShowPage] = useState(false)
   const [products, setProducts] = useState([])
   const [categories, setCategories] = useState([])
   const _getProducts = async () => {
@@ -63,7 +61,6 @@ export const Home = ({ isOpenPage }) => {
         <SliderProduct title={"Lap top"} />
         <SliderPost />
       </div>
-      <MenuBottomMobile setShowPage={setShowPage} showPage={showPage} />
     </>
   )
 }

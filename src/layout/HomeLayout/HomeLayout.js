@@ -5,10 +5,12 @@ import { Fragment, useState } from "react"
 import Header from "~/app/Header"
 import { Footer } from "~/components/footer/Footer"
 import style from "./HomeLayout.module.scss"
+import { MenuBottomMobile } from "~/app/Home/MenuBottomMobile"
 
 const cx = classNames.bind(style)
 const HomeLayout = ({ children }) => {
   const [loading, setLoading] = useState(false)
+  const [showPage, setShowPage] = useState(false)
 
   return (
     <Fragment>
@@ -23,6 +25,7 @@ const HomeLayout = ({ children }) => {
           <Footer />
         </div>
       )}
+      <MenuBottomMobile setShowPage={setShowPage} showPage={showPage} />
     </Fragment>
   )
 }
