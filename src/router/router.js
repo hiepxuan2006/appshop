@@ -13,7 +13,7 @@ import { Register } from "~/components/auth/register/Register"
 import { HomeLayout } from "~/layout"
 import { CheckOrder } from "~/app/order/CheckOrder"
 import { ProductHomePage } from "~/app/store/ProductHomePage"
-import { BlogLayout } from "~/layout/blog/BlogLayout"
+import { BlogLayout } from "~/layout"
 import { HomeBlog } from "~/app/blog/HomeBlog"
 
 const router = [
