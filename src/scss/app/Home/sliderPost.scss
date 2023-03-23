@@ -1,0 +1,58 @@
+.SliderPostPage {
+    width: 100%;
+
+    .swiper-slide {
+        padding: 0 8px !important;
+    }
+}
+
+.mySwiperSliderPost{
+    width: 100%;
+    height: 300px;
+    margin-top: 20px;
+}
+
+.PostItem {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 10px;
+    box-shadow: var(--boxShadow);
+    border-radius: 10px;
+    cursor: pointer;
+
+    &:hover {
+        transform: scale(1.02);
+        transition: all .2s linear;
+        z-index: 100;
+    }
+
+}
+
+.ImagePost {
+    height: 170px;
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+
+    img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+}
+
+.TitlePost {
+    width: 100%;
+    text-align: left;
+}
+
+.TitleTileContent {
+    line-height: 1.6;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    display: -webkit-box;
+    word-wrap: break-word;
+}

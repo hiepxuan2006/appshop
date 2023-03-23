@@ -1,0 +1,56 @@
+.ListCategoryHomePage {
+    position: relative;
+    height: 100%;
+    box-shadow: var(--boxShadow);
+    width: 210px;
+    border-radius: 10px;
+
+    
+}
+
+
+.ItemCategoryHomePage{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    justify-content: space-between;
+    cursor: pointer;
+    padding: 10px !important;
+    &:hover{
+        border-radius: 6px;
+        background-color: rgba($color: #e8e8e8, $alpha: 1.0);
+    }
+    &:hover  .ModalSubCategory {
+         display: flex;
+    }
+   
+}
+
+
+.ModalSubCategory {
+    position: absolute;
+    left: 90%;
+    z-index: 1009;
+    height: 100%;
+    top: 0;
+    background-color: #fff;
+    box-shadow: var(--boxShadow);
+    width: calc(1200px - 210px);
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    display: none;
+    padding: 10px;
+    gap: 20px;
+
+}
+.SubCategoryItem{
+    display: flex;
+    flex-direction: column;
+}
+.LinkCategorySub{
+    padding: 4px 10px;
+    &:hover p{
+        color: var(--primary-color);
+    }
+}

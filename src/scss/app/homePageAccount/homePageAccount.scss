@@ -1,0 +1,470 @@
+.HomePageAccount {
+    width: 1200px;
+    margin: 20px auto;
+    border-radius: 10px;
+    min-height: 100%;
+    position: relative;
+    font-size: 18px;
+}
+
+.ColLeft {
+    background-color: #f6fbfc;
+    border-radius: 5px;
+    height: calc(100vh - 84px);
+    top: 74px;
+    position: -webkit-sticky;
+    position: sticky;
+}
+
+.HelloAccount {
+    height: 140px;
+    width: 100%;
+    background-color: var(--primary-color);
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    display: none;
+    align-items: start;
+    padding-top: 10px;
+    gap: 10px;
+
+    .ImageHello {
+        height: 50px;
+        width: 50px;
+        background-color: #f6fbfc;
+        border-radius: 50%;
+
+        img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+    }
+
+    .SayHello {
+        color: #f6fbfc;
+    }
+}
+
+@media (max-width:740px) {
+
+    // /////Home
+    .HomePageAccount {
+        width: 100vw;
+        position: relative;
+        margin: 0 auto;
+    }
+
+    .ColLeft {
+        position: absolute;
+        height: 0;
+
+    }
+
+    .HelloAccount {
+        display: flex;
+    }
+}
+
+// /////////////
+
+.HomePage-ColLeft {
+    padding: 10px;
+    border-radius: 15px;
+    background-color: #f6fbfc;
+
+
+
+}
+
+.container {
+    height: 100%;
+}
+
+.ItemMenu {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 12px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.HomePage-ColLeft .active {
+    color: var(--primary-color);
+    border-radius: 16px;
+    border: 2px solid var(--primary-color);
+}
+
+.HomePage-MenuItem {
+    color: #000;
+}
+
+@media (max-width:740px) {
+
+    .HomePage-ColLeft {
+        display: flex;
+        justify-content: space-between;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border: 1px solid var(--primary-color);
+        margin-bottom: 4px;
+
+        p {
+            display: none;
+        }
+    }
+
+    .hideOnMobile {
+        display: none !important;
+    }
+
+    .HomePage-ColRight {
+        margin-top: -60px;
+    }
+}
+
+// //////
+
+
+// /////home Account
+.AccountWelcome {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    border: 0.5px solid #e7e7e7;
+    border-radius: 10px;
+
+}
+
+.AccountImage {
+    height: 100px;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+}
+
+.AccountInfo {
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+    width: 100%;
+}
+
+.AccountInfoItem {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.CalendarIcon {
+    font-size: 24px;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    border-radius: 50%;
+}
+
+.SliderAccount {
+    box-shadow: var(--boxShadow);
+    padding: 10px;
+    border-radius: 10px;
+
+}
+
+.row+.row {
+    margin-top: 20px;
+}
+
+.BlockMember_box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    background-color: #f6fbfc;
+    border-radius: 10px;
+}
+
+.hiddenMobile {
+    display: none;
+}
+
+@media (max-width:740px) {
+
+    // /////Home
+    .row+.row {
+        margin-top: 0;
+    }
+
+    .AccountWelcome {
+        align-items: start;
+        border: 0;
+        margin-top: 4px;
+        gap: 4px;
+        background-color: #f6fbfc;
+    }
+
+    .AccountImage {
+        border: 2px solid var(--primary-color);
+        border-radius: 50%;
+        height: 80px;
+        width: 80px;
+
+        img {
+            height: 60%;
+            width: 60%;
+
+        }
+    }
+
+    .hiddenMobile {
+        display: flex;
+        flex-direction: column;
+        font-weight: 500;
+    }
+
+    .AccountInfo {
+        margin-bottom: 40px;
+        box-shadow: var(--boxShadow);
+        align-items: center;
+        font-size: 14px;
+        border-radius: 10px;
+        padding: 10px 0;
+        height: 100px;
+
+    }
+
+    .AccountInfoItem {
+        height: 100px;
+    }
+
+    .CalendarIcon {
+        font-size: 18px;
+        height: 30px;
+        width: 30px;
+    }
+
+
+
+}
+
+.BlockMember_gift-icon {
+    height: 100px;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 3px solid var(--primary-color);
+
+    img {
+        height: 40%;
+        width: 40%;
+        object-fit: cover;
+    }
+}
+
+// ////history order
+
+.HistoryOrder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.HeadingHistoryOrder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.OrderCount {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    align-items: center;
+    text-align: center;
+
+}
+
+.OrderPending,
+.OrderCompleted {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.OrderListContainer {
+    width: 100%;
+}
+
+.OrderListOption {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.OrderOptionItem {
+    cursor: pointer;
+}
+
+@media (max-width:740px) {
+
+    .HeadingHistoryOrder {
+        box-shadow: var(--boxShadow);
+        background-color: #f6fbfc;
+        width: 90%;
+        border-radius: 10px;
+    }
+
+    .OrderListOption {
+        overflow-x: scroll;
+        overflow-y: hidden;
+        width: 100%;
+        gap: 20px;
+        border-bottom: 1px solid #ccc;
+        padding: 4px;
+    }
+
+    .OrderListOption .active {
+        position: relative;
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            width: 100%;
+            background-color: var(--primary-color);
+            animation: border .25s linear;
+
+        }
+    }
+
+    @keyframes border {
+        0% {
+            width: 0;
+        }
+
+        100% {
+            width: 100%;
+        }
+    }
+
+    .OrderOptionItem {
+        width: 100%;
+        flex: 1;
+        display: block;
+        white-space: nowrap;
+
+    }
+
+    .OrderListTable {
+        display: none;
+    }
+}
+
+// ///////////// rank
+.RankAccount {
+    width: 700px;
+    margin: 0 auto;
+
+}
+
+.RankAccountHead {
+    background-color: var(--primary-color);
+    height: 160px;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+
+}
+
+.RankAccountImage {
+    height: 100px;
+    width: 100px;
+    overflow: hidden;
+    background-color: #f6fbfc;
+    border-radius: 50%;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+.RankAccountSayHello {
+    font-weight: 600;
+    color: #f6fbfc;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.FormRanking{
+    color: var(--primary-color);
+    font-size: 18px;
+    position: relative;
+}
+.RankLevelStatus{
+    position: relative;
+    background-color: #ffffff;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    width: 90%;
+    margin: -40px auto 0 auto;
+    box-shadow: var(--boxShadow);
+    padding: 10px;
+    flex-direction: column;
+    justify-content: center;
+}
+.imageStart{
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 20%;
+    left: 0;
+    img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+.FormRanking{
+    flex:1;
+}
+.imageEnd{
+    position: absolute;
+    right: 0;
+    top: 20%;
+}

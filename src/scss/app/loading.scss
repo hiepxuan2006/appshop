@@ -1,0 +1,37 @@
+.ModalFullscreen {
+    height: 100%;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.6);
+    position: absolute;
+    top:50% ;
+    left: 50%;
+    transform: translate(-50% , -50%);
+    z-index: 100;
+    pointer-events: none;
+    .modal-content {
+        border: none;
+
+    }
+}
+
+.Loading {
+    height: 120px;
+    width: 150px;
+    overflow: hidden;
+    position: relative;
+
+    img {
+        height: 100%;
+        width: 100%;
+        object-fit: contain;
+    }
+}
+
+
+
+
+@keyframes spiner {
+    to {
+        transform: rotate(360deg);
+    }
+}

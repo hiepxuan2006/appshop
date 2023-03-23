@@ -1,0 +1,186 @@
+.CartHomePage {
+    width: 700px;
+    margin: 20px auto;
+    user-select: none;
+    min-height: 100vh;
+}
+
+.CartHeading {
+    height: 50px;
+    width: 100%;
+    color: var(--primary-color);
+    font-size: 18px;
+    padding: 0 4px;
+    position: sticky;
+    top: 64px;
+    background-color: #fff;
+    z-index: 100;
+
+}
+.CartBody{
+    margin-bottom: 20px;
+    // overflow-y: auto;
+    // overflow-x: hidden;
+    position: relative;
+    user-select: none;
+    
+}
+.CartBodyItem {
+    height: 100px;
+    width: 100%;
+    position: relative;
+    padding:0 10px;
+    padding: 6px 0;
+    &::after{
+        position: absolute;
+        content: "";
+        height: 1px;
+        background-color: #ccc;
+        width: 100%;
+        left: 0;
+        top: 100%;
+    }
+}
+
+.ImageItemCart {
+    height: 90%;
+    width: 25%;
+    padding: 10px;
+
+    img {
+        height: 100%;
+        width: 100%;
+        object-fit: contain;
+    }
+}
+
+.InfoProductCartItem {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 100%;
+}
+.PriceProductCart{
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    align-items: flex-end;
+
+}
+.PriceRetailProduct {
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+.PriceProductCartNoSale {
+    text-decoration: line-through;
+}
+
+.DiscountSale {
+    padding: 0px 6px;
+    color: #fff;
+    font-weight: 500;
+    background-color: var(--primary-color);
+    border-radius: 4px;
+}
+
+.CartAction{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+}
+
+.QuantityCart{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 10px;
+    user-select: none;
+    border: 1px solid #ccc;
+
+}
+.DeleteProductCart{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    &:hover{
+        transform: scale(1.2);
+        transition: all .2s linear;
+    }
+
+}
+.IconQuanTity{
+    cursor: pointer;
+    &:hover{
+        transform: scale(1.1);
+        transition: all .1s linear;
+    }
+}
+.CartActionBuy{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    height: 180px;
+    box-shadow: var(--boxShadow);
+    bottom: 4px;
+    margin: 0 auto;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 10px;
+}
+.CountPriceTotal{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    p{
+        font-weight: 600;
+        color: var(--primary-color);
+    }
+}
+.ButtonBuyCart{
+    padding: 10px 0;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    border-radius: 6px;
+    color: var(--primary-color);
+    cursor: pointer;
+}
+
+.ButtonContinue{
+    background-color: #fff;
+    &:hover{
+        background-color: #dc3545;
+        color: #fff;
+    }
+}
+.ButtonNext{
+    background-color: var(--primary-color);
+    color: #fff;
+}
+// ///////////////////
+
+.BodyCartEmpty{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    height: 160px;
+}
+.ButtonReturnHome{
+    align-items: center;
+    justify-content: center;
+    padding: 10px 16px;
+    background-color: var(--primary-color);
+    border-radius: 10px;
+    font-weight: 600;
+    color: #fff;
+    &:hover{
+        color: #fff;
+    }
+}

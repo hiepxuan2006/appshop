@@ -1,86 +1,156 @@
-import style from "./Header.module.scss";
-import classNames from "classnames/bind";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faBars,
-  faCartArrowDown,
-  faClose,
+  faBarsStaggered,
+  faCartFlatbed,
+  faChevronRight,
   faSearch,
-  faUser,
-} from "@fortawesome/free-solid-svg-icons";
-import { useEffect, useRef, useState } from "react";
-const cx = classNames.bind(style);
-const logo = require("~/assets/logo.jpg");
+  faTruckFast,
+  faUserCircle,
+} from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import classNames from "classnames/bind"
+import { Fragment, useContext, useEffect, useState } from "react"
+import Modal from "react-modal"
+import { Link } from "react-router-dom"
+import { DataContext } from "~/context/AppContext"
+import { getCategories } from "~/services/categoryService"
+import style from "./Header.module.scss"
+const cx = classNames.bind(style)
+const logo = require("~/assets/logo.png")
 
-const Header = () => {
-  const [hideBarsMobile, setHideBarsMobile] = useState(false);
-  const [scrollY, setScrollY] = useState(0);
-  const handleHideBars = () => {
-    setHideBarsMobile(!hideBarsMobile);
-  };
+const Header = ({ isHidden = true }) => {
+  const [modalIsOpen, setIsOpen] = useState(false)
+  const [categories, setCategories] = useState([])
+  const [hideOn, setHideOn] = useState(false)
+
+  const { isLogin } = useContext(DataContext)
+  const handleCategory = () => {
+    setIsOpen(!modalIsOpen)
+  }
+
+  const handleCloseModal = () => {
+    setIsOpen(false)
+  }
+
   useEffect(() => {
-    const handleScrollY = () => {
-      setScrollY(window.scrollY);
-    };
-    window.addEventListener("scroll", handleScrollY);
-  }, [scrollY]);
-  console.log(scrollY);
+    const fetchCategories = async () => {
+      const { data, success } = await getCategories()
+      if (success) {
+        setCategories(data)
+      }
+    }
+    fetchCategories()
+  }, [])
+
+  const [scrollY, setScrollY] = useState(window.scrollY)
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY)
+    window.addEventListener("scroll", handleScroll)
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+    }
+  }, [])
+  const isLocationHome = window.location.pathname === "/"
+  console.log(modalIsOpen)
   return (
-    <div className={cx("wrapper")}>
-      <div className={cx("inner")}>
-        <div className={cx("top")}>
+    <div className={`${cx("wrapper")}  ${scrollY > 0 ? cx("zIndex") : ""}`}>
+      <div className={`${cx("inner")}`}>
+        <Link to="/" style={{ height: "100%" }}>
           <div className={cx("logo")}>
             <img src={logo} alt="" />
           </div>
-          <div className={cx("center")}>
-            <div className={cx("search")}>
-              <input type="text" />
-              <div className={cx("icon")}>
-                <FontAwesomeIcon icon={faSearch} />
-              </div>
-            </div>
-          </div>
-          <div className={cx("action")}>
-            <div className={cx("cart")}>
-              <FontAwesomeIcon icon={faCartArrowDown} />
-              <div className={cx("quantity-cart")}>
-                <p>3</p>
-              </div>
-            </div>
-            <div className={cx("user")}>
-              <FontAwesomeIcon icon={faUser} />
-            </div>
-            <div
-              for="checked_bars"
-              onClick={() => handleHideBars()}
-              className={cx("menu")}
-            >
-              {hideBarsMobile ? (
-                <FontAwesomeIcon icon={faClose} />
-              ) : (
-                <FontAwesomeIcon icon={faBars} />
-              )}
-            </div>
-          </div>
+        </Link>
+        <div className={cx("danh-muc")} onClick={handleCategory}>
+          <FontAwesomeIcon icon={faBarsStaggered} />
+          <p>Danh mục</p>
         </div>
         <div
-          className={`${
-            hideBarsMobile ? cx("bot", "on-show") : cx("bot", "hidden")
+          className={`${cx("search")} ${
+            !isHidden || !isLocationHome || scrollY > 0
+              ? cx("positionRelative")
+              : ""
           }`}
         >
+          <FontAwesomeIcon className={cx("icon-search")} icon={faSearch} />
+          <input type="text" placeholder="Bạn cần tìm gì ..." />
+        </div>
+        <Link to={"/tra-cuu-don-hang"} className={cx("dilivery-tracking")}>
+          <FontAwesomeIcon icon={faTruckFast} />
+          <p>Tra cứu đơn hàng</p>
+        </Link>
+        <Link to="/cart" className={cx("cart")}>
+          <FontAwesomeIcon className={cx("icon-cart")} icon={faCartFlatbed} />
+          <p className={cx("quantity")}>2</p>
+          <p>Giỏ hàng</p>
+        </Link>
+        {isLogin ? (
+          <Fragment>
+            <div className={cx("account")} onClick={() => setHideOn(!hideOn)}>
+              <FontAwesomeIcon icon={faUserCircle} />
+              <p>name</p>
+            </div>
+            <ul className={`${hideOn ? cx("tooltipAccount") : "d-none"}`}>
+              <li>
+                <Link to={"/account/homepage"}>Smember</Link>
+              </li>
+              <li>Đăng xuất</li>
+            </ul>
+          </Fragment>
+        ) : (
+          <Link to={"/account"} className={cx("account")}>
+            <FontAwesomeIcon icon={faUserCircle} />
+            <p>Đăng nhập</p>
+          </Link>
+        )}
+      </div>
+      {isLocationHome && isHidden ? (
+        <div
+          className={`${cx("clear")}  ${scrollY > 0 ? cx("innerSticky") : ""}`}
+        ></div>
+      ) : (
+        ""
+      )}
+      <div
+        onClick={handleCategory}
+        onRequestClose={handleCloseModal}
+        className={`${cx("modal")} ${modalIsOpen ? cx("hideOnModal") : ""}`}
+      >
+        <div className={cx("inner-modal")}>
           <ul className={cx("list-category")}>
-            <li className={cx("item-category")}>home</li>
-            <li className={cx("item-category")}>home</li>
-            <li className={cx("item-category")}>home</li>
-            <li className={cx("item-category")}>home</li>
-            <li className={cx("item-category")}>home</li>
-            <li className={cx("item-category")}>home</li>
-            <li className={cx("item-category")}>home</li>
+            {categories.length &&
+              categories.map((item, key) => {
+                return (
+                  <li>
+                    <p>{item.name}</p>
+                    <FontAwesomeIcon icon={faChevronRight} />
+
+                    <div className={cx("category-child")}>
+                      {item.children.length &&
+                        item.children.map((item) => {
+                          return (
+                            <div className={cx("heading-category-children")}>
+                              {item.name}
+
+                              {item.children.length &&
+                                item.children.map((item) => {
+                                  return (
+                                    <Link to="/cart" className={cx("item")}>
+                                      <p> {item.name}</p>
+                                    </Link>
+                                  )
+                                })}
+                            </div>
+                          )
+                        })}
+                    </div>
+                  </li>
+                )
+              })}
           </ul>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

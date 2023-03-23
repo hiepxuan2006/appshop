@@ -1,0 +1,198 @@
+.HomePageWrapper {
+    // height: 1000px;
+    width: 1200px;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+.HomePageSlider {
+    display: flex;
+    height: 380px;
+    gap: 10px;
+    width: 100%;
+
+
+}
+
+.SliderHomePage {
+    width: 100%;
+    height: 380px;
+    flex: 2;
+    border-radius: 10px;
+    z-index: 1000;
+    overflow: hidden;
+    box-shadow: var(--boxShadow);
+}
+
+.mySwiper2 {
+    height:80%;
+}
+
+.mySwiper {
+    height: 20%;;
+    animation: width-in-out .25s linear;
+
+}
+.mySwiper .swiper-wrapper{
+    gap: 10px;
+}
+.mySwiper .swiper-slide-thumb-active {
+    transition: all .25s linear;
+    position: relative;
+    font-weight: bold !important;
+    font-weight: 600;
+
+    &::before {
+        content: "";
+        position: absolute;
+        height: 4px;
+        background-color: var(--primary-color);
+        bottom: 0;
+        left: 0;
+        right: 0;
+        animation: width-in-out .25s linear;
+
+    }
+}
+@keyframes width-in-out {
+    0% {
+        width: 0;
+        opacity: 0;
+    }
+    100%{
+        width: 100%;
+        opacity: 1;
+    }
+}
+
+.swiper {
+    width: 100%;
+    // height: 100%;
+    margin: 0;
+    animation: width-in-out .25s linear;
+
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+
+    /* Center slide text vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+.swiper-button-prev,
+.swiper-button-next {
+    display: none;
+}
+
+.swiper:hover+.swiper-button-next {
+    display: block;
+}
+
+.swiper:hover+.swiper-button-prev {
+    display: block;
+}
+.DescriptionSlider{
+    font-size: 14px;
+    color: #353434;
+    width: 100%;
+}
+
+// //////////////
+
+
+// /////
+.TicketHomePage{
+    height: 100%;
+    box-shadow: var(--boxShadow);
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.TicketItem{
+    height: calc(100% / 3);
+    width: 250px;
+    img{
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+}
+
+// /////////////
+@media (max-width:740px) {
+.ListCategoryHomePage{
+    display: none;
+}
+.TicketHomePage{
+    display: none;
+    
+}
+.HomePageWrapper{
+    width: 100vw;
+    
+}
+.HomePageSlider{
+    height: 220px;
+    width: 100vw;
+}
+.swiper{
+    width: 96%;
+    margin: 0 auto;
+    height: 160px;
+    border-radius: 10px;
+}
+.mySwiper{
+    // display: none;
+    height: 10px;
+    margin: 10px auto;
+    width: 100%;
+}
+.mySwiper img{
+    display: none;
+}
+.mySwiper .swiper-wrapper{
+    justify-content: center;
+    gap: 10px;
+}
+.DescriptionSlider{
+    display: none;
+}
+.mySwiper .swiper-slide{
+    width: 10px !important;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #000;
+}
+
+.swiper-slide-thumb-active{
+    width: 24px !important;
+    background-color: red !important;
+    &::before{
+        display: none;
+    }
+}
+.SliderHomePage{
+    border: none;
+    margin-top: 40px;
+    width: 100%;
+}
+
+}

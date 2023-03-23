@@ -1,0 +1,111 @@
+.inner {
+    width: 700px;
+    margin: 0 auto;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+h2{
+    margin-bottom: 20px;
+}
+.image{
+    margin-top: 40px;
+    height: 250px;
+    width: 250px;
+    img{
+        height: 100%;
+        width: 100%;
+        object-fit: contain;
+    }
+}
+
+.input-text {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 0 10px;
+    position: relative;
+    input{
+        border: 1px solid #eee;
+        padding:12px 10px ;
+        width: 100%;
+        background-color: #fff;
+        border-radius: 6px;
+        outline: none;
+        &:not(:placeholder-shown)  ~  label , 
+        &:focus ~ label{
+            top: 0;
+            padding: 4px;
+            background-color: #fff;
+            font-size: 14px;
+            
+
+        }
+        &:not(:placeholder-shown)  ~  label{
+            color:#343434;
+        }
+        &:focus ~ label{
+            color: var(--primary-color);
+            
+
+        }
+        &:focus{
+            border: 1px solid var(--primary-color);
+        }
+        
+    }
+    label{
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 20px;
+        margin: 0;
+        user-select: none;
+        pointer-events: none;
+        transition: all .25s linear;
+        color: #ccc;
+    }
+    
+}
+.btn-login{
+    padding: 14px 10px;
+    width: 100%;
+    margin: 20px;
+    border: none;
+    color: #fff;
+    border-radius: 999px;
+    background-color: var(--primary-color);
+    cursor: pointer;
+}
+.btn-login-gg{
+    display: flex;
+    padding: 14px 10px;
+    width: 100%;
+    margin: 20px;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    color: #000;
+    gap: 10px;
+    font-size: 2rem;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+.node-register{
+    display: flex;
+    gap: 6px;
+    a{
+        color: var(--primary-color);
+    }
+    margin-bottom: 20px;
+}
+
+
+// ///////////////////
+@media (max-width:740px) {
+   .inner{
+    width: 100vw;
+    padding: 0 4px;
+   }
+}

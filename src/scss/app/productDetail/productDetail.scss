@@ -1,0 +1,144 @@
+.ProductDetailPage {
+    width: 1200px;
+    margin: 0 auto;
+    overflow: hidden;
+    padding-top: 20px;
+}
+
+.ProductDetailTitle {
+    position: relative;
+
+    &::after {
+        content: '';
+        position: absolute;
+        height: 2px;
+        width: 100%;
+        background-color: var(--primary-color);
+    }
+}
+
+.ProductDetailInfo {
+    padding: 20px 0;
+    margin-bottom: 20px;
+
+    position: relative;
+
+    &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        height: 2px;
+        bottom: 0;
+
+        width: 100%;
+        background-color: var(--primary-color);
+    }
+
+
+}
+
+// ///////////
+.valueAttribute {
+    display: flex;
+    gap: 10px;
+
+    .active{
+        border: 2px solid var(--primary-color);
+    }
+}
+
+h2 {
+    margin: 0;
+    padding: 0;
+}
+
+.valueAttributeItem {
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex; align-items: center;
+    gap: 4px;
+}
+.StyleColor{
+    border: 1px solid var(--primary-color);
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+}
+
+.ActionBuyProduct {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    width: 100%;
+
+}
+
+.BuyNow {
+    padding: 10px;
+    flex: 1;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+
+    background-color: var(--primary-color);
+    color: #fff;
+    cursor: pointer;
+
+    p {
+        font-weight: 600;
+    }
+}
+
+.AddTocart {
+    padding: 10px;
+    height: 70px;
+    width: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px !important;
+    border: 2px solid var(--primary-color);
+    border-radius: 10px;
+    cursor: pointer;
+    color: var(--primary-color);
+    flex-direction: column;
+
+    span {
+        font-size: 10px;
+        white-space: nowrap;
+    }
+}
+
+.ActionAmortization {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.ActionAmortizationItem {
+    padding: 10px;
+    background-color: #4d82f5;
+    border-radius: 10px;
+    flex: 1;
+    text-align: center;
+    color: #fff;
+    cursor: pointer;
+
+    p {
+        font-size: 18px;
+        font-weight: 600;
+    }
+}
+
+.InfoProduct {
+    width: 100%;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    overflow: hidden;
+}
