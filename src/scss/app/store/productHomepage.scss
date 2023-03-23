@@ -3,7 +3,8 @@
     margin: 20px auto;
     padding: 20px 0;
     position: relative;
-    &::after{
+
+    &::after {
         content: '';
         position: absolute;
         height: 1px;
@@ -29,6 +30,13 @@
 
 }
 
+.BrandProductItemHome {
+    padding: 4px 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
 .FilterProduct {
     display: flex;
     flex-direction: column;
@@ -48,10 +56,13 @@
     padding: 6px 10px;
     border: 1px solid #ccc;
     border-radius: 6px;
+    white-space: nowrap;
 }
 
-.ListProductHome{
+.ListProductHome {
     justify-content: space-between;
+    width: 100%;
+    margin: 0;
 }
 
 .ProductItemHome {
@@ -69,10 +80,12 @@
     border-radius: 10px;
     position: relative;
     cursor: pointer;
-    &:hover > .ImageProductItem{
+
+    &:hover>.ImageProductItem {
         transform: scale(1.1);
         transition: all .2s linear;
     }
+
     &:hover {
         transform: scale(1.03);
         transition: all .2s linear;
@@ -102,8 +115,8 @@
 
 .ProductItemInfo {
     margin-top: 20px;
-display: flex;
-flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 .ProductItemTitle {
@@ -114,6 +127,7 @@ flex-direction: column;
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
+    overflow: hidden;
 
     p {
         font-weight: 600;
@@ -132,7 +146,8 @@ flex-direction: column;
     margin-top: 10px;
     justify-content: center;
 }
-.ProductLike{
+
+.ProductLike {
     display: flex;
     align-items: flex-end;
     margin-top: 10px;
@@ -141,7 +156,7 @@ flex-direction: column;
     justify-content: end;
 }
 
-.MoreListProduct{
+.MoreListProduct {
     width: 100%;
     display: flex;
     align-items: center;
@@ -149,11 +164,45 @@ flex-direction: column;
     margin-top: 20px;
     position: relative;
     margin-bottom: 10px;
-    .ButtonMore{
+
+    .ButtonMore {
         padding: 6px 10px;
         box-shadow: var(--boxShadow);
         border-radius: 6px;
         color: var(--primary-color);
     }
-  
+
+}
+
+@media (max-width:740px) {
+    .ProductHomePage {
+        width: 100vw;
+    }
+
+    .BrandProductHome {
+        overflow-x: scroll;
+    }
+
+    .ProductItemHome {
+        width: 49%;
+    }
+
+    .ProductItemPrice {
+        p {
+            font-size: 13px;
+            font-weight: 400;
+        }
+    }
+
+    .FilterList {
+        overflow-x: scroll;
+    }
+
+    .BrandProductHome {
+        overflow-x: scroll;
+
+    }
+    .BrandProductHome , .FilterCategory ,.FilterProduct {
+        padding: 0 4px;
+    }
 }

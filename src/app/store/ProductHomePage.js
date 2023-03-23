@@ -12,17 +12,19 @@ export const ProductHomePage = () => {
   return (
     <div className="ProductHomePage">
       <div className="BrandProductHome">
-        <h3>Brand : </h3>
-        <Link to="#" className="BrandProductItem">
+        <Link to="#" className="BrandProductItemHome">
           <p>Samsung</p>
         </Link>
-        <Link to="#" className="BrandProductItem">
+        <Link to="#" className="BrandProductItemHome">
           <p>Samsung</p>
         </Link>
-        <Link to="#" className="BrandProductItem">
+        <Link to="#" className="BrandProductItemHome">
           <p>Samsung</p>
         </Link>
-        <Link to="#" className="BrandProductItem">
+        <Link to="#" className="BrandProductItemHome">
+          <p>Samsung</p>
+        </Link>
+        <Link to="#" className="BrandProductItemHome">
           <p>Samsung</p>
         </Link>
       </div>
@@ -30,10 +32,10 @@ export const ProductHomePage = () => {
       <div className="FilterCategory">
         <h3>Chọn theo hệ điều hành</h3>
         <div className="BrandProductHome">
-          <Link to="#" className="BrandProductItem">
+          <Link to="#" className="BrandProductItemHome">
             <p>Android</p>
           </Link>
-          <Link to="#" className="BrandProductItem">
+          <Link to="#" className="BrandProductItemHome">
             <p>IOS</p>
           </Link>
         </div>

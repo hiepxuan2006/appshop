@@ -97,7 +97,7 @@ export const HomeBlog = () => {
               </div>
             </div>
           </div>
-          <div className="col col-md-4">
+          <div className="col col-md-4 PreviewPosts">
             <div className="">
               <h2 className="HeadingPreview">Trên tay mới nhất</h2>
               <PreviewListPost />

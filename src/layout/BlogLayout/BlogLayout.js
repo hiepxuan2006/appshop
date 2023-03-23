@@ -7,7 +7,7 @@ const BlogLayout = ({ children }) => {
     <div className="WrapperBlog">
       <HeaderBlog />
       <div className="ContainerBlog">
-        <div className="row">
+        <div className="row ContainerBlogRow gap-3 w-100">
           <div className="col col-md-3">
             <BlogLayoutLeft />
           </div>
