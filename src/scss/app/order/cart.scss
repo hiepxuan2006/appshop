@@ -2,7 +2,8 @@
     width: 700px;
     margin: 20px auto;
     user-select: none;
-    min-height: 100vh;
+    min-height: calc(100vh - 100px);
+    
 }
 
 .CartHeading {
@@ -173,14 +174,29 @@
     height: 160px;
 }
 .ButtonReturnHome{
+    display: flex;
     align-items: center;
     justify-content: center;
     padding: 10px 16px;
     background-color: var(--primary-color);
     border-radius: 10px;
     font-weight: 600;
-    color: #fff;
+    color: #fff !important;
     &:hover{
         color: #fff;
+    }
+}
+// //////////////
+@media (max-width:740px) {
+    .CartHomePage{
+        width: 100vw;
+        padding: 0 4px;
+        min-height: calc(100vh - 480px);
+    }
+    .CartActionBuy{
+        // position: fixed;
+        // bottom: 72px;
+        // background-color: #fff;
+        // z-index: 1001;
     }
 }

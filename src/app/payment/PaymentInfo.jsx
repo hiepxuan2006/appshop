@@ -195,9 +195,9 @@ export const PaymentInfo = () => {
         </div>
         <div className="CartActionPayment">
           <div className="ButtonBuy ButtonNext">Tiến Tục</div>
-          <div className="ButtonBuy ButtonContinue">
+          <Link to="/" className="ButtonBuy ButtonContinue">
             Chọn Thêm Sản Phẩm Khác
-          </div>
+          </Link>
         </div>
       </div>
     </Payment>

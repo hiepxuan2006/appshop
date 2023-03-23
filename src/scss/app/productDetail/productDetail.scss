@@ -142,3 +142,60 @@ h2 {
     padding: 10px;
     overflow: hidden;
 }
+
+@media (max-width:740px) {
+    .ProductDetailPage{
+        width: 100vw;
+    }
+    .ProductDetailInfoBody{
+        flex-wrap: wrap !important;
+        display: flex;
+        flex-direction: column;
+    }
+    .ProductDetailContent{
+    }
+    .PriceProductDetail{
+        padding: 0 4px;
+        justify-content: flex-start !important;
+        gap: 20px !important;
+    }
+    .AttributeProduct{
+        padding: 0 4px;
+    }
+    .valueAttributeItem {
+        padding: 12px !important;
+    }
+    .ActionBuyProduct{
+        gap: 4px;
+        padding:0 4px;
+    }
+    .BuyNow{
+        padding: 4px 0;
+        span{
+            white-space: nowrap;
+            font-size: 14px;
+        }
+    }
+    .AddTocart{
+        padding: 4px;
+        font-size: 28px !important;
+        height: 60px;
+        width: 60px;
+        span{
+            display: none;
+        }
+    }
+    .ActionAmortization{
+        padding: 0 4px;
+        gap: 4px;
+        font-size: 16px;
+    }
+    .ActionAmortizationItem{
+        padding: 6px;
+        span{
+            width: 100%;
+            white-space: nowrap;
+            font-size: 14px;
+        }
+    }
+}

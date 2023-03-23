@@ -288,7 +288,7 @@
     &:hover {
         background-color: var(--primary-color);
         color: #fff;
-        transition: all .2s linear ;
+        transition: all .2s linear;
     }
 }
 
@@ -297,7 +297,7 @@
 }
 
 // //////////////
-.PaymentCompleteInfo{
+.PaymentCompleteInfo {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -306,7 +306,8 @@
     background-color: #a7d6a7;
     border-radius: 10px;
 }
-.PaymentProduct{
+
+.PaymentProduct {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -315,26 +316,29 @@
     padding: 10px;
     border-radius: 10px;
 }
-.PaymentProductItem{
+
+.PaymentProductItem {
     display: flex;
     gap: 10px;
     height: 100px;
     border-radius: 10px;
     position: relative;
-border: 1px solid #ccc;
+    border: 1px solid #ccc;
 }
-.PaymentProductImage{
+
+.PaymentProductImage {
     height: 100px;
     width: 25%;
     padding: 10px;
-    img{
+
+    img {
         height: 100%;
         width: 100%;
         object-fit: contain;
     }
 }
 
-.PaymentCompleteButton{
+.PaymentCompleteButton {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -344,9 +348,10 @@ border: 1px solid #ccc;
     cursor: pointer;
 
 }
-.PaymentCompleteButtonIcon{
+
+.PaymentCompleteButtonIcon {
     width: 100%;
-    padding:4px 6px;
+    padding: 4px 6px;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -355,9 +360,32 @@ border: 1px solid #ccc;
     color: #fff;
     font-weight: 500;
 }
-.CheckOrderComplete{
+
+.CheckOrderComplete {
     background-color: #87b4f4;
 }
-.NextBuyProduct{
+
+.NextBuyProduct {
     background-color: var(--primary-color);
+}
+
+// //////////
+@media (max-width:740px) {
+    .PaymentPage {
+        width: 100vw;
+       
+    }
+
+    .PaymentHeaderItem {
+        justify-content: center;
+
+        p {
+            text-align: center;
+
+        }
+    }
+    .DeliveryAddress{
+        flex-direction: column;
+    }
+    
 }

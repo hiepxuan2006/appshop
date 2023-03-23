@@ -138,11 +138,11 @@ export const ProductDetail = () => {
             )}
           </div>
           <div className="ProductDetailInfo container">
-            <div className="row flex-nowrap gap-3">
+            <div className="row flex-nowrap ProductDetailInfoBody gap-3">
               <div className="col col-md-4">
                 <ImageSlideThumb product={product} />
               </div>
-              <div className="col col-md-5">
+              <div className="col ProductDetailContent col-md-5">
                 <div className="PriceProductDetail d-flex gap-3 justify-content-between">
                   <h1>
                     {variantChose
@@ -158,8 +158,8 @@ export const ProductDetail = () => {
                     product.attributes.map((item, key) => {
                       return (
                         <div className="AttributeProductItem">
-                          <h2>{item.name} :</h2>
-                          <ul className="valueAttribute">
+                          <h2 className="mb-4">{item.name} :</h2>
+                          <ul className="valueAttribute mb-4">
                             {item.values.map((value, key) => {
                               return (
                                 <li

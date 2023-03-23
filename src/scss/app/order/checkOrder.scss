@@ -41,11 +41,12 @@
     flex-direction: column;
     gap: 10px;
     justify-content: center;
+    z-index: 5;
 }
 
 .CheckOrderButton {
     margin-top: 10px;
-    padding:  10px;
+    padding: 10px;
     text-align: center;
     width: 100%;
     font-weight: 500;
@@ -53,4 +54,81 @@
     border-radius: 10px;
     color: #fff;
     cursor: pointer;
+}
+
+@media (max-width:740px) {
+    .CheckOrderPage {
+        width: 100vw;
+    }
+
+    .CheckOrder {
+        width: 70% !important;
+        justify-content: flex-center;
+        align-items: flex-end;
+        gap: 0;
+    }
+
+    .CheckOrderPageImage {
+        height: 120px;
+        width: 120px;
+        z-index: 100;
+    }
+
+    .CheckOrderPageBg {
+
+        top: -290px;
+        left: -750px;
+    }
+
+    .FormInput {
+        width: 100%;
+    }
+
+    .hiddenMobile {
+        display: none;
+    }
+
+    .CheckOrderButton {
+        width: 50%;
+    }
+    .CheckLoginButton{
+        margin-top: 10px;
+        padding: 10px;
+        text-align: center;
+        width: 120%;
+        font-weight: 500;
+        background-color: var(--primary-color);
+        border-radius: 10px;
+        color: #fff;
+        cursor: pointer;
+        color: #fff !important;
+        display: block !important;
+    }
+    .OptionCheckOrder{
+        display: block !important;
+        width: 120%;
+        text-align: center;
+        padding: 10px 0;
+        position: relative;
+        &::after{
+            content: '';
+            position: absolute;
+            height: 1px;
+            width: 42%;
+            background-color: #333;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        &::before{
+            content: '';
+            position: absolute;
+            height: 1px;
+            width: 42%;
+            background-color: #333;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    }
 }

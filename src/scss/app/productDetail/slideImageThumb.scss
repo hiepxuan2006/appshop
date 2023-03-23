@@ -50,6 +50,7 @@
     margin-top: 20px;
     .swiper-wrapper {
         align-items: center;
+        width: 100% !important;
     }
     .swiper-slide {
         height: 100%;
@@ -65,5 +66,29 @@
             object-fit: cover;
         }
 
+    }
+}
+
+@media (max-width:740px) {
+    .ImageSlideThumbs{
+        height: 420px;
+        width: 100%;
+        padding:  0 4px;
+    }
+    .mySwiperImageProductDetail{
+        height: 70%;
+    }
+    .mySwiperImageProductThumb{
+        height: 25%;
+        margin-top: 10px;
+        .swiper-slide {
+            height: 60% !important;
+        }
+        .swiper-slide-thumb-active {
+        }
+        .swiper-wrapper{
+            gap: 4px;
+            width: 100% !important;
+        }
     }
 }

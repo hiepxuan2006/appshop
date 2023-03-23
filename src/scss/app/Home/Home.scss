@@ -182,7 +182,7 @@
     background-color: #000;
 }
 
-.swiper-slide-thumb-active{
+.mySwiper .swiper-slide-thumb-active{
     width: 24px !important;
     background-color: red !important;
     &::before{
