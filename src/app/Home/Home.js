@@ -6,6 +6,7 @@ import { getProducts } from "~/services/productService"
 import { ListCategory } from "./ListCategory"
 import { SliderPost } from "./SliderPost"
 import { SliderProduct } from "./SliderProduct"
+import { ScrollToTopOnMount } from "~/components/ScrollToTopOnMount"
 export const Home = ({ isOpenPage }) => {
   const [products, setProducts] = useState([])
   const [categories, setCategories] = useState([])
@@ -26,6 +27,7 @@ export const Home = ({ isOpenPage }) => {
   }, [])
   return (
     <>
+      <ScrollToTopOnMount />
       <div className="HomePageWrapper">
         <DocTitle
           title={"CellphoneS - Điện thoại, laptop, tablet, phụ kiện chính hãng"}

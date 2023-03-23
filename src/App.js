@@ -4,6 +4,7 @@ import { DataContext } from "./context/AppContext"
 import { Loading } from "./helper/Loading"
 import { HomeLayout } from "./layout"
 import { router } from "./router"
+import { Gototop } from "./components/Gototop"
 
 function App() {
   const { loading, setLoading } = useContext(DataContext)
@@ -33,10 +34,9 @@ function App() {
               )
             })}
           </Routes>
-
-          {/* <InformationPage /> */}
         </div>
       )}
+      <Gototop />
     </Router>
   )
 }
