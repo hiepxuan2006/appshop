@@ -16,7 +16,7 @@ import { getCategories } from "~/services/categoryService"
 import style from "./Header.module.scss"
 const cx = classNames.bind(style)
 const logo = require("~/assets/logo.png")
-
+const logo2 = require("~/assets/blog.png")
 const Header = ({ isHidden = true }) => {
   const [modalIsOpen, setIsOpen] = useState(false)
   const [categories, setCategories] = useState([])
