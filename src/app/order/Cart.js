@@ -20,7 +20,7 @@ export const Cart = () => {
   const [loading, setLoading] = useState(false)
   useEffect(() => {
     const cartLocal = getLocalData("cart-product-list")
-
+    console.log(cartLocal?.data?.productList)
     setCart(cartLocal?.data?.productList)
     setCartLocal(cartLocal)
     setIsUpdateCart(false)
@@ -96,7 +96,7 @@ export const Cart = () => {
   }
   return (
     <>
-      {cart.length ? (
+      {cart && cart.length ? (
         <div className="CartHomePage">
           <div className="CartHeading d-flex align-items-center justify-content-between fw-bold">
             <div className="GoBackCart">
