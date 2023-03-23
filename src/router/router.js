@@ -10,10 +10,9 @@ import { PaymentInfo } from "~/app/payment/PaymentInfo"
 import { ProductDetail } from "~/app/productDetail/ProductDetail"
 import { Login } from "~/components/auth/login/Login"
 import { Register } from "~/components/auth/register/Register"
-import { HomeLayout } from "~/layout"
+import { BlogLayout, HomeLayout } from "~/layout"
 import { CheckOrder } from "~/app/order/CheckOrder"
 import { ProductHomePage } from "~/app/store/ProductHomePage"
-import BlogLayout from "~/layout/blog/BlogLayout"
 import { HomeBlog } from "~/app/blog/HomeBlog"
 
 const router = [
