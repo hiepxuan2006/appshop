@@ -186,13 +186,13 @@
     width: 200px;
     position: relative;
 
-    li {
+    a {
         padding: 10px !important;
         display: flex;
         align-items: center;
         justify-content: space-between;
         cursor: pointer;
-
+        color: #000 !important;
         &:hover {
             background-color: rgba(192, 192, 192, 0.53);
         }

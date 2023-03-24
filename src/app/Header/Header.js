@@ -51,7 +51,6 @@ const Header = ({ isHidden = true }) => {
     }
   }, [])
   const isLocationHome = window.location.pathname === "/"
-  console.log(modalIsOpen)
   return (
     <div className={`${cx("wrapper")}  ${scrollY > 0 ? cx("zIndex") : ""}`}>
       <div className={`${cx("inner")}`}>
@@ -121,31 +120,39 @@ const Header = ({ isHidden = true }) => {
               categories.map((item, key) => {
                 return (
                   <li>
-                    <p>{item.name}</p>
-                    <FontAwesomeIcon icon={faChevronRight} />
+                    <Link to={"#"}>
+                      <p>{item.name}</p>
+                      <FontAwesomeIcon icon={faChevronRight} />
 
-                    <div className={cx("category-child")}>
-                      {item.children.length &&
-                        item.children.map((item) => {
-                          return (
-                            <div className={cx("heading-category-children")}>
-                              {item.name}
+                      <div className={cx("category-child")}>
+                        {item.children.length &&
+                          item.children.map((item) => {
+                            return (
+                              <div className={cx("heading-category-children")}>
+                                {item.name}
 
-                              {item.children.length &&
-                                item.children.map((item) => {
-                                  return (
-                                    <Link to="/cart" className={cx("item")}>
-                                      <p> {item.name}</p>
-                                    </Link>
-                                  )
-                                })}
-                            </div>
-                          )
-                        })}
-                    </div>
+                                {item.children.length &&
+                                  item.children.map((item) => {
+                                    return (
+                                      <Link to="/cart" className={cx("item")}>
+                                        <p> {item.name}</p>
+                                      </Link>
+                                    )
+                                  })}
+                              </div>
+                            )
+                          })}
+                      </div>
+                    </Link>
                   </li>
                 )
               })}
+            <li>
+              <Link to={"/hx-blog"} className="d-flex">
+                <p>Tin công nghệ</p>
+                <FontAwesomeIcon icon={faChevronRight} />
+              </Link>
+            </li>
           </ul>
         </div>
       </div>
