@@ -17,9 +17,13 @@ export const SliderProductItem = ({ item = {} }) => {
           className="SliderProductItem"
         >
           <div className="ProductItem">
-            <div className="ProductDiscount">
-              <p>Giảm 30%</p>
-            </div>
+            {item.is_sale ? (
+              <div className="ProductDiscount">
+                <p>Giảm {item.sale}%</p>
+              </div>
+            ) : (
+              ""
+            )}
             <div className="ImageSliderProductItem mt-3">
               <img
                 src={process.env.REACT_APP_BASE_URL + "/" + item.images[0]}
@@ -33,7 +37,9 @@ export const SliderProductItem = ({ item = {} }) => {
               <div className="d-flex justify-content-between gap-3 mt-3">
                 <p>
                   {item.retail_price &&
-                    formattedNumber(item.retail_price, "VND")}
+                    formattedNumber(
+                      item.retail_price - (item.retail_price * item.sale) / 100
+                    )}
                 </p>
                 <p className="text-decoration-line-through">
                   {item.retail_price && formattedNumber(item.retail_price)}

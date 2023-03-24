@@ -22,8 +22,14 @@ export const Gototop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" })
   }
   return (
-    <div onClick={scrollToTop} className="GoToTop">
-      <FontAwesomeIcon icon={faJetFighterUp} />
-    </div>
+    <>
+      {visible ? (
+        <div onClick={scrollToTop} className="GoToTop">
+          <FontAwesomeIcon icon={faJetFighterUp} />
+        </div>
+      ) : (
+        ""
+      )}
+    </>
   )
 }

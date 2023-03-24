@@ -10,6 +10,7 @@ import queryString from "query-string"
 import _ from "lodash"
 import { getLocalData, setLocalData } from "~/services/StoreageServices"
 import { toast } from "react-toastify"
+import { PreviewListPost } from "../blog/PreviewListPost"
 
 export const ProductDetail = () => {
   const { slug } = useParams()
@@ -17,6 +18,7 @@ export const ProductDetail = () => {
   const [attributesChose, setAttributesChose] = useState({})
   const [variantChose, setVariantChose] = useState("")
   const [isChoseAttribute, setIsChoseAttribute] = useState(false)
+  const [more, setMore] = useState(false)
 
   const url = window.location.href
   const pathParts = url.split("/")
@@ -34,6 +36,7 @@ export const ProductDetail = () => {
     const { data, success, message } = await getProduct(params)
     if (!success) throw new Error(message)
     setProduct(data)
+    // setVariantChose(data?.variants[0])
   }
   useEffect(() => {
     _getProductBySlugId()
@@ -54,7 +57,6 @@ export const ProductDetail = () => {
         const slug = option.map((item) => item.slug).join("/")
         return test === slug
       })
-    console.log(test)
     if (variant) setVariantChose(variant[0])
   }, [attributesChose])
   console.log(attributesChose)
@@ -129,6 +131,10 @@ export const ProductDetail = () => {
       }
     }
   }
+
+  const handleReadMore = () => {
+    setMore(true)
+  }
   return (
     <>
       {Object.keys(product).length !== 0 && (
@@ -149,11 +155,19 @@ export const ProductDetail = () => {
                 <div className="PriceProductDetail d-flex gap-3 justify-content-between">
                   <h1>
                     {variantChose
-                      ? formattedNumber(variantChose.retail_price)
-                      : formattedNumber(product.retail_price)}
+                      ? formattedNumber(
+                          variantChose.retail_price -
+                            (variantChose.retail_price * product.sale) / 100
+                        )
+                      : formattedNumber(
+                          product.retail_price -
+                            (product.retail_price * product.sale) / 100
+                        )}
                   </h1>
                   <h1 className="text-decoration-line-through">
-                    {formattedNumber(16000000)}
+                    {variantChose
+                      ? formattedNumber(variantChose.retail_price)
+                      : formattedNumber(product.retail_price)}
                   </h1>
                 </div>
                 <div className="AttributeProduct mt-3">
@@ -233,6 +247,35 @@ export const ProductDetail = () => {
                   </p>
                 </div>
               </div>
+            </div>
+          </div>
+          <div className=" row me-2 ms-2">
+            <div
+              className={
+                more
+                  ? "col col-md-8 ProductDescription MW-100"
+                  : "col col-md-8 ProductDescription"
+              }
+            >
+              <div className="SalientFeatures flex-column mt-3 mb-3 d-flex">
+                <h1 className="w-100 text-center">Đặc Điểm Nổi Bật</h1>
+                <div
+                  dangerouslySetInnerHTML={{ __html: product.salient_features }}
+                ></div>
+              </div>
+              <div
+                className="Description"
+                dangerouslySetInnerHTML={{ __html: product.description }}
+              ></div>
+              <div
+                className={more ? "d-none" : "ReadMore"}
+                onClick={() => handleReadMore()}
+              >
+                <p>Xem thêm</p>
+              </div>
+            </div>
+            <div className="col col-md-4 ProductPreviewListPost">
+              <PreviewListPost />
             </div>
           </div>
         </div>
