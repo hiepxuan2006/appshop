@@ -118,7 +118,7 @@ const Header = ({ isHidden = true }) => {
               categories.map((item, key) => {
                 return (
                   <li key={key}>
-                    <Link to={"#"}>
+                    <Link to={`/san-pham/danh-muc/${item.slug}?id=${item._id}`}>
                       <p>{item.name}</p>
                       <FontAwesomeIcon icon={faChevronRight} />
 
@@ -137,7 +137,7 @@ const Header = ({ isHidden = true }) => {
                                     return (
                                       <Link
                                         key={key}
-                                        to="/cart"
+                                        to={`/san-pham/danh-muc/${item.slug}?id=${item._id}`}
                                         className={cx("item")}
                                       >
                                         <p> {item.name}</p>

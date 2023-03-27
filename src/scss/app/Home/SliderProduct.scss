@@ -188,6 +188,15 @@
         padding-top: 30px;
     }
 
+    .SlickSlider{
+        height: 300px;
+        .SliderProductItem{
+            font-size: 14px;
+            h3{
+                white-space: nowrap;
+            }
+        }
+    }
     .mySwiperSliderProduct{
         height: 100%;
     }

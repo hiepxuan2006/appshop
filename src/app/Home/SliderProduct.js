@@ -21,14 +21,24 @@ export const SliderProduct = ({ data = [], category }) => {
   SwiperCore.use([Autoplay])
   const settings = {
     dots: true,
-    infinite: data.length < 5 ? false : true,
+    infinite: true,
     dots: false,
     speed: 500,
     slidesToShow: 5,
     slidesToScroll: 1,
     arrows: false,
     autoplay: true,
-    // pauseOnLastSlide: false,
+    autoplaySpeed: 3000,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2.5,
+          slidesToScroll: 1,
+          dots: true,
+        },
+      },
+    ],
     autoplaySpeed: 3000, // Thiết lập thời gian chuyển đổi giữa các slide
   }
   return (

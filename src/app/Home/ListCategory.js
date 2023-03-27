@@ -17,7 +17,7 @@ export const ListCategory = ({ categories = [] }) => {
           return (
             <li key={item._id + key} className="ItemCategoryHomePage">
               <Link
-                to={`/san-pham/danh-muc/${item.slug}`}
+                to={`/san-pham/danh-muc/${item.slug}?id=${item._id}`}
                 className="d-flex align-items-center gap-3"
               >
                 <p> {item.label}</p>

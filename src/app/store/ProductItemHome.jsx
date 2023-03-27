@@ -1,11 +1,15 @@
 import { faCartPlus, faHeart } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import React from "react"
+import { Link } from "react-router-dom"
 import { formattedNumber } from "~/helper/formatCurentcy"
 
 export const ProductItemHome = ({ product }) => {
   return (
-    <div className="ProductHomeItem">
+    <Link
+      to={`/san-pham/${product.slug}?id=${product._id}`}
+      className="ProductHomeItem"
+    >
       {product.is_Sale && (
         <div className="ProductDiscount">
           <p>{product.sale}</p>
@@ -35,6 +39,6 @@ export const ProductItemHome = ({ product }) => {
           <FontAwesomeIcon icon={faHeart} />
         </div>
       </div>
-    </div>
+    </Link>
   )
 }

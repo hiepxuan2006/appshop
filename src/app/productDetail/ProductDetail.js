@@ -136,7 +136,7 @@ export const ProductDetail = () => {
   }
   return (
     <>
-      {Object.keys(product).length !== 0 && (
+      {product && Object.keys(product).length !== 0 && (
         <div className="ProductDetailPage">
           <div className="ProductDetailTitle">
             {variantChose ? (

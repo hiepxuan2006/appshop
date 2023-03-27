@@ -16,7 +16,8 @@ import SwiperCore, {
   Pagination,
 } from "swiper"
 import { getSliders } from "~/services/SliderService"
-export const Slider = () => {
+import Slider from "react-slick"
+export const SliderBanner = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null)
   const [sliders, setSliders] = useState([])
 

@@ -4,7 +4,7 @@ import {
   faSackDollar,
 } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { Slider } from "~/components/Slider/Slider"
+import { Slider, SliderBanner } from "~/components/Slider/SliderReact"
 import { HomePageAccount } from "./HomePageAccount"
 import { Link } from "react-router-dom"
 const logo = require("~/assets/login.png")
@@ -46,7 +46,7 @@ export const HomeAccount = () => {
         </div>
         <div className="col col-md-6">
           <div className="SliderAccount">
-            <Slider />
+            <SliderBanner />
           </div>
         </div>
       </div>

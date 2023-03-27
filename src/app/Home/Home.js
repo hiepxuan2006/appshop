@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { ScrollToTopOnMount } from "~/components/ScrollToTopOnMount"
-import { Slider } from "~/components/Slider/Slider"
+import { Slider, SliderBanner } from "~/components/Slider/SliderReact"
 import { DocTitle } from "~/helper/DocTitle"
 import { getCategories } from "~/services/categoryService"
 import { getProductGroupCategory, getProducts } from "~/services/productService"
@@ -35,7 +35,7 @@ export const Home = ({ isOpenPage }) => {
         <div className="HomePageSlider">
           <ListCategory categories={categories} />
           <div className="SliderHomePage">
-            <Slider />
+            <SliderBanner />
           </div>
           <div className="TicketHomePage">
             <div className="TicketItem">
