@@ -5,9 +5,9 @@ import { Swiper, SwiperSlide } from "swiper/react"
 // Import Swiper styles
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
-import { Autoplay } from "swiper"
+import SwiperCore, { Autoplay } from "swiper"
 import "swiper/css"
-import "swiper/css/pagination"
+import "swiper/css/autoplay"
 import { SliderProductItem } from "./SliderProductItem"
 // import required modules
 export const SliderProduct = ({ data = [], category }) => {
@@ -19,7 +19,7 @@ export const SliderProduct = ({ data = [], category }) => {
       setOptions(brand)
     }
   }, [category])
-  console.log("options", options.length > 0 ? options[0].children : "momo")
+  SwiperCore.use([Autoplay])
   return (
     <div className="SliderProduct">
       <div className="headingSliderProduct">
@@ -61,17 +61,20 @@ export const SliderProduct = ({ data = [], category }) => {
           865: {
             slidesPerView: 4,
           },
-          1280: {
+          1200: {
             slidesPerView: 5,
           },
         }}
         watchSlidesProgress={true}
+        slidesPerView={2}
+        spaceBetween={5}
         modules={[Autoplay]}
+        loop={true}
         autoplay={{
-          delay: 2000,
+          delay: 200,
           disableOnInteraction: false,
         }}
-        className="mySwiperSliderProduct"
+        className="mySwiper mySwiperSliderProduct"
       >
         {data.length > 0 &&
           data.map((item, key) => {

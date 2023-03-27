@@ -3,11 +3,18 @@ import { Swiper, SwiperSlide } from "swiper/react"
 
 // Import Swiper styles
 import "swiper/css"
+import "swiper/css/free-mode"
 import "swiper/css/navigation"
-
+import "swiper/css/thumbs"
 // import required modules
 
-import { FreeMode, Navigation, Thumbs, Autoplay, Pagination } from "swiper"
+import SwiperCore, {
+  FreeMode,
+  Navigation,
+  Thumbs,
+  Autoplay,
+  Pagination,
+} from "swiper"
 import { getSliders } from "~/services/SliderService"
 export const Slider = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null)
@@ -24,6 +31,7 @@ export const Slider = () => {
   useEffect(() => {
     _getSliders()
   }, [])
+  SwiperCore.use([Autoplay])
   return (
     <>
       <Swiper
@@ -35,13 +43,13 @@ export const Slider = () => {
         spaceBetween={10}
         navigation={true}
         autoplay={{
-          delay: 4000,
+          delay: 2500,
           disableOnInteraction: false,
         }}
+        modules={[Autoplay, FreeMode, Navigation, Thumbs]}
         thumbs={{
           swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
         }}
-        modules={[FreeMode, Navigation, Thumbs, Autoplay, Pagination]}
         className="mySwiper2"
       >
         {sliders.length &&
@@ -56,11 +64,15 @@ export const Slider = () => {
       <Swiper
         onSwiper={setThumbsSwiper}
         loop={true}
-        spaceBetween={0}
+        spaceBetween={10}
         slidesPerView={4}
         freeMode={true}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
         watchSlidesProgress={true}
-        modules={[FreeMode, Navigation, Thumbs, Autoplay]}
+        modules={[Autoplay, FreeMode, Navigation, Thumbs]}
         className="mySwiper"
       >
         {sliders.length &&
