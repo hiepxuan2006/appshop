@@ -14,7 +14,7 @@ const crown = require("~/assets/crown.d2de999.png")
 export const HomeAccount = () => {
   return (
     <HomePageAccount>
-      <div className="row">
+      <div className="row HomeAccountTop">
         <div className="col col-md-6">
           <div className="AccountWelcome">
             <div className="d-flex align-items-center gap-3">

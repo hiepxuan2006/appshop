@@ -139,6 +139,9 @@
     border-radius: 10px;
 
 }
+.HomeAccountTop{
+//    min-height: 300px;
+}
 
 .AccountImage {
     height: 100px;
@@ -186,7 +189,15 @@
     box-shadow: var(--boxShadow);
     padding: 10px;
     border-radius: 10px;
-
+    .swiper-wrapper{
+        font-size: 12px;
+    }
+    .DescriptionSlider{
+        p{
+            white-space: nowrap;
+            font-size: 12px;
+        }
+    }
 }
 
 .row+.row {

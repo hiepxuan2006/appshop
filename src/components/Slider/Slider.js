@@ -63,7 +63,7 @@ export const Slider = () => {
       </Swiper>
       <Swiper
         onSwiper={setThumbsSwiper}
-        // loop={true}
+        loop={true}
         spaceBetween={10}
         slidesPerView={4}
         freeMode={true}

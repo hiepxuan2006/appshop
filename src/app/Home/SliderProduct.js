@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-no-duplicate-props */
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react"
-
+import Slider from "react-slick"
 // Import Swiper styles
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
@@ -19,6 +19,18 @@ export const SliderProduct = ({ data = [], category }) => {
     }
   }, [category])
   SwiperCore.use([Autoplay])
+  const settings = {
+    dots: true,
+    infinite: data.length < 5 ? false : true,
+    dots: false,
+    speed: 500,
+    slidesToShow: 5,
+    slidesToScroll: 1,
+    arrows: false,
+    autoplay: true,
+    // pauseOnLastSlide: false,
+    autoplaySpeed: 3000, // Thiết lập thời gian chuyển đổi giữa các slide
+  }
   return (
     <div className="SliderProduct">
       <div className="headingSliderProduct">
@@ -45,7 +57,7 @@ export const SliderProduct = ({ data = [], category }) => {
           Xem tất cả
         </Link>
       </div>
-      <Swiper
+      {/* <Swiper
         breakpoints={{
           0: {
             slidesPerView: 2.5,
@@ -81,7 +93,17 @@ export const SliderProduct = ({ data = [], category }) => {
               </SwiperSlide>
             )
           })}
-      </Swiper>
+      </Swiper> */}
+      <Slider {...settings} className="SlickSlider">
+        {data.length > 0 &&
+          data.map((item, key) => {
+            return (
+              // <SwiperSlide key={key}>
+              <SliderProductItem key={key} item={item} />
+              // </SwiperSlide>
+            )
+          })}
+      </Slider>
     </div>
   )
 }
