@@ -90,7 +90,7 @@ export const Footer = () => {
             </div>
           </form>
         </div>
-        <p class="copyright-text w-100 text-center">
+        <p className="copyright-text w-100 text-center">
           Copyright &copy; 2017 All Rights Reserved by hiepxuan2006
         </p>
       </div>

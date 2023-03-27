@@ -10,3 +10,10 @@ export const getCategories = () => {
     method: "get",
   })
 }
+
+export const getCategoriesById = (params) => {
+  return api.makeRequest({
+    url: `/get-category-id/${params}`,
+    method: "get",
+  })
+}

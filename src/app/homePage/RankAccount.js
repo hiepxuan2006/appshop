@@ -22,7 +22,7 @@ export const RankAccount = () => {
           <div className=""></div>
           <input
             type="range"
-            class="form-range FormRanking"
+            className="form-range FormRanking"
             min="0"
             max="5"
             step="0.5"

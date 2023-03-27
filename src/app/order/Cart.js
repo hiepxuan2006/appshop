@@ -164,7 +164,7 @@ export const Cart = () => {
               <h3>Tổng tiền tạm tính</h3>
               <p>{formattedNumber(56700000)}</p>
             </div>
-            <Link to="/payment-info" className="ButtonBuyCart ButtonNext">
+            <Link to="/payment" className="ButtonBuyCart ButtonNext">
               Tiến Hành Đặt Hàng
             </Link>
             <div className="ButtonBuyCart ButtonContinue">

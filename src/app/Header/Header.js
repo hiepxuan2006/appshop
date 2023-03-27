@@ -2,27 +2,27 @@ import {
   faBarsStaggered,
   faCartFlatbed,
   faChevronRight,
-  faSearch,
   faTruckFast,
   faUserCircle,
 } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import classNames from "classnames/bind"
 import { Fragment, useContext, useEffect, useState } from "react"
-import Modal from "react-modal"
 import { Link } from "react-router-dom"
 import { DataContext } from "~/context/AppContext"
+import { getLocalData } from "~/services/StoreageServices"
 import { getCategories } from "~/services/categoryService"
 import style from "./Header.module.scss"
+import { Search } from "./Search"
 const cx = classNames.bind(style)
 const logo = require("~/assets/logo.png")
-const logo2 = require("~/assets/blog.png")
 const Header = ({ isHidden = true }) => {
   const [modalIsOpen, setIsOpen] = useState(false)
   const [categories, setCategories] = useState([])
   const [hideOn, setHideOn] = useState(false)
-
+  const [totalCart, setTotalCart] = useState(0)
   const { isLogin } = useContext(DataContext)
+
   const handleCategory = () => {
     setIsOpen(!modalIsOpen)
   }
@@ -38,6 +38,8 @@ const Header = ({ isHidden = true }) => {
         setCategories(data)
       }
     }
+    const cartLocal = getLocalData("cart-product-list")
+    setTotalCart(cartLocal.data.totalQuantity)
     fetchCategories()
   }, [])
 
@@ -50,6 +52,7 @@ const Header = ({ isHidden = true }) => {
       window.removeEventListener("scroll", handleScroll)
     }
   }, [])
+
   const isLocationHome = window.location.pathname === "/"
   return (
     <div className={`${cx("wrapper")}  ${scrollY > 0 ? cx("zIndex") : ""}`}>
@@ -63,23 +66,18 @@ const Header = ({ isHidden = true }) => {
           <FontAwesomeIcon icon={faBarsStaggered} />
           <p>Danh mục</p>
         </div>
-        <div
-          className={`${cx("search")} ${
-            !isHidden || !isLocationHome || scrollY > 0
-              ? cx("positionRelative")
-              : ""
-          }`}
-        >
-          <FontAwesomeIcon className={cx("icon-search")} icon={faSearch} />
-          <input type="text" placeholder="Bạn cần tìm gì ..." />
-        </div>
+        <Search
+          isHidden={isHidden}
+          scrollY={scrollY}
+          isLocationHome={isLocationHome}
+        />
         <Link to={"/tra-cuu-don-hang"} className={cx("dilivery-tracking")}>
           <FontAwesomeIcon icon={faTruckFast} />
           <p>Tra cứu đơn hàng</p>
         </Link>
         <Link to="/cart" className={cx("cart")}>
           <FontAwesomeIcon className={cx("icon-cart")} icon={faCartFlatbed} />
-          <p className={cx("quantity")}>2</p>
+          <p className={cx("quantity")}>{totalCart}</p>
           <p>Giỏ hàng</p>
         </Link>
         {isLogin ? (
@@ -119,22 +117,29 @@ const Header = ({ isHidden = true }) => {
             {categories.length &&
               categories.map((item, key) => {
                 return (
-                  <li>
+                  <li key={key}>
                     <Link to={"#"}>
                       <p>{item.name}</p>
                       <FontAwesomeIcon icon={faChevronRight} />
 
                       <div className={cx("category-child")}>
                         {item.children.length &&
-                          item.children.map((item) => {
+                          item.children.map((item, key) => {
                             return (
-                              <div className={cx("heading-category-children")}>
+                              <div
+                                key={key}
+                                className={cx("heading-category-children")}
+                              >
                                 {item.name}
 
                                 {item.children.length &&
-                                  item.children.map((item) => {
+                                  item.children.map((item, key) => {
                                     return (
-                                      <Link to="/cart" className={cx("item")}>
+                                      <Link
+                                        key={key}
+                                        to="/cart"
+                                        className={cx("item")}
+                                      >
                                         <p> {item.name}</p>
                                       </Link>
                                     )

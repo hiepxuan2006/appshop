@@ -59,7 +59,6 @@ export const ProductDetail = () => {
       })
     if (variant) setVariantChose(variant[0])
   }, [attributesChose])
-  console.log(attributesChose)
 
   const handleAddToCart = () => {
     if (!variantChose) setIsChoseAttribute(true)

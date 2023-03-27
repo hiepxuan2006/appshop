@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react"
+import { ScrollToTopOnMount } from "~/components/ScrollToTopOnMount"
 import { Slider } from "~/components/Slider/Slider"
 import { DocTitle } from "~/helper/DocTitle"
 import { getCategories } from "~/services/categoryService"
-import { getProducts } from "~/services/productService"
+import { getProductGroupCategory, getProducts } from "~/services/productService"
 import { ListCategory } from "./ListCategory"
-import { SliderPost } from "./SliderPost"
 import { SliderProduct } from "./SliderProduct"
-import { ScrollToTopOnMount } from "~/components/ScrollToTopOnMount"
+import { SliderPost } from "./SliderPost"
 export const Home = ({ isOpenPage }) => {
   const [products, setProducts] = useState([])
   const [categories, setCategories] = useState([])
   const _getProducts = async () => {
-    const { data, message, success } = await getProducts()
+    const { data, message, success } = await getProductGroupCategory()
     if (!success) throw new Error(message)
     setProducts(data)
   }
@@ -58,9 +58,19 @@ export const Home = ({ isOpenPage }) => {
             </div>
           </div>
         </div>
-        <SliderProduct data={products} title={"Điện thoại nổi bật nhất"} />
-        <SliderProduct title={"Lap top"} />
-        <SliderProduct title={"Lap top"} />
+        {products.length > 0 &&
+          products.map((product, key) => {
+            return (
+              <div key={key}>
+                {product.products.length > 0 && (
+                  <SliderProduct
+                    data={product.products}
+                    category={product.category}
+                  />
+                )}
+              </div>
+            )
+          })}
         <SliderPost />
       </div>
     </>

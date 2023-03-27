@@ -60,7 +60,7 @@ export const HistoryAccount = () => {
             </div>
           </div>
           <div className="OrderListTable">
-            <table class="table  table-sm">
+            <table className="table  table-sm">
               <thead className="rounded-pill mb-5">
                 <tr>
                   <th scope="col">#</th>

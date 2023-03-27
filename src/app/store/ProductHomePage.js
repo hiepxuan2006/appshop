@@ -1,45 +1,81 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   faArrowDownShortWide,
   faArrowUpShortWide,
   faPercent,
 } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import React from "react"
-import { Link } from "react-router-dom"
+import React, { useEffect, useState } from "react"
+import { Link, useLocation, useParams } from "react-router-dom"
 import { ProductItemHome } from "./ProductItemHome"
+import { getCategoriesById } from "~/services/categoryService"
+import { SliderHotSale } from "~/components/bannerSale/SliderHotSale"
+import { getProductsByCategory } from "~/services/productService"
+import queryString from "query-string"
 
 export const ProductHomePage = () => {
+  const [categories, setCategories] = useState([])
+  const [products, setProducts] = useState([])
+
+  const location = useLocation()
+  const queryParams = new URLSearchParams(location.search)
+
+  const sort = queryParams.get("id")
+  console.log(sort)
+  const _getCategoriesById = async () => {
+    const { data, success, message } = await getCategoriesById(sort)
+    if (!success) throw new Error(message)
+    setCategories(data)
+  }
+
+  const _getProductById = async () => {
+    const query = { id: sort }
+    setProducts([])
+    const params = queryString.stringify(query, {
+      skipNull: true,
+      skipEmptyString: true,
+    })
+    const { data, success, message } = await getProductsByCategory(params)
+    if (!success) throw new Error(message)
+    setProducts(data.data)
+    console.log(products)
+  }
+  useEffect(() => {
+    _getCategoriesById()
+    _getProductById()
+  }, [sort])
+  console.log(products)
   return (
     <div className="ProductHomePage">
-      <div className="BrandProductHome">
-        <Link to="#" className="BrandProductItemHome">
-          <p>Samsung</p>
-        </Link>
-        <Link to="#" className="BrandProductItemHome">
-          <p>Samsung</p>
-        </Link>
-        <Link to="#" className="BrandProductItemHome">
-          <p>Samsung</p>
-        </Link>
-        <Link to="#" className="BrandProductItemHome">
-          <p>Samsung</p>
-        </Link>
-        <Link to="#" className="BrandProductItemHome">
-          <p>Samsung</p>
-        </Link>
-      </div>
+      {/* <div className="row"> */}
+      {categories.length > 0 &&
+        categories.slice(0, 2).map((category, key) => {
+          return (
+            <div
+              key={key}
+              className=" col col-md-6 d-flex flex-column gap-3 mb-5"
+            >
+              <h2>{category.label}</h2>
+              <div className="BrandProductHome ">
+                {category.children &&
+                  category.children.map((value, key) => {
+                    return (
+                      <Link
+                        key={key}
+                        to={`/san-pham/danh-muc/${value.slug}?id=${value._id}`}
+                        className="BrandProductItemHome"
+                      >
+                        <p>{value.label}</p>
+                      </Link>
+                    )
+                  })}
+              </div>
+            </div>
+          )
+        })}
+      {/* </div> */}
 
-      <div className="FilterCategory">
-        <h3>Chọn theo hệ điều hành</h3>
-        <div className="BrandProductHome">
-          <Link to="#" className="BrandProductItemHome">
-            <p>Android</p>
-          </Link>
-          <Link to="#" className="BrandProductItemHome">
-            <p>IOS</p>
-          </Link>
-        </div>
-      </div>
+      {categories.length > 0 && <SliderHotSale products={products} />}
       <div className="FilterProduct">
         <h3>Sắp Xếp Theo</h3>
         <div className="FilterList">
@@ -58,40 +94,14 @@ export const ProductHomePage = () => {
         </div>
       </div>
       <div className="ListProductHome row mt-5">
-        <div class="col-lg-2 ProductItemHome mt-3">
-          <ProductItemHome />
-        </div>
-        <div class="col-lg-2 ProductItemHome mt-3">
-          <ProductItemHome />
-        </div>
-        <div class="col-lg-2 ProductItemHome mt-3">
-          <ProductItemHome />
-        </div>
-        <div class="col-lg-2 ProductItemHome mt-3">
-          <ProductItemHome />
-        </div>
-        <div class="col-lg-2 ProductItemHome mt-3">
-          <ProductItemHome />
-        </div>
-
-        <div class="col-lg-2 ProductItemHome mt-3">
-          <ProductItemHome />
-        </div>
-
-        <div class="col-lg-2 ProductItemHome mt-3">
-          <ProductItemHome />
-        </div>
-
-        <div class="col-lg-2 ProductItemHome mt-3">
-          <ProductItemHome />
-        </div>
-
-        <div class="col-lg-2 ProductItemHome mt-3">
-          <ProductItemHome />
-        </div>
-        <div class="col-lg-2 ProductItemHome mt-3">
-          <ProductItemHome />
-        </div>
+        {products.length > 0 &&
+          products.map((item, key) => {
+            return (
+              <div key={key} className="col-lg-2 ProductItemHome mt-3">
+                <ProductItemHome product={item} />
+              </div>
+            )
+          })}
       </div>
       <div className="MoreListProduct">
         <div className="ButtonMore">

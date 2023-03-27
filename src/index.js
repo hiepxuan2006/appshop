@@ -4,8 +4,8 @@ import App from "./App"
 import GlobalStyle from "~/app/globalStyle"
 import reportWebVitals from "./reportWebVitals"
 import "./scss/app.scss"
-import Notify from "./helper/toast"
 import AppContext from "./context/AppContext"
+import { Notify } from "./helper/toast"
 const root = ReactDOM.createRoot(document.getElementById("root"))
 root.render(
   <React.StrictMode>

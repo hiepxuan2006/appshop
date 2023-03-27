@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useState } from "react"
@@ -15,7 +16,10 @@ export const ListCategory = ({ categories = [] }) => {
         categories.map((item, key) => {
           return (
             <li key={item._id + key} className="ItemCategoryHomePage">
-              <Link className="d-flex align-items-center gap-3">
+              <Link
+                to={`/san-pham/danh-muc/${item.slug}`}
+                className="d-flex align-items-center gap-3"
+              >
                 <p> {item.label}</p>
               </Link>
               <FontAwesomeIcon icon={faChevronRight} />
@@ -23,13 +27,17 @@ export const ListCategory = ({ categories = [] }) => {
                 {item.children.length &&
                   item.children.map((value, key) => {
                     return (
-                      <div className="SubCategoryItem">
+                      <div key={key} className="SubCategoryItem">
                         <h3>{value.label}</h3>
 
                         {value.children.length &&
                           value.children.map((valueSub, key) => {
                             return (
-                              <Link to="/cart" className="LinkCategorySub">
+                              <Link
+                                key={key}
+                                to={`/san-pham/danh-muc/${valueSub.slug}`}
+                                className="LinkCategorySub"
+                              >
                                 <p>{valueSub.label}</p>
                               </Link>
                             )

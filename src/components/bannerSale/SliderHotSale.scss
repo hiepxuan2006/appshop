@@ -1,0 +1,31 @@
+.SliderHotSale {
+    height: 500px;
+    width: 100%;
+    background-color: antiquewhite;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+padding: 10px;
+    .mySwiperSliderHotSale {
+        height: 350px;
+        width: 100%;
+    }
+    .swiper-wrapper{
+        gap: 0;
+    }
+    .swiper-slide {
+        padding: 6px;
+        border-radius: 10px;
+    }
+    .Title{
+        height: 100px;
+        width: 50%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        img{
+            height: 100%;
+            width: 100%;object-fit: contain;
+        }
+    }
+}

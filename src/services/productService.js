@@ -17,3 +17,24 @@ export const getProduct = (params) => {
     method: "get",
   })
 }
+
+export const searchProducts = (params) => {
+  return api.makeRequest({
+    url: `/search-product?${params}`,
+    method: "get",
+  })
+}
+
+export const getProductsByCategory = (params) => {
+  return api.makeRequest({
+    url: `/get-products-category?${params}`,
+    method: "get",
+  })
+}
+
+export const getProductGroupCategory = (params) => {
+  return api.makeRequest({
+    url: `/get-product-group`,
+    method: "get",
+  })
+}

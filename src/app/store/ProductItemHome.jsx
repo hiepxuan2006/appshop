@@ -3,15 +3,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import React from "react"
 import { formattedNumber } from "~/helper/formatCurentcy"
 
-export const ProductItemHome = () => {
+export const ProductItemHome = ({ product }) => {
+  console.log(product)
   return (
     <div className="ProductHomeItem">
-      <div className="ProductDiscount">
-        <p>-20%</p>
-      </div>
+      {product.is_Sale && (
+        <div className="ProductDiscount">
+          <p>{product.sale}</p>
+        </div>
+      )}
       <div className="ImageProductItem">
         <img
-          src="https://cdn2.cellphones.com.vn/358x358,webp,q100/media/catalog/product/t/_/t_m_24.png"
+          src={process.env.REACT_APP_BASE_URL + "/" + product.images[0]}
           alt=""
         />
       </div>

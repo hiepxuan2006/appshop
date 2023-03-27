@@ -68,7 +68,7 @@ const router = [
   },
 
   {
-    path: "/payment-info",
+    path: "/payment",
     component: PaymentInfo,
     layout: HomeLayout,
   },
