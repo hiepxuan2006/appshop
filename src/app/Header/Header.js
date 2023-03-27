@@ -39,7 +39,7 @@ const Header = ({ isHidden = true }) => {
       }
     }
     const cartLocal = getLocalData("cart-product-list")
-    setTotalCart(cartLocal.data.totalQuantity)
+    setTotalCart(cartLocal?.data?.totalQuantity)
     fetchCategories()
   }, [])
 
