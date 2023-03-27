@@ -39,7 +39,7 @@ export const Slider = () => {
           "--swiper-navigation-color": "#fff",
           "--swiper-pagination-color": "#fff",
         }}
-        loop={true}
+        // loop={true}
         spaceBetween={10}
         navigation={true}
         autoplay={{
@@ -63,7 +63,7 @@ export const Slider = () => {
       </Swiper>
       <Swiper
         onSwiper={setThumbsSwiper}
-        loop={true}
+        // loop={true}
         spaceBetween={10}
         slidesPerView={4}
         freeMode={true}

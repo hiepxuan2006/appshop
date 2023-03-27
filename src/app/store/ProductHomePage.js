@@ -21,7 +21,6 @@ export const ProductHomePage = () => {
   const queryParams = new URLSearchParams(location.search)
 
   const sort = queryParams.get("id")
-  console.log(sort)
   const _getCategoriesById = async () => {
     const { data, success, message } = await getCategoriesById(sort)
     if (!success) throw new Error(message)
@@ -38,13 +37,11 @@ export const ProductHomePage = () => {
     const { data, success, message } = await getProductsByCategory(params)
     if (!success) throw new Error(message)
     setProducts(data.data)
-    console.log(products)
   }
   useEffect(() => {
     _getCategoriesById()
     _getProductById()
   }, [sort])
-  console.log(products)
   return (
     <div className="ProductHomePage">
       {/* <div className="row"> */}

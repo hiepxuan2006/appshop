@@ -4,7 +4,6 @@ import React from "react"
 import { formattedNumber } from "~/helper/formatCurentcy"
 
 export const ProductItemHome = ({ product }) => {
-  console.log(product)
   return (
     <div className="ProductHomeItem">
       {product.is_Sale && (

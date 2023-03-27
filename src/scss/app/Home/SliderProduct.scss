@@ -40,7 +40,9 @@
 .BrandProductItem{
 }
 
-.mySwiperSliderProduct .swiper-wrapper {}
+.mySwiperSliderProduct .swiper-wrapper {
+    gap: 0;
+}
 
 .mySwiperSliderProduct .swiper-slide {
     // width: 236px !important;

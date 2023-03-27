@@ -35,7 +35,6 @@ export const Register = () => {
       })
     }
   }
-  console.log(error)
   return (
     <div className={cx("register")}>
       <DocTitle title={"Smember | Tri ân khách hàng thân thiết"} />

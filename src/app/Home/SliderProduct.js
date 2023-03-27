@@ -12,7 +12,6 @@ import { SliderProductItem } from "./SliderProductItem"
 // import required modules
 export const SliderProduct = ({ data = [], category }) => {
   const [options, setOptions] = useState([])
-  // console.log(category.children)
   useEffect(() => {
     const brand = category.children.filter((item) => item.key === "brand")
     if (brand.length > 0) {
@@ -28,7 +27,6 @@ export const SliderProduct = ({ data = [], category }) => {
           {options.length > 0 &&
             options[0].children.length > 0 &&
             options[0].children.map((item, key) => {
-              console.log(item.label)
               return (
                 <Link
                   to={`/san-pham/danh-muc/${item.slug}?id=${item._id}`}
@@ -66,12 +64,11 @@ export const SliderProduct = ({ data = [], category }) => {
           },
         }}
         watchSlidesProgress={true}
-        slidesPerView={2}
         spaceBetween={5}
         modules={[Autoplay]}
-        loop={true}
+        // loop={true}
         autoplay={{
-          delay: 200,
+          delay: 2500,
           disableOnInteraction: false,
         }}
         className="mySwiper mySwiperSliderProduct"

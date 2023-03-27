@@ -21,7 +21,6 @@ export const Cart = () => {
   const [loading, setLoading] = useState(false)
   useEffect(() => {
     const cartLocal = getLocalData("cart-product-list")
-    console.log(cartLocal?.data?.productList)
     setCart(cartLocal?.data?.productList)
     setCartLocal(cartLocal)
     setIsUpdateCart(false)
