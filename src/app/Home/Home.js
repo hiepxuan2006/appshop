@@ -7,9 +7,13 @@ import { getProductGroupCategory, getProducts } from "~/services/productService"
 import { ListCategory } from "./ListCategory"
 import { SliderProduct } from "./SliderProduct"
 import { SliderPost } from "./SliderPost"
+import { SkeletonTheme } from "~/helper/SkeletonTheme"
+import { LoadingProcess } from "~/helper/LoadingProcess"
 export const Home = ({ isOpenPage }) => {
   const [products, setProducts] = useState([])
   const [categories, setCategories] = useState([])
+  const [loading, setLoading] = useState(false)
+
   const _getProducts = async () => {
     const { data, message, success } = await getProductGroupCategory()
     if (!success) throw new Error(message)
@@ -22,12 +26,15 @@ export const Home = ({ isOpenPage }) => {
     setCategories(data)
   }
   useEffect(() => {
+    setLoading(true)
     _getProducts()
     _getCategories()
+    setLoading(false)
   }, [])
   return (
     <>
       <ScrollToTopOnMount />
+
       <div className="HomePageWrapper">
         <DocTitle
           title={"CellphoneS - Điện thoại, laptop, tablet, phụ kiện chính hãng"}

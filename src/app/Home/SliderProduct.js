@@ -26,6 +26,7 @@ export const SliderProduct = ({ data = [], category }) => {
     slidesToScroll: 1,
     arrows: false,
     autoplay: true,
+    pauseOnHover: false,
     autoplaySpeed: 3000,
     responsive: [
       {

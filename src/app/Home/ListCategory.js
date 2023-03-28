@@ -3,6 +3,7 @@ import { faChevronRight } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useState } from "react"
 import { Link } from "react-router-dom"
+import { LoadingProcess } from "~/helper/LoadingProcess"
 
 export const ListCategory = ({ categories = [] }) => {
   const [modalIsOpen, setIsOpen] = useState(true)
@@ -49,6 +50,12 @@ export const ListCategory = ({ categories = [] }) => {
             </li>
           )
         })}
+      <li className="ItemCategoryHomePage">
+        <Link to={`/hx-blog/home`} className="d-flex align-items-center gap-3">
+          <p>Tin tức</p>
+        </Link>
+        <FontAwesomeIcon icon={faChevronRight} />
+      </li>
     </ul>
   )
 }

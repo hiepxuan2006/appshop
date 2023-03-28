@@ -5,6 +5,7 @@ import { Post } from "./Post"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { getPost } from "~/services/postService"
 import { useEffect } from "react"
+import { SkeletonTheme } from "react-loading-skeleton"
 export const SliderPost = () => {
   const [post, setPost] = useState([])
   const _getPostHome = async () => {
@@ -54,7 +55,7 @@ export const SliderPost = () => {
           post.map((item, key) => {
             return (
               <SwiperSlide key={key}>
-                <Post item={item} />
+                {<Post item={item} /> || <SkeletonTheme />}
               </SwiperSlide>
             )
           })}

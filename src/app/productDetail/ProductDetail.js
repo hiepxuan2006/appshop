@@ -4,13 +4,14 @@ import { ImageSlideThumb } from "./ImageSlideThumb"
 import { formattedNumber } from "~/helper/formatCurentcy"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons"
-import { useParams } from "react-router-dom"
+import { useLocation, useParams } from "react-router-dom"
 import { getProduct } from "~/services/productService"
 import queryString from "query-string"
 import _ from "lodash"
 import { getLocalData, setLocalData } from "~/services/StoreageServices"
 import { toast } from "react-toastify"
 import { PreviewListPost } from "../blog/PreviewListPost"
+import { DocTitle } from "~/helper/DocTitle"
 
 export const ProductDetail = () => {
   const { slug } = useParams()
@@ -20,11 +21,10 @@ export const ProductDetail = () => {
   const [isChoseAttribute, setIsChoseAttribute] = useState(false)
   const [more, setMore] = useState(false)
 
-  const url = window.location.href
-  const pathParts = url.split("/")
-  const lastPart = pathParts[pathParts.length - 1]
-  const idParts = lastPart.split("?id=")
-  const id = idParts[idParts.length - 1]
+  const location = useLocation()
+  const queryParams = new URLSearchParams(location.search)
+
+  const id = queryParams.get("id")
   const _getProductBySlugId = async () => {
     const params = queryString.stringify(
       { slug, id },
@@ -138,6 +138,7 @@ export const ProductDetail = () => {
     <>
       {product && Object.keys(product).length !== 0 && (
         <div className="ProductDetailPage">
+          <DocTitle title={product.title} />
           <div className="ProductDetailTitle">
             {variantChose ? (
               <h1>{variantChose.title}</h1>

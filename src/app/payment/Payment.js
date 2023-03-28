@@ -8,11 +8,13 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import React from "react"
 import { useParams } from "react-router-dom"
+import { DocTitle } from "~/helper/DocTitle"
 import { formattedNumber } from "~/helper/formatCurentcy"
 
 export const Payment = ({ children }) => {
   return (
     <div className="PaymentPage">
+      <DocTitle title={"Tiến hành đặt hàng"} />
       <div className="PaymentHeader">
         <div className="PaymentBack">
           <FontAwesomeIcon icon={faChevronLeft} />

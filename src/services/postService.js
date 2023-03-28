@@ -1,6 +1,6 @@
 import createAPIServices from "./httpRequest"
 
-const baseUrl = "http://localhost:5005/post"
+const baseUrl = "https://api-hx-cellphone.onrender.com/post"
 
 const api = createAPIServices({ baseUrl })
 
