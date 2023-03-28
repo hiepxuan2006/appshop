@@ -65,13 +65,18 @@
     border-radius: 10px;
 }
 
+.TitleItem{
+    font-weight: 600;
+}
 .DescriptionBlog {
-    line-height: 1.6;
+    line-height: 1.4;
+    font-weight: 400;
     overflow: hidden;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
     display: -webkit-box;
     word-wrap: break-word;
+    text-align: justify;
 }
 
 // /////////////

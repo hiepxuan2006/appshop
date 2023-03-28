@@ -1,20 +1,18 @@
 import React from "react"
+import { Link } from "react-router-dom"
 
-export const Post = () => {
+export const Post = ({ item }) => {
   return (
-    <div className="PostItem">
+    <Link
+      to={`/hx-blog/bai-viet/${item.slug}?id=${item._id}`}
+      className="PostItem"
+    >
       <div className="ImagePost">
-        <img
-          src="https://cellphones.com.vn/sforum/wp-content/uploads/2023/03/samsung-galaxy-a34-5g-8.jpg"
-          alt=""
-        />
+        <img src={process.env.REACT_APP_BASE_URL + "/" + item.image} alt="" />
       </div>
       <div className="TitlePost">
-        <h3 className="TitleTileContent">
-          Đánh giá hiệu năng Galaxy A34 5G: Bắt đền đi! Samsung tầm trung mà lại
-          "máy mạnh - pin trâu" lạ thế
-        </h3>
+        <h3 className="TitleTileContent">{item.title}</h3>
       </div>
-    </div>
+    </Link>
   )
 }

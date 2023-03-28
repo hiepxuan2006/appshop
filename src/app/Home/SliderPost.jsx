@@ -1,9 +1,20 @@
-import React from "react"
+import React, { useState } from "react"
 import { Autoplay } from "swiper"
 
 import { Post } from "./Post"
 import { Swiper, SwiperSlide } from "swiper/react"
+import { getPost } from "~/services/postService"
+import { useEffect } from "react"
 export const SliderPost = () => {
+  const [post, setPost] = useState([])
+  const _getPostHome = async () => {
+    const { data, success, message } = await getPost()
+    if (!success) throw new Error(message)
+    setPost(data)
+  }
+  useEffect(() => {
+    _getPostHome()
+  }, [])
   return (
     <div className="SliderPostPage">
       <div className="d-flex align-items-center justify-content-between">
@@ -38,18 +49,15 @@ export const SliderPost = () => {
         }}
         className="mySwiperSliderPost"
       >
-        <SwiperSlide>
-          <Post />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Post />
-        </SwiperSlide>{" "}
-        <SwiperSlide>
-          <Post />
-        </SwiperSlide>{" "}
-        <SwiperSlide>
-          <Post />
-        </SwiperSlide>
+        {post.length > 0 &&
+          post.slice(0, 4) &&
+          post.map((item, key) => {
+            return (
+              <SwiperSlide key={key}>
+                <Post item={item} />
+              </SwiperSlide>
+            )
+          })}
       </Swiper>
     </div>
   )

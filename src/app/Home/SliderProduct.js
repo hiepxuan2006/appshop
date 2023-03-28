@@ -5,10 +5,9 @@ import Slider from "react-slick"
 // Import Swiper styles
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
-import SwiperCore, { Autoplay } from "swiper"
-import "swiper/css"
-import "swiper/css/autoplay"
+
 import { SliderProductItem } from "./SliderProductItem"
+import { Autoplay } from "swiper"
 // import required modules
 export const SliderProduct = ({ data = [], category }) => {
   const [options, setOptions] = useState([])
@@ -18,7 +17,6 @@ export const SliderProduct = ({ data = [], category }) => {
       setOptions(brand)
     }
   }, [category])
-  SwiperCore.use([Autoplay])
   const settings = {
     dots: true,
     infinite: true,
@@ -67,53 +65,56 @@ export const SliderProduct = ({ data = [], category }) => {
           Xem tất cả
         </Link>
       </div>
-      {/* <Swiper
-        breakpoints={{
-          0: {
-            slidesPerView: 2.5,
-          },
-          400: {
-            slidesPerView: 2.5,
-          },
-          639: {
-            slidesPerView: 3,
-          },
-          865: {
-            slidesPerView: 4,
-          },
-          1200: {
-            slidesPerView: 5,
-          },
-        }}
-        watchSlidesProgress={true}
-        spaceBetween={5}
-        modules={[Autoplay]}
-        // loop={true}
-        autoplay={{
-          delay: 2500,
-          disableOnInteraction: false,
-        }}
-        className="mySwiper mySwiperSliderProduct"
-      >
-        {data.length > 0 &&
-          data.map((item, key) => {
-            return (
-              <SwiperSlide key={key}>
-                <SliderProductItem item={item} />
-              </SwiperSlide>
-            )
-          })}
-      </Swiper> */}
-      <Slider {...settings} className="SlickSlider">
-        {data.length > 0 &&
-          data.map((item, key) => {
-            return (
-              // <SwiperSlide key={key}>
-              <SliderProductItem key={key} item={item} />
-              // </SwiperSlide>
-            )
-          })}
-      </Slider>
+      {data.length && data.length <= 5 ? (
+        <Swiper
+          breakpoints={{
+            0: {
+              slidesPerView: 2.5,
+            },
+            400: {
+              slidesPerView: 2.5,
+            },
+            639: {
+              slidesPerView: 3,
+            },
+            865: {
+              slidesPerView: 4,
+            },
+            1200: {
+              slidesPerView: 5,
+            },
+          }}
+          watchSlidesProgress={true}
+          modules={[Autoplay]}
+          slidesPerView={2}
+          spaceBetween={5}
+          autoplay={{
+            delay: 3000,
+            disableOnInteraction: false,
+          }}
+          className="mySwiperSliderProduct"
+        >
+          {data.length > 0 &&
+            data.map((item, key) => {
+              return (
+                <SwiperSlide key={key}>
+                  <SliderProductItem item={item} />
+                </SwiperSlide>
+              )
+            })}
+        </Swiper>
+      ) : (
+        <Slider {...settings} className="SlickSlider">
+          {data.length > 0 &&
+            data.map((item, key) => {
+              return (
+                // <SwiperSlide key={key}>
+                <SliderProductItem key={key} item={item} />
+                // </SwiperSlide>
+              )
+            })}
+        </Slider>
+      )}
     </div>
   )
 }

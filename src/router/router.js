@@ -14,6 +14,7 @@ import { BlogLayout, HomeLayout } from "~/layout"
 import { CheckOrder } from "~/app/order/CheckOrder"
 import { ProductHomePage } from "~/app/store/ProductHomePage"
 import { HomeBlog } from "~/app/blog/HomeBlog"
+import { PostDetail } from "~/app/blog/PostDetail"
 
 const router = [
   {
@@ -93,8 +94,18 @@ const router = [
     layout: HomeLayout,
   },
   {
-    path: "/hx-blog",
+    path: "/hx-blog/home",
     component: HomeBlog,
+    layout: BlogLayout,
+  },
+  {
+    path: "/hx-blog/:topic",
+    component: HomeBlog,
+    layout: BlogLayout,
+  },
+  {
+    path: "/hx-blog/bai-viet/:title",
+    component: PostDetail,
     layout: BlogLayout,
   },
 ]

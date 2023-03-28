@@ -7,7 +7,8 @@ import "swiper/css/pagination"
 import "swiper/css/navigation"
 import { Autoplay, Pagination, Navigation } from "swiper"
 import { slidersBlog } from "~/fetchData"
-export const SliderBlog = () => {
+import { Link } from "react-router-dom"
+export const SliderBlog = ({ data = [] }) => {
   return (
     <div className="SliderBlog">
       <Swiper
@@ -23,18 +24,32 @@ export const SliderBlog = () => {
         modules={[Autoplay, Pagination, Navigation]}
         className="mySwiperSliderBlog"
       >
-        {slidersBlog.length &&
-          slidersBlog.map((item, key) => {
+        {data.length &&
+          data.map((item, key) => {
             return (
               <SwiperSlide>
                 <div className="ItemSliderBlog">
-                  <div className="ImageItemSlider">
-                    <img src={item.imgThumb} alt="" />
-                  </div>
+                  <Link
+                    to={`/hx-blog/bai-viet/${item.slug}?id=${item._id}`}
+                    className="ImageItemSlider"
+                  >
+                    <img
+                      src={process.env.REACT_APP_BASE_URL + "/" + item.image}
+                      alt=""
+                    />
+                  </Link>
                   <div className="DescriptionItemBlog">
-                    <p className="TopicBlog">{item.topic.label}</p>
-                    <h2 className="TitleItem">{item.title}</h2>
-                    <p className="DescriptionBlog"> {item.description}</p>
+                    <p className="TopicBlog">{item.topic_id.label}</p>
+                    <Link
+                      to={`/hx-blog/bai-viet/${item.slug}?id=${item._id}`}
+                      className="TitleItem"
+                    >
+                      {item.title}
+                    </Link>
+                    <p
+                      className="DescriptionBlog fw-lighter"
+                      dangerouslySetInnerHTML={{ __html: item.content }}
+                    ></p>
                   </div>
                 </div>
               </SwiperSlide>
