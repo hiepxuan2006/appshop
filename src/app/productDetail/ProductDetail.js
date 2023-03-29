@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { ImageSlideThumb } from "./ImageSlideThumb"
 import { formattedNumber } from "~/helper/formatCurentcy"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -12,6 +12,7 @@ import { getLocalData, setLocalData } from "~/services/StoreageServices"
 import { toast } from "react-toastify"
 import { PreviewListPost } from "../blog/PreviewListPost"
 import { DocTitle } from "~/helper/DocTitle"
+import { DataContext } from "~/context/AppContext"
 
 export const ProductDetail = () => {
   const { slug } = useParams()
@@ -25,6 +26,8 @@ export const ProductDetail = () => {
   const queryParams = new URLSearchParams(location.search)
 
   const id = queryParams.get("id")
+
+  const { setCartTotal } = useContext(DataContext)
   const _getProductBySlugId = async () => {
     const params = queryString.stringify(
       { slug, id },
@@ -74,6 +77,7 @@ export const ProductDetail = () => {
           data: { totalQuantity: 1, productList: [itemProduct] },
           __expires: Date.now() + 86400000,
         }
+        setCartTotal(dataCart.data.totalQuantity)
         setLocalData("cart-product-list", dataCart)
         toast.success("Thêm vào giỏ hàng thành công!", {
           position: "top-center",
@@ -115,6 +119,8 @@ export const ProductDetail = () => {
           },
           __expires: Date.now() + 86400000,
         }
+        setCartTotal(dataCart.data.totalQuantity)
+
         setLocalData("cart-product-list", dataCart)
 
         toast.success("Thêm vào giỏ hàng thành công!", {

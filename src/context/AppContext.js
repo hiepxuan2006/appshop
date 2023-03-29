@@ -1,6 +1,10 @@
 import * as React from "react"
 import { useEffect } from "react"
-import { removeLocalData } from "~/services/StoreageServices"
+import {
+  getLocalData,
+  removeLocalData,
+  setLocalData,
+} from "~/services/StoreageServices"
 import { secretAccount } from "~/services/authService"
 
 export const DataContext = React.createContext()
@@ -8,7 +12,23 @@ const AppContext = (props) => {
   const [isCollapsed, setIsCollapsed] = React.useState(true)
   const [isLogin, setIsLogin] = React.useState(false)
   const [loading, setLoading] = React.useState(false)
+  const [cartTotal, setCartTotal] = React.useState(0)
 
+  useEffect(() => {
+    const cartLocal = getLocalData("cart-product-list")
+    if (Date.now - cartLocal.__expires > 0) {
+      const cartEmpty = {
+        data: {
+          totalQuantity: 3,
+          productList: [],
+          __expires: Date.now() + 86400000,
+        },
+      }
+      setCartTotal(0)
+      setLocalData("cart-product-list", cartEmpty)
+    }
+    setCartTotal(cartLocal?.data?.totalQuantity)
+  }, [])
   const secretLogin = async () => {
     try {
       // setLoading(true)
@@ -38,6 +58,8 @@ const AppContext = (props) => {
     isLogin,
     loading,
     setLoading,
+    cartTotal,
+    setCartTotal,
   }
   return (
     <DataContext.Provider value={value}>{props.children}</DataContext.Provider>

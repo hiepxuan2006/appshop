@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import classNames from "classnames/bind"
 import { Fragment, useContext, useEffect, useState } from "react"
 import { Link } from "react-router-dom"
-import { DataContext } from "~/context/AppContext"
+import AppContext, { DataContext } from "~/context/AppContext"
 import { getLocalData } from "~/services/StoreageServices"
 import { getCategories } from "~/services/categoryService"
 import style from "./Header.module.scss"
@@ -30,6 +30,8 @@ const Header = ({ isHidden = true }) => {
   const handleCloseModal = () => {
     setIsOpen(false)
   }
+
+  const { cartTotal, setCartTotal } = useContext(DataContext)
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -77,7 +79,7 @@ const Header = ({ isHidden = true }) => {
         </Link>
         <Link to="/cart" className={cx("cart")}>
           <FontAwesomeIcon className={cx("icon-cart")} icon={faCartFlatbed} />
-          <p className={cx("quantity")}>{totalCart}</p>
+          <p className={cx("quantity")}>{cartTotal}</p>
           <p>Giỏ hàng</p>
         </Link>
         {isLogin ? (
