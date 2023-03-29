@@ -182,18 +182,19 @@
     .SliderProduct {
         width: 100vw;
         font-size: 12px;
+        padding-top: 30px;
         h2{
             font-size: 18px;
         }
-        padding-top: 30px;
     }
 
     .SlickSlider{
-        height: 300px;
+        height: 360px;
         .SliderProductItem{
             font-size: 14px;
             h3{
-                white-space: nowrap;
+                white-space: normal !important;
+                text-align: justify;
             }
         }
     }
@@ -215,6 +216,11 @@
         margin-left: 0;
     }
     .InfoProductItem {
+        overflow: hidden;
+        h3{
+        font-size: 13px;
+
+        }
         p {
             font-size: 12px;
         font-weight: 500;
