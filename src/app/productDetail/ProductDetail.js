@@ -249,7 +249,7 @@ export const ProductDetail = () => {
               </div>
             </div>
           </div>
-          <div className=" row me-2 ms-2">
+          <div className="DescriptionProduct row me-2 ms-2">
             <div
               className={
                 more
