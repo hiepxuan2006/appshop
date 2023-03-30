@@ -1,6 +1,6 @@
 import createAPIServices from "./httpRequest"
 
-const baseUrl = "https://api-hx-cellphone.onrender.com/post"
+const baseUrl = `${process.env.REACT_APP_BASE_URL_API}/post`
 
 const api = createAPIServices({ baseUrl })
 

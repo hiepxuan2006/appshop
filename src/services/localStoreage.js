@@ -37,7 +37,7 @@ export const setUserData = (user) => {
   setLocalData("user", updatedUser)
 }
 export const getAccessToken = () =>
-  getLocalData("accessToken") || _store.state.accessToken || ""
+  getLocalData("access_token") || _store.state.accessToken || ""
 
 export const getRoles = () => getLocalData("roles") || _store.state.roles || ""
 

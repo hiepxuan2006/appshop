@@ -41,7 +41,7 @@ const AppContext = (props) => {
         throw new Error(message)
       }
 
-      // setIsLogin(true)
+      setIsLogin(true)
       setLoading(false)
     } catch (error) {
     } finally {
