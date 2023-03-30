@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { getCategories } from "~/services/categoryService"
 
-export const CategoryMobile = ({ show, setShow }) => {
+export const CategoryMobile = ({ show, setShow, setActiveId }) => {
   const availableColors = [
     "#F4D03F", // màu vàng nhạt
     "#A9CCE3", // màu xanh nước biển
@@ -75,7 +75,10 @@ export const CategoryMobile = ({ show, setShow }) => {
           <div className="group_content_mobile">
             <Link
               className="parent_category_mobile"
-              onClick={() => setShow(false)}
+              onClick={() => {
+                setActiveId("")
+                setShow(false)
+              }}
               to={`/san-pham/danh-muc/${categoryChose.slug}?id=${categoryChose._id}`}
             >
               {categoryChose.label}
@@ -91,7 +94,10 @@ export const CategoryMobile = ({ show, setShow }) => {
                           value.children.map((item, key) => {
                             return (
                               <Link
-                                onClick={() => setShow(false)}
+                                onClick={() => {
+                                  setActiveId("")
+                                  setShow(false)
+                                }}
                                 to={`/san-pham/danh-muc/${item.slug}?id=${item._id}`}
                                 key={key}
                                 className="title_category_mobile"

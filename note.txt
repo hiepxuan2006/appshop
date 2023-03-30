@@ -1,1 +1,2 @@
 https://api-dev-hx-hiepxuan2006-dev.apps.sandbox-m3.1530.p1.openshiftapps.com
+http://localhost:5005

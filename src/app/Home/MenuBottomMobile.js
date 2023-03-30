@@ -15,7 +15,13 @@ export const MenuBottomMobile = ({ showPage, setShowPage, setShow, show }) => {
   return (
     <>
       <div className="MenuBottom">
-        {show && <CategoryMobile show={show} setShow={setShow} />}
+        {show && (
+          <CategoryMobile
+            setActiveId={setActiveId}
+            show={show}
+            setShow={setShow}
+          />
+        )}
         <Link
           to={"/"}
           className={`${
