@@ -16,7 +16,7 @@ const AppContext = (props) => {
 
   useEffect(() => {
     const cartLocal = getLocalData("cart-product-list")
-    if (Date.now - cartLocal.__expires > 0) {
+    if (cartLocal && Date.now - cartLocal.__expires > 0) {
       const cartEmpty = {
         data: {
           totalQuantity: 3,
