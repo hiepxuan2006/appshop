@@ -15,7 +15,7 @@ import { searchProducts } from "~/services/productService"
 import style from "./Header.module.scss"
 import { Link } from "react-router-dom"
 const cx = classNames.bind(style)
-export const Search = ({ isLocationHome, isHidden, scrollY }) => {
+export const Search = ({ isLocationHome, isHidden, scrollY, show = false }) => {
   const [value, setValue] = useState("")
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(false)
@@ -69,7 +69,7 @@ export const Search = ({ isLocationHome, isHidden, scrollY }) => {
   return (
     <div
       className={`${cx("search")} ${
-        !isHidden || !isLocationHome || scrollY > 0
+        !isHidden || !isLocationHome || scrollY > 0 || show
           ? cx("positionRelative")
           : ""
       }`}

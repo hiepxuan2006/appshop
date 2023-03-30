@@ -16,7 +16,7 @@ import style from "./Header.module.scss"
 import { Search } from "./Search"
 const cx = classNames.bind(style)
 const logo = require("~/assets/logo.png")
-const Header = ({ isHidden = true }) => {
+const Header = ({ isHidden = true, show = false }) => {
   const [modalIsOpen, setIsOpen] = useState(false)
   const [categories, setCategories] = useState([])
   const [hideOn, setHideOn] = useState(false)
@@ -69,6 +69,7 @@ const Header = ({ isHidden = true }) => {
           <p>Danh mục</p>
         </div>
         <Search
+          show={show}
           isHidden={isHidden}
           scrollY={scrollY}
           isLocationHome={isLocationHome}
@@ -80,7 +81,7 @@ const Header = ({ isHidden = true }) => {
         <Link to="/cart" className={cx("cart")}>
           <FontAwesomeIcon className={cx("icon-cart")} icon={faCartFlatbed} />
           <p className={cx("quantity")}>{cartTotal}</p>
-          <p>Giỏ hàng</p>
+          <p className={cx("title")}>Giỏ hàng</p>
         </Link>
         {isLogin ? (
           <Fragment>

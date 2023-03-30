@@ -6,12 +6,19 @@ import Header from "~/app/Header"
 import { Footer } from "~/components/footer/Footer"
 import style from "./HomeLayout.module.scss"
 import { MenuBottomMobile } from "~/app/Home/MenuBottomMobile"
+import { CategoryMobile } from "~/app/CategoryMobile/CategoryMobile"
 
 const cx = classNames.bind(style)
 const HomeLayout = ({ children }) => {
   const [loading, setLoading] = useState(false)
   const [showPage, setShowPage] = useState(false)
-
+  const [categoryMobile, setCategoryMobile] = useState(false)
+  const body = document.body
+  if (categoryMobile === true) {
+    body.classList.add(`no-scroll`)
+  } else {
+    body.classList.remove(`no-scroll`)
+  }
   return (
     <Fragment>
       {loading ? (
@@ -20,12 +27,17 @@ const HomeLayout = ({ children }) => {
         </div>
       ) : (
         <div className={cx("wrapper")}>
-          <Header />
-          <div className={`${cx("container")} mb-5`}>{children}</div>
+          <Header show={categoryMobile} />
+          <div className={`${cx("container")}  mb-5`}>{children}</div>
           <Footer />
         </div>
       )}
-      <MenuBottomMobile setShowPage={setShowPage} showPage={showPage} />
+      <MenuBottomMobile
+        show={categoryMobile}
+        setShow={setCategoryMobile}
+        setShowPage={setShowPage}
+        showPage={showPage}
+      />
     </Fragment>
   )
 }

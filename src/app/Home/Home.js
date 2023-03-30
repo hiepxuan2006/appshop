@@ -1,14 +1,12 @@
 import { useEffect, useState } from "react"
 import { ScrollToTopOnMount } from "~/components/ScrollToTopOnMount"
-import { Slider, SliderBanner } from "~/components/Slider/SliderReact"
+import { SliderBanner } from "~/components/Slider/SliderReact"
 import { DocTitle } from "~/helper/DocTitle"
 import { getCategories } from "~/services/categoryService"
-import { getProductGroupCategory, getProducts } from "~/services/productService"
+import { getProductGroupCategory } from "~/services/productService"
 import { ListCategory } from "./ListCategory"
-import { SliderProduct } from "./SliderProduct"
 import { SliderPost } from "./SliderPost"
-import { SkeletonTheme } from "~/helper/SkeletonTheme"
-import { LoadingProcess } from "~/helper/LoadingProcess"
+import { SliderProduct } from "./SliderProduct"
 export const Home = ({ isOpenPage }) => {
   const [products, setProducts] = useState([])
   const [categories, setCategories] = useState([])

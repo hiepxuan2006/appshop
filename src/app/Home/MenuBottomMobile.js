@@ -6,43 +6,77 @@ import {
   faUserCircle,
 } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { NavLink } from "react-router-dom"
+import { Link } from "react-router-dom"
+import { CategoryMobile } from "../CategoryMobile/CategoryMobile"
+import { useState } from "react"
 
-export const MenuBottomMobile = ({ showPage, setShowPage }) => {
+export const MenuBottomMobile = ({ showPage, setShowPage, setShow, show }) => {
+  const [activeId, setActiveId] = useState("")
   return (
     <>
       <div className="MenuBottom">
-        <NavLink
+        {show && <CategoryMobile show={show} setShow={setShow} />}
+        <Link
           to={"/"}
-          className="d-flex ButtonBottom  HomeButton"
-          onClick={() => setShowPage(false)}
+          className={`${
+            activeId === "home" ? "active" : ""
+          } d-flex ButtonBottom  CategoryButton`}
+          onClick={() => {
+            setActiveId("home")
+            setShow(false)
+          }}
         >
           <FontAwesomeIcon icon={faHome} />
           <span>Trang chủ</span>
-        </NavLink>
-        <div className="d-flex ButtonBottom  CategoryButton">
+        </Link>
+        <Link
+          onClick={() => {
+            setShow(!show)
+            setActiveId("category")
+          }}
+          className={`${
+            activeId === "category" ? "active" : ""
+          } d-flex ButtonBottom  CategoryButton`}
+        >
           <FontAwesomeIcon icon={faBars} />
           <span>Danh mục</span>
-        </div>
+        </Link>
         <div
-          className="d-flex ButtonBottom  CategoryButton"
-          onClick={() => setShowPage(false)}
+          className={`${
+            activeId === "store" ? "active" : ""
+          } d-flex ButtonBottom  CategoryButton`}
+          onClick={() => {
+            setActiveId("store")
+            setShow(false)
+          }}
         >
           <FontAwesomeIcon icon={faStore} />
           <span>Cửa hàng</span>
         </div>
-        <NavLink
+        <Link
           to={"/account"}
-          className="d-flex ButtonBottom  CategoryButton"
-          onClick={() => setShowPage(false)}
+          className={`${
+            activeId === "auth" ? "active" : ""
+          } d-flex ButtonBottom  CategoryButton`}
+          onClick={() => {
+            setActiveId("auth")
+            setShow(false)
+          }}
         >
           <FontAwesomeIcon icon={faUserCircle} />
           <span>Đăng nhập</span>
-        </NavLink>
-        <div className="d-flex ButtonBottom  CategoryButton">
+        </Link>
+        <div
+          className={` ${
+            activeId === "more" ? "active" : ""
+          } d-flex ButtonBottom  CategoryButton`}
+        >
           <FontAwesomeIcon
             icon={faEllipsis}
-            onClick={() => setShowPage(!showPage)}
+            onClick={() => {
+              setActiveId("more")
+              // setShow(!showPage)
+            }}
           />
           <span>Xem thêm</span>
         </div>
