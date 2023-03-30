@@ -34,7 +34,7 @@ export const SliderProductItem = ({ item = {} }) => {
               <h3 className="d-flex justify-content-start text-start">
                 {item.title}
               </h3>
-              <div className="d-flex justify-content-between gap-3 mt-3">
+              <div className="d-flex justify-content-between gap-2 mt-3">
                 <p>
                   {item.retail_price &&
                     formattedNumber(
