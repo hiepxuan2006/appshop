@@ -13,6 +13,8 @@ import { toast } from "react-toastify"
 import { PreviewListPost } from "../blog/PreviewListPost"
 import { DocTitle } from "~/helper/DocTitle"
 import { DataContext } from "~/context/AppContext"
+import { LoadingProcess } from "~/helper/LoadingProcess"
+import { ScrollToTopOnMount } from "~/components/ScrollToTopOnMount"
 
 export const ProductDetail = () => {
   const { slug } = useParams()
@@ -21,6 +23,7 @@ export const ProductDetail = () => {
   const [variantChose, setVariantChose] = useState("")
   const [isChoseAttribute, setIsChoseAttribute] = useState(false)
   const [more, setMore] = useState(false)
+  const [loading, setLoading] = React.useState(false)
 
   const location = useLocation()
   const queryParams = new URLSearchParams(location.search)
@@ -29,6 +32,7 @@ export const ProductDetail = () => {
 
   const { setCartTotal } = useContext(DataContext)
   const _getProductBySlugId = async () => {
+    setLoading(true)
     const params = queryString.stringify(
       { slug, id },
       {
@@ -37,6 +41,7 @@ export const ProductDetail = () => {
       }
     )
     const { data, success, message } = await getProduct(params)
+    setLoading(false)
     if (!success) throw new Error(message)
     setProduct(data)
     // setVariantChose(data?.variants[0])
@@ -142,150 +147,160 @@ export const ProductDetail = () => {
   }
   return (
     <>
-      {product && Object.keys(product).length !== 0 && (
-        <div className="ProductDetailPage">
-          <DocTitle title={product.title} />
-          <div className="ProductDetailTitle">
-            {variantChose ? (
-              <h1>{variantChose.title}</h1>
-            ) : (
-              <h1>{product.title}</h1>
-            )}
-          </div>
-          <div className="ProductDetailInfo container">
-            <div className="row flex-nowrap ProductDetailInfoBody gap-3">
-              <div className="col col-md-4">
-                <ImageSlideThumb product={product} />
-              </div>
-              <div className="col ProductDetailContent col-md-5">
-                <div className="PriceProductDetail d-flex gap-3 justify-content-between">
-                  <h1>
-                    {variantChose
-                      ? formattedNumber(
-                          variantChose.retail_price -
-                            (variantChose.retail_price * product.sale) / 100
+      <ScrollToTopOnMount />
+      {product &&
+        Object.keys(product).length !== 0 &&
+        (loading ? (
+          <LoadingProcess />
+        ) : (
+          <div className="ProductDetailPage">
+            <DocTitle title={product.title} />
+            <div className="ProductDetailTitle">
+              {variantChose ? (
+                <h1>{variantChose.title}</h1>
+              ) : (
+                <h1>{product.title}</h1>
+              )}
+            </div>
+            <div className="ProductDetailInfo container">
+              <div className="row flex-nowrap ProductDetailInfoBody gap-3">
+                <div className="col col-md-4">
+                  <ImageSlideThumb product={product} />
+                </div>
+                <div className="col ProductDetailContent col-md-5">
+                  <div className="PriceProductDetail d-flex gap-3 justify-content-between">
+                    <h1>
+                      {variantChose
+                        ? formattedNumber(
+                            variantChose.retail_price -
+                              (variantChose.retail_price * product.sale) / 100
+                          )
+                        : formattedNumber(
+                            product.retail_price -
+                              (product.retail_price * product.sale) / 100
+                          )}
+                    </h1>
+                    <h1 className="text-decoration-line-through">
+                      {variantChose
+                        ? formattedNumber(variantChose.retail_price)
+                        : formattedNumber(product.retail_price)}
+                    </h1>
+                  </div>
+                  <div className="AttributeProduct mt-3">
+                    {product.attributes.length &&
+                      product.attributes.map((item, key) => {
+                        return (
+                          <div className="AttributeProductItem">
+                            <h2 className="mb-4">{item.name} :</h2>
+                            <ul className="valueAttribute mb-4">
+                              {item.values.map((value, key) => {
+                                return (
+                                  <li
+                                    className={`valueAttributeItem ${
+                                      attributesChose[item._id] &&
+                                      attributesChose[item._id].position ===
+                                        value.position
+                                        ? "active"
+                                        : ""
+                                    }`}
+                                    onClick={() =>
+                                      handleChoseAttributes(value, item)
+                                    }
+                                  >
+                                    <p>{value.name}:</p>
+                                    {item.type === "color" && (
+                                      <p
+                                        className="StyleColor"
+                                        style={{
+                                          backgroundColor: `${value.value}`,
+                                        }}
+                                      ></p>
+                                    )}
+                                  </li>
+                                )
+                              })}
+                            </ul>
+                          </div>
                         )
-                      : formattedNumber(
-                          product.retail_price -
-                            (product.retail_price * product.sale) / 100
-                        )}
-                  </h1>
-                  <h1 className="text-decoration-line-through">
-                    {variantChose
-                      ? formattedNumber(variantChose.retail_price)
-                      : formattedNumber(product.retail_price)}
-                  </h1>
-                </div>
-                <div className="AttributeProduct mt-3">
-                  {product.attributes.length &&
-                    product.attributes.map((item, key) => {
-                      return (
-                        <div className="AttributeProductItem">
-                          <h2 className="mb-4">{item.name} :</h2>
-                          <ul className="valueAttribute mb-4">
-                            {item.values.map((value, key) => {
-                              return (
-                                <li
-                                  className={`valueAttributeItem ${
-                                    attributesChose[item._id] &&
-                                    attributesChose[item._id].position ===
-                                      value.position
-                                      ? "active"
-                                      : ""
-                                  }`}
-                                  onClick={() =>
-                                    handleChoseAttributes(value, item)
-                                  }
-                                >
-                                  <p>{value.name}:</p>
-                                  {item.type === "color" && (
-                                    <p
-                                      className="StyleColor"
-                                      style={{
-                                        backgroundColor: `${value.value}`,
-                                      }}
-                                    ></p>
-                                  )}
-                                </li>
-                              )
-                            })}
-                          </ul>
-                        </div>
-                      )
-                    })}
-                  <p
-                    className={`mt-3 mb-3 text-danger ${
-                      isChoseAttribute ? "" : "d-none"
-                    }`}
-                  >
-                    Vui Lòng chọn phân loại hàng
-                  </p>
-                </div>
-                <div className="ActionBuyProduct">
-                  <div className="BuyNow text-center">
-                    <p>Mua Ngay</p>
-                    <span className="fw-lighter">
-                      (Giao nhanh từ 2 giờ hoặc nhận tại cửa hàng)
-                    </span>
+                      })}
+                    <p
+                      className={`mt-3 mb-3 text-danger ${
+                        isChoseAttribute ? "" : "d-none"
+                      }`}
+                    >
+                      Vui Lòng chọn phân loại hàng
+                    </p>
                   </div>
-                  <div className="AddTocart" onClick={() => handleAddToCart()}>
-                    <FontAwesomeIcon icon={faCartPlus} />
-                    <span>Thêm vào giỏ</span>
+                  <div className="ActionBuyProduct">
+                    <div className="BuyNow text-center">
+                      <p>Mua Ngay</p>
+                      <span className="fw-lighter">
+                        (Giao nhanh từ 2 giờ hoặc nhận tại cửa hàng)
+                      </span>
+                    </div>
+                    <div
+                      className="AddTocart"
+                      onClick={() => handleAddToCart()}
+                    >
+                      <FontAwesomeIcon icon={faCartPlus} />
+                      <span>Thêm vào giỏ</span>
+                    </div>
+                  </div>
+                  <div className="ActionAmortization">
+                    <div className="ActionAmortizationItem">
+                      <p>Trả góp 0%</p>
+                      <span>Xét duyệt qua điện thoại</span>
+                    </div>
+                    <div className="ActionAmortizationItem">
+                      <p>Trả góp qua thẻ</p>
+                      <span>Visa , Master Card , JCB </span>
+                    </div>
                   </div>
                 </div>
-                <div className="ActionAmortization">
-                  <div className="ActionAmortizationItem">
-                    <p>Trả góp 0%</p>
-                    <span>Xét duyệt qua điện thoại</span>
+                <div className="col col-md-3 flex-shrink-1">
+                  <div className="InfoProduct">
+                    <h1>Thông tin sản phẩm</h1>
+                    <p>
+                      Bảo hành chính hãng 12 tháng tại trung tâm bảo hành ủy
+                      quyền, 1 đổi 1 trong 30 ngày nếu có lỗi phần cứng từ NSX.
+                    </p>
                   </div>
-                  <div className="ActionAmortizationItem">
-                    <p>Trả góp qua thẻ</p>
-                    <span>Visa , Master Card , JCB </span>
-                  </div>
-                </div>
-              </div>
-              <div className="col col-md-3 flex-shrink-1">
-                <div className="InfoProduct">
-                  <h1>Thông tin sản phẩm</h1>
-                  <p>
-                    Bảo hành chính hãng 12 tháng tại trung tâm bảo hành ủy
-                    quyền, 1 đổi 1 trong 30 ngày nếu có lỗi phần cứng từ NSX.
-                  </p>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="DescriptionProduct row me-2 ms-2">
-            <div
-              className={
-                more
-                  ? "col col-md-8 ProductDescription MW-100"
-                  : "col col-md-8 ProductDescription"
-              }
-            >
-              <div className="SalientFeatures flex-column mt-3 mb-3 d-flex">
-                <h1 className="w-100 text-center">Đặc Điểm Nổi Bật</h1>
-                <div
-                  dangerouslySetInnerHTML={{ __html: product.salient_features }}
-                ></div>
-              </div>
+            <div className="DescriptionProduct row me-2 ms-2">
               <div
-                className="Description"
-                dangerouslySetInnerHTML={{ __html: product.description }}
-              ></div>
-              <div
-                className={more ? "d-none" : "ReadMore"}
-                onClick={() => handleReadMore()}
+                className={
+                  more
+                    ? "col col-md-8 ProductDescription MW-100"
+                    : "col col-md-8 ProductDescription"
+                }
               >
-                <p>Xem thêm</p>
+                <div className="SalientFeatures flex-column mt-3 mb-3 d-flex">
+                  <h1 className="w-100 text-center">Đặc Điểm Nổi Bật</h1>
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: product.salient_features,
+                    }}
+                  ></div>
+                </div>
+                <div
+                  className="Description"
+                  dangerouslySetInnerHTML={{ __html: product.description }}
+                ></div>
+                <div
+                  className={more ? "d-none" : "ReadMore"}
+                  onClick={() => handleReadMore()}
+                >
+                  <p>Xem thêm</p>
+                </div>
+              </div>
+              <div className="col col-md-4 ProductPreviewListPost">
+                <PreviewListPost />
               </div>
             </div>
-            <div className="col col-md-4 ProductPreviewListPost">
-              <PreviewListPost />
-            </div>
           </div>
-        </div>
-      )}
+        ))}
     </>
   )
 }

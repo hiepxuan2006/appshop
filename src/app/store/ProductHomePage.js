@@ -12,12 +12,16 @@ import { getCategoriesById } from "~/services/categoryService"
 import { SliderHotSale } from "~/components/bannerSale/SliderHotSale"
 import { getProductsByCategory } from "~/services/productService"
 import queryString from "query-string"
+import { ScrollToTopOnMount } from "~/components/ScrollToTopOnMount"
 
 export const ProductHomePage = () => {
   const [categories, setCategories] = useState([])
   const [products, setProducts] = useState([])
-
+  const [sort_by, setSort_by] = useState("")
+  const [order, setOrder] = useState("")
   const location = useLocation()
+  const [loading, setLoading] = useState(false)
+  const [pages, setPages] = useState(0)
   const queryParams = new URLSearchParams(location.search)
 
   const sort = queryParams.get("id")
@@ -28,23 +32,31 @@ export const ProductHomePage = () => {
   }
 
   const _getProductById = async () => {
-    const query = { id: sort }
+    const query = { id: sort, sort_by, order }
+    setLoading(true)
     setProducts([])
     const params = queryString.stringify(query, {
       skipNull: true,
       skipEmptyString: true,
     })
     const { data, success, message } = await getProductsByCategory(params)
+    setLoading(false)
     if (!success) throw new Error(message)
     setProducts(data.data)
+    setPages(data.pages)
   }
   useEffect(() => {
     _getCategoriesById()
-    _getProductById()
   }, [sort])
+
+  useEffect(() => {
+    _getProductById()
+  }, [sort_by, sort, order])
+
   return (
     <div className="ProductHomePage">
       {/* <div className="row"> */}
+      <ScrollToTopOnMount />
       {categories.length > 0 &&
         categories.slice(0, 2).map((category, key) => {
           return (
@@ -76,11 +88,23 @@ export const ProductHomePage = () => {
       <div className="FilterProduct">
         <h3>Sắp Xếp Theo</h3>
         <div className="FilterList">
-          <div className="FilterItem">
+          <div
+            className={`FilterItem ${order === "desc" ? "active" : ""}`}
+            onClick={() => {
+              setOrder("desc")
+              setSort_by("retail_price")
+            }}
+          >
             <FontAwesomeIcon icon={faArrowDownShortWide} />
             <p>Giá từ cao - thấp</p>
           </div>
-          <div className="FilterItem">
+          <div
+            className={`FilterItem ${order === "asc" ? "active" : ""}`}
+            onClick={() => {
+              setOrder("asc")
+              setSort_by("retail_price")
+            }}
+          >
             <FontAwesomeIcon icon={faArrowUpShortWide} />
             <p>Giá từ thấp - cao</p>
           </div>
@@ -100,11 +124,13 @@ export const ProductHomePage = () => {
             )
           })}
       </div>
-      <div className="MoreListProduct">
-        <div className="ButtonMore">
-          <p>Xem thêm Sản phẩm</p>
+      {pages > 1 && (
+        <div className="MoreListProduct">
+          <div className="ButtonMore">
+            <p>Xem thêm Sản phẩm</p>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   )
 }

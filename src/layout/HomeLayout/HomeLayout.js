@@ -7,6 +7,7 @@ import { Footer } from "~/components/footer/Footer"
 import style from "./HomeLayout.module.scss"
 import { MenuBottomMobile } from "~/app/Home/MenuBottomMobile"
 import { CategoryMobile } from "~/app/CategoryMobile/CategoryMobile"
+import { ScrollToTopOnMount } from "~/components/ScrollToTopOnMount"
 
 const cx = classNames.bind(style)
 const HomeLayout = ({ children }) => {
@@ -21,17 +22,11 @@ const HomeLayout = ({ children }) => {
   }
   return (
     <Fragment>
-      {loading ? (
-        <div className="loading-page">
-          <FontAwesomeIcon icon={faSpinner} />
-        </div>
-      ) : (
-        <div className={cx("wrapper")}>
-          <Header show={categoryMobile} />
-          <div className={`${cx("container")}  mb-5`}>{children}</div>
-          <Footer />
-        </div>
-      )}
+      <div className={cx("wrapper")}>
+        <Header show={categoryMobile} />
+        <div className={`${cx("container")}  mb-5`}>{children}</div>
+        <Footer />
+      </div>
       <MenuBottomMobile
         show={categoryMobile}
         setShow={setCategoryMobile}

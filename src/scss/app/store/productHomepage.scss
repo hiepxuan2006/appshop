@@ -57,6 +57,7 @@
     border: 1px solid #ccc;
     border-radius: 6px;
     white-space: nowrap;
+    cursor: pointer;
 }
 
 .ListProductHome {
@@ -117,10 +118,15 @@
     margin-top: 20px;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
+
 }
 
 .ProductItemTitle {
     font-size: 18px;
+    line-height: 1.6;
+    height: 32px;
 }
 
 .ProductItemPrice {

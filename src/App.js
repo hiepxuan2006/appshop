@@ -5,13 +5,14 @@ import { Loading } from "./helper/Loading"
 import { HomeLayout } from "./layout"
 import { router } from "./router"
 import { Gototop } from "./components/Gototop"
+import { LoadingProcess } from "./helper/LoadingProcess"
 
 function App() {
   const { loading, setLoading } = useContext(DataContext)
   return (
     <Router>
       {loading ? (
-        <Loading />
+        <LoadingProcess />
       ) : (
         <div className="app">
           <Routes>
@@ -34,9 +35,9 @@ function App() {
               )
             })}
           </Routes>
+          <Gototop />
         </div>
       )}
-      <Gototop />
     </Router>
   )
 }

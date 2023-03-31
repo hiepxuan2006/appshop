@@ -23,12 +23,16 @@ export const ProductItemHome = ({ product }) => {
       </div>
       <div className="ProductItemInfo">
         <div className="ProductItemTitle">
-          <h4>Iphone 14 pro max chính hãng</h4>
+          <h4>{product.title}</h4>
         </div>
         <div className="ProductItemPrice">
-          <p className="PriceAfterSale">{formattedNumber(39000000)}</p>
+          <p className="PriceAfterSale">
+            {formattedNumber(
+              product.retail_price - (product.retail_price * product.sale) / 100
+            )}
+          </p>
           <p className="PriceRetail text-decoration-line-through">
-            {formattedNumber(39000000)}
+            {formattedNumber(product.retail_price)}
           </p>
         </div>
         <div className="AddCart">

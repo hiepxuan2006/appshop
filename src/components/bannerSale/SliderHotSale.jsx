@@ -9,24 +9,74 @@ import "swiper/css/navigation"
 // import required modules
 import { Autoplay, Pagination, Navigation } from "swiper"
 import { SliderProductItem } from "~/app/Home/SliderProductItem"
+import moment from "moment"
 export const SliderHotSale = ({ products = [] }) => {
   const [isWeekend, setIsWeekend] = useState(false)
   useEffect(() => {
     const date = new Date()
     const day = date.getDay()
-    if (day === 6 || day === 0) {
+    if (day === 5 || day === 0 || day === 6) {
       setIsWeekend(true)
     }
   }, [])
+  const targetDays = [6] // 0: Chủ nhật, 1: Thứ 2, ..., 6: Thứ 7
+  const [remainingTime, setRemainingTime] = useState(0)
+
+  useEffect(() => {
+    // Tìm ngày gần nhất từ hôm nay đến thứ 5
+    const now = new Date()
+    const targetDate = new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate() + (6 - now.getDay()),
+      0,
+      0,
+      0
+    )
+    console.log(now)
+    console.log(targetDate)
+
+    const interval = setInterval(() => {
+      setRemainingTime(targetDate - new Date().getTime())
+    }, 1000)
+
+    // Xóa interval khi component bị unmount
+    return () => clearInterval(interval)
+  }, [targetDays])
+
+  const days = Math.floor(remainingTime / (1000 * 60 * 60 * 24))
+  const hours = Math.floor(
+    (remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+  )
+  const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60))
+  const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000)
+
+  // console.log(days, hours, minutes, seconds)
   return (
     <>
       {isWeekend && (
         <div className="SliderHotSale">
-          <div className="Title">
-            <img
-              src="https://cdn2.cellphones.com.vn/600x,webp/media/wysiwyg/hst.png"
-              alt=""
-            />
+          <div className="heading_banner">
+            <div className="Title">
+              <img
+                src="https://cdn2.cellphones.com.vn/600x,webp/media/wysiwyg/hst.png"
+                alt=""
+              />
+            </div>
+            <div className="time_sale">
+              <h2>
+                Diễn ra sau <strong>:</strong>
+              </h2>
+              <div className="clock_banner">
+                <p>{`0${days}`.slice(-2)}</p>
+                <strong>:</strong>
+                <p>{`0${hours}`.slice(-2)}</p>
+                <strong>:</strong>
+                <p>{`0${minutes}`.slice(-2)}</p>
+                <strong>:</strong>
+                <p>{`0${seconds}`.slice(-2)}</p>
+              </div>
+            </div>
           </div>
           <Swiper
             breakpoints={{
