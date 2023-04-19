@@ -191,7 +191,12 @@ export const ProductDetail = () => {
                           to={`/san-pham/${item.slug}`}
                           className="ProductRelationItem d-flex gap-5 "
                         >
-                          <p key={key}>{item.product_class}</p>
+                          <p
+                            key={key}
+                            dangerouslySetInnerHTML={{
+                              __html: item.product_class,
+                            }}
+                          ></p>
                           {item._id === product._id && (
                             <FontAwesomeIcon
                               icon={faCheck}
