@@ -7,18 +7,17 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import queryString from "query-string"
 import { useContext, useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { Link, useLocation } from "react-router-dom"
+import { Loading } from "~/components/Loading"
 import { ScrollToTopOnMount } from "~/components/ScrollToTopOnMount"
 import { SliderHotSale } from "~/components/bannerSale/SliderHotSale"
-import { getCategoriesById } from "~/services/categoryService"
+import { DataContext } from "~/context/AppContext"
 import { getProductsByCategory } from "~/services/productService"
-import { ProductItemHome } from "./ProductItemHome"
-import { SliderCategory } from "./SliderCategory"
-import { useDispatch, useSelector } from "react-redux"
 import { _getBannerCategory } from "~/slice/bannerSlice"
 import { _getCategoryById } from "~/slice/categorySlice"
-import { Loading } from "~/components/Loading"
-import { DataContext } from "~/context/AppContext"
+import { ProductItemHome } from "./ProductItemHome"
+import { SliderCategory } from "./SliderCategory"
 
 export const ProductHomePage = () => {
   const [categories, setCategories] = useState([])
@@ -69,12 +68,16 @@ export const ProductHomePage = () => {
       <ScrollToTopOnMount />
       {bannerCategory[sort] && bannerCategory[sort].length > 0 && (
         <div className="row p-0 m-0">
-          <div className={`col ${windowWidth < 1200 ? "col-12" : "col-lg-6"}`}>
+          <div
+            className={`col col-md-6 col-sm-6 ${
+              windowWidth < 800 ? "col12" : "col-lg-6"
+            }`}
+          >
             <SliderCategory bannerCategory={bannerCategory[sort]} />
           </div>
           <div
-            className={`col col-lg-6  ${
-              windowWidth < 1200 ? "d-none" : "SliderCategory2"
+            className={`col col-lg-6 col-md-6 col-sm-6  ${
+              windowWidth < 800 ? "d-none" : "SliderCategory2"
             }`}
           >
             <SliderCategory bannerCategory={bannerCategory[sort]} />
@@ -143,7 +146,10 @@ export const ProductHomePage = () => {
         {products.length > 0 &&
           products.map((item, key) => {
             return (
-              <div key={key} className="col-lg-2 ProductItemHome mt-3">
+              <div
+                key={key}
+                className="col col-xs-6 col-sm-4 col-md-3 col-lg-2 ProductItemHome mt-3"
+              >
                 <ProductItemHome product={item} />
               </div>
             )
