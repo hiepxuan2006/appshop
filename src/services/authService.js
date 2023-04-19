@@ -18,3 +18,11 @@ export const secretAccount = () => {
     method: "get",
   })
 }
+
+export const loginLocal = (data) => {
+  return api.makeRequest({
+    url: "/login",
+    method: "post",
+    data,
+  })
+}

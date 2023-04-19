@@ -7,24 +7,26 @@ import { DocTitle } from "~/helper/DocTitle"
 import style from "./Login.module.scss"
 import { Spinner } from "react-bootstrap"
 import Modal from "react-modal"
-import { authGoogle } from "~/services/authService"
+import { authGoogle, loginLocal } from "~/services/authService"
 import { toast } from "react-toastify"
 import AppContext, { DataContext } from "~/context/AppContext"
 import { setLocalData } from "~/services/StoreageServices"
 import { setAccessToken, setRoles, setUserData } from "~/services/localStoreage"
+import { toastAlert } from "~/helper/toast"
+import { LoadingProcess } from "~/helper/LoadingProcess"
 
 const loginImg = require("~/assets/login.png")
 const cx = classNames.bind(style)
 const clientId = process.env.REACT_APP_CLIENT_ID_GOOGLE
 export const Login = () => {
   const [data, setData] = useState({
-    name: "",
+    email: "",
     password: "",
     error: {},
   })
-  const { setIsLogin } = useContext(DataContext)
+  const { setIsLogin, isLogin } = useContext(DataContext)
   const [loading, setLoading] = useState(false)
-  const { name, password, error } = data
+  const { email, password, error } = data
   const navigation = useNavigate()
 
   const handleChange = (e) => {
@@ -32,12 +34,6 @@ export const Login = () => {
   }
   const handleBlur = (e) => {
     setData({ ...data, error: Object.assign(error, { [e.target.name]: "" }) })
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-
-    alert("hello")
   }
 
   useEffect(() => {
@@ -50,21 +46,15 @@ export const Login = () => {
   }, [])
 
   const failureHandler = (res) => {
-    toast.warn("🦄 Wow so easy!", {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    })
+    toastAlert("error", "Đăng nhập thất bại")
   }
+
   const loginHandler = async (res) => {
     try {
       setLoading(true)
-      const { data, success, message } = await authGoogle(res?.profileObj)
+      console.log(res)
+      const profileObj = res.profileObj
+      const { data, success, message } = await authGoogle(profileObj)
 
       if (!success) throw new Error(message)
       setIsLogin(true)
@@ -72,25 +62,39 @@ export const Login = () => {
       setAccessToken(data.access_token)
       setRoles(data.roles)
       setLocalData("is_admin", data.is_admin)
-
+      toastAlert("success", "Đăng nhập thành công")
       navigation("/")
       setLoading(false)
     } catch (error) {
       setLoading(false)
-      toast.warn("🦄 Wow so easy!", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      })
+      toastAlert("error", "Đăng nhập thất bại")
     }
   }
 
-  return (
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setLoading(true)
+    const { data, success, message } = await loginLocal({ email, password })
+    setLoading(false)
+    if (!success) {
+      toastAlert("error", message)
+      throw new Error(message)
+    }
+    setIsLogin(true)
+    setUserData(data.profile)
+    setAccessToken(data.access_token)
+    setRoles(data.roles)
+    setLocalData("is_admin", data.is_admin)
+    toastAlert("success", "Đăng nhập thành công")
+    navigation("/")
+  }
+  console.log(isLogin)
+  useEffect(() => {
+    if (isLogin) navigation("/account/homepage")
+  }, [])
+  return loading ? (
+    <LoadingProcess />
+  ) : (
     <div className={cx("login")}>
       <DocTitle title={"Smember | Tri ân khách hàng thân thiết"} />
       {loading && (
@@ -105,7 +109,7 @@ export const Login = () => {
           <Spinner animation="border" variant="warning" />
         </Modal>
       )}
-      <form className={cx("inner")} onSubmit={handleSubmit}>
+      <form className={`${cx("inner")} form-check`} onSubmit={handleSubmit}>
         <div className={cx("image")}>
           <img src={loginImg} alt="" />
         </div>
@@ -115,12 +119,12 @@ export const Login = () => {
             onBlur={handleBlur}
             onChange={handleChange}
             required
-            name="name"
-            className={cx("form-input-name")}
+            name="email"
+            className={`${cx("form-input-name")}`}
             type="text"
             placeholder=" "
           />
-          <label htmlFor="name">Vui lòng nhập số điện thoại/email</label>
+          <label htmlFor="name">Vui lòng nhập email</label>
         </div>
         <div className={cx("input-text")}>
           <input

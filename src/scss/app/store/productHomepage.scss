@@ -1,7 +1,6 @@
 .ProductHomePage {
     width: 1200px;
     margin: 20px auto;
-    padding: 20px 0;
     position: relative;
 
     &::after {
@@ -181,6 +180,9 @@
 }
 
 @media (max-width:740px) {
+    .SliderCategory2{
+        display: none;
+    }
     .ProductHomePage {
         width: 100vw;
     }

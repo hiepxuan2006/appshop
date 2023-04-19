@@ -13,7 +13,7 @@ export const HomeBlog = () => {
   const _getPostHome = async () => {
     const { data, success, message } = await getPost()
     if (!success) throw new Error(message)
-    setPost(data)
+    setPost(data.post)
   }
   const _getPostGrHome = async () => {
     const { data, success, message } = await getPostGroup()
@@ -24,10 +24,9 @@ export const HomeBlog = () => {
     _getPostHome()
     _getPostGrHome()
   }, [])
-  console.log(postGr)
   return (
     <div className="HomeBlog">
-      <SliderBlog data={post.slice(0, 4)} />
+      <SliderBlog data={post.length > 0 && post.slice(0, 4)} />
       <div className="mt-5">
         <h3 className="mb-5">Tin tức cập nhật</h3>
         <div className="row">
@@ -40,10 +39,7 @@ export const HomeBlog = () => {
                     className="PostItemBlog"
                   >
                     <div className="ImageThumbPost">
-                      <img
-                        src={process.env.REACT_APP_BASE_URL + "/" + item.image}
-                        alt=""
-                      />
+                      <img src={item.image} alt="" />
                     </div>
                     <div className="TitlePost">
                       <h3>{item.title}</h3>
@@ -64,9 +60,11 @@ export const HomeBlog = () => {
           <div className="col col-md-4 PreviewPosts">
             {postGr.length > 0 &&
               postGr.map((item, key) => {
+                console.log(item)
+
                 return (
                   <>
-                    {item.posts.length >= 3 && (
+                    {item.posts.length && (
                       <div className="mb-5" key={key}>
                         <h2 className="HeadingPreview">{item.title}</h2>
                         <PreviewListPost data={item.posts.slice(0, 3)} />

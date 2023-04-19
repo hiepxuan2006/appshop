@@ -1,21 +1,23 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useContext, useEffect, useState } from "react"
-import { ImageSlideThumb } from "./ImageSlideThumb"
-import { formattedNumber } from "~/helper/formatCurentcy"
+import {
+  faCartPlus,
+  faCheck,
+  faTicket,
+} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCartPlus } from "@fortawesome/free-solid-svg-icons"
-import { useLocation, useParams } from "react-router-dom"
-import { getProduct } from "~/services/productService"
-import queryString from "query-string"
 import _ from "lodash"
-import { getLocalData, setLocalData } from "~/services/StoreageServices"
+import React, { useContext, useEffect, useState } from "react"
+import { Link, useLocation, useParams } from "react-router-dom"
 import { toast } from "react-toastify"
-import { PreviewListPost } from "../blog/PreviewListPost"
-import { DocTitle } from "~/helper/DocTitle"
-import { DataContext } from "~/context/AppContext"
-import { LoadingProcess } from "~/helper/LoadingProcess"
 import { ScrollToTopOnMount } from "~/components/ScrollToTopOnMount"
-
+import { DataContext } from "~/context/AppContext"
+import { DocTitle } from "~/helper/DocTitle"
+import { LoadingProcess } from "~/helper/LoadingProcess"
+import { formattedNumber } from "~/helper/formatCurentcy"
+import { getLocalData, setLocalData } from "~/services/StoreageServices"
+import { getProductBySlug } from "~/services/productService"
+import { PreviewListPost } from "../blog/PreviewListPost"
+import { ImageSlideThumb } from "./ImageSlideThumb"
 export const ProductDetail = () => {
   const { slug } = useParams()
   const [product, setProduct] = useState({})
@@ -24,31 +26,28 @@ export const ProductDetail = () => {
   const [isChoseAttribute, setIsChoseAttribute] = useState(false)
   const [more, setMore] = useState(false)
   const [loading, setLoading] = React.useState(false)
-
-  const location = useLocation()
-  const queryParams = new URLSearchParams(location.search)
-
-  const id = queryParams.get("id")
+  const [productRelation, setProductRelation] = useState([])
 
   const { setCartTotal } = useContext(DataContext)
   const _getProductBySlugId = async () => {
     setLoading(true)
-    const params = queryString.stringify(
-      { slug, id },
-      {
-        skipNull: true,
-        skipEmptyString: true,
-      }
-    )
-    const { data, success, message } = await getProduct(params)
+    const params = { slug }
+    const { data, success, message } = await getProductBySlug(params)
     setLoading(false)
     if (!success) throw new Error(message)
+    const { relation } = data
+
+    setProductRelation(_.sortBy([data, ...relation], "product_class"))
     setProduct(data)
+    productRelation.sort((a, b) =>
+      a.product_class.localeCompare(b.product_class)
+    )
     // setVariantChose(data?.variants[0])
   }
+  console.log(productRelation)
   useEffect(() => {
     _getProductBySlugId()
-  }, [])
+  }, [slug])
   const handleChoseAttributes = (att = {}, item) => {
     setAttributesChose({ ...attributesChose, [item._id]: att })
     setIsChoseAttribute(false)
@@ -56,24 +55,28 @@ export const ProductDetail = () => {
   useEffect(() => {
     const test = Object.values(attributesChose)
       .map((item) => item.slug)
+      .sort()
       .join("/")
+    console.log("1", test)
     const variant =
       product.variants &&
       product.variants.length &&
       product.variants.filter((item) => {
         const option = _.get(item, "options")
-        const slug = option.map((item) => item.slug).join("/")
+        const slug = option
+          .map((item) => item.slug)
+          .sort()
+          .join("/")
         return test === slug
       })
     if (variant) setVariantChose(variant[0])
   }, [attributesChose])
-
   const handleAddToCart = () => {
     if (!variantChose) setIsChoseAttribute(true)
     else {
       const itemProduct = Object.assign({}, product, {
         variants: variantChose,
-        link: window.location.pathname + "?id=" + id,
+        link: window.location.pathname,
       })
       const cart = getLocalData("cart-product-list")
       if (!cart) {
@@ -145,6 +148,7 @@ export const ProductDetail = () => {
   const handleReadMore = () => {
     setMore(true)
   }
+
   return (
     <>
       <ScrollToTopOnMount />
@@ -157,9 +161,9 @@ export const ProductDetail = () => {
             <DocTitle title={product.title} />
             <div className="ProductDetailTitle">
               {variantChose ? (
-                <h1>{variantChose.title}</h1>
+                <h2>{variantChose.title}</h2>
               ) : (
-                <h1>{product.title}</h1>
+                <h2>{product.title}</h2>
               )}
             </div>
             <div className="ProductDetailInfo container">
@@ -168,8 +172,8 @@ export const ProductDetail = () => {
                   <ImageSlideThumb product={product} />
                 </div>
                 <div className="col ProductDetailContent col-md-5">
-                  <div className="PriceProductDetail d-flex gap-3 justify-content-between">
-                    <h1>
+                  <div className="PriceProductDetail d-flex gap-3 ">
+                    <h2>
                       {variantChose
                         ? formattedNumber(
                             variantChose.retail_price -
@@ -179,12 +183,31 @@ export const ProductDetail = () => {
                             product.retail_price -
                               (product.retail_price * product.sale) / 100
                           )}
-                    </h1>
-                    <h1 className="text-decoration-line-through">
+                    </h2>
+                    <h3 className="text-decoration-line-through">
                       {variantChose
                         ? formattedNumber(variantChose.retail_price)
                         : formattedNumber(product.retail_price)}
-                    </h1>
+                    </h3>
+                  </div>
+                  <div className="ProductRelation mt-3 d-flex gap-3 ">
+                    {productRelation.length > 0 &&
+                      productRelation.map((item, key) => {
+                        return (
+                          <Link
+                            to={`/san-pham/${item.slug}`}
+                            className="ProductRelationItem d-flex gap-5 "
+                          >
+                            <p key={key}>{item.product_class}</p>
+                            {item._id === product._id && (
+                              <FontAwesomeIcon
+                                icon={faCheck}
+                                className="text-danger"
+                              />
+                            )}
+                          </Link>
+                        )
+                      })}
                   </div>
                   <div className="AttributeProduct mt-3">
                     {product.attributes.length &&

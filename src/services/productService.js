@@ -11,10 +11,11 @@ export const getProducts = (params) => {
   })
 }
 
-export const getProduct = (params) => {
+export const getProductBySlug = (data) => {
   return api.makeRequest({
-    url: `/get-product?${params}`,
-    method: "get",
+    url: `/get-product`,
+    method: "post",
+    data,
   })
 }
 

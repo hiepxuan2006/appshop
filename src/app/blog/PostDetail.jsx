@@ -22,7 +22,7 @@ export const PostDetail = () => {
   return (
     <div className="PostDetailPage">
       <div className="ImagePostDetail">
-        <img src={process.env.REACT_APP_BASE_URL + "/" + post.image} alt="" />
+        <img src={post.image} alt="" />
       </div>
       <div className="BodyPost">
         <div className="TopicPost">

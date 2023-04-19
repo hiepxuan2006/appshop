@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { Swiper, SwiperSlide } from "swiper/react"
 
 // Import Swiper styles
@@ -8,30 +8,17 @@ import "swiper/css/navigation"
 import "swiper/css/thumbs"
 // import required modules
 
-import SwiperCore, {
-  FreeMode,
-  Navigation,
-  Thumbs,
-  Autoplay,
-  Pagination,
-} from "swiper"
-import { getSliders } from "~/services/SliderService"
-import Slider from "react-slick"
+import SwiperCore, { Autoplay, FreeMode, Navigation, Thumbs } from "swiper"
+import { useDispatch, useSelector } from "react-redux"
+import { _getSliders } from "~/slice/sliderSlice"
 export const SliderBanner = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null)
-  const [sliders, setSliders] = useState([])
-
-  const _getSliders = async () => {
-    const { data, message, success } = await getSliders()
-
-    if (!success) throw new Error(message)
-    const { sliders: sliderRel } = data
-    setSliders(sliderRel)
-  }
+  const { sliders } = useSelector((state) => state.slider)
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    _getSliders()
-  }, [])
+    dispatch(_getSliders())
+  }, [dispatch])
   SwiperCore.use([Autoplay])
   return (
     <>
@@ -57,7 +44,7 @@ export const SliderBanner = () => {
           sliders.map((item, key) => {
             return (
               <SwiperSlide key={key}>
-                <img src={process.env.REACT_APP_BASE_URL + "/" + item.image} />
+                <img src={item.image} />
               </SwiperSlide>
             )
           })}

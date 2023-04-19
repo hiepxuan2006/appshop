@@ -94,6 +94,9 @@
 
     }
 }
+.ImageItemProduct{
+    height: 190px;
+}
 
 .ImageSliderProductItem {
     width: 80%;
@@ -185,6 +188,29 @@
     }
 }
 
+.SlickSliderCategory {
+    width: 100%;
+    height: 100px;
+    overflow: hidden;
+
+    .slick-list {
+        height: 100%;
+    }
+
+    .slick-track {
+        display: flex;
+        height: 100%;
+        width: 100%;
+    }
+
+    .slick-slide {}
+
+    .slick-slide>div {
+        height: 100%;
+        // width: 240px;
+    }
+}
+
 @media (max-width:740px) {
     .SliderProduct {
         width: 100vw;
@@ -196,7 +222,9 @@
             font-size: 18px;
         }
     }
-
+.ImageItemProduct{
+    height: 130px;
+}
     .SlickSlider {
         height: 320px;
 

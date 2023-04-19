@@ -12,23 +12,19 @@ export const SliderProductItem = ({ item = {} }) => {
   return (
     <>
       {Object.values(item).length !== 0 ? (
-        <Link
-          to={`/san-pham/${item.slug}?id=${item._id}`}
-          className="SliderProductItem"
-        >
+        <Link to={`/san-pham/${item.slug}`} className="SliderProductItem">
           <div className="ProductItem">
-            {item.is_sale ? (
+            {item.sale !== 0 ? (
               <div className="ProductDiscount">
                 <p>Giảm {item.sale}%</p>
               </div>
             ) : (
               ""
             )}
-            <div className="ImageSliderProductItem mt-3">
-              <img
-                src={process.env.REACT_APP_BASE_URL + "/" + item.images[0]}
-                alt=""
-              />
+            <div className="ImageItemProduct">
+              <div className="ImageSliderProductItem mt-3">
+                <img src={item.images[0]} alt="" />
+              </div>
             </div>
             <div className="InfoProductItem">
               <h3 className="d-flex justify-content-start text-start">

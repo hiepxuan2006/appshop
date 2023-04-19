@@ -8,7 +8,7 @@ export const Post = ({ item }) => {
       className="PostItem"
     >
       <div className="ImagePost">
-        <img src={process.env.REACT_APP_BASE_URL + "/" + item.image} alt="" />
+        <img src={item.image} alt="" />
       </div>
       <div className="TitlePost">
         <h3 className="TitleTileContent">{item.title}</h3>

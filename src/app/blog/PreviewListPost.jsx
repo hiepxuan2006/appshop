@@ -12,13 +12,9 @@ export const PreviewListPost = ({ data = [] }) => {
               key={key}
               className={key === 0 ? "PreviewListPostBig" : "PreviewListPost"}
             >
-              {/* hiện thị ảnh lớn PreviewListPostBig - anh nhỏ PreviewListPost */}
               <div className="PreviewItemPost">
                 <div className="ImageThumbPreview">
-                  <img
-                    src={process.env.REACT_APP_BASE_URL + "/" + item.image}
-                    alt=""
-                  />
+                  <img src={item.image} alt="" />
                 </div>
                 <div className="TitlePreview">
                   <p>{item.title}</p>

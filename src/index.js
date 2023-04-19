@@ -6,14 +6,18 @@ import reportWebVitals from "./reportWebVitals"
 import "./scss/app.scss"
 import AppContext from "./context/AppContext"
 import { Notify } from "./helper/toast"
+import { Provider } from "react-redux"
+import store from "./store"
 const root = ReactDOM.createRoot(document.getElementById("root"))
 root.render(
   <React.StrictMode>
     <GlobalStyle>
-      <AppContext>
-        <App />
-        <Notify />
-      </AppContext>
+      <Provider store={store}>
+        <AppContext>
+          <App />
+          <Notify />
+        </AppContext>
+      </Provider>
     </GlobalStyle>
   </React.StrictMode>
 )

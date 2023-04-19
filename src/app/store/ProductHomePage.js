@@ -5,14 +5,18 @@ import {
   faPercent,
 } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import React, { useEffect, useState } from "react"
-import { Link, useLocation, useParams } from "react-router-dom"
-import { ProductItemHome } from "./ProductItemHome"
-import { getCategoriesById } from "~/services/categoryService"
-import { SliderHotSale } from "~/components/bannerSale/SliderHotSale"
-import { getProductsByCategory } from "~/services/productService"
 import queryString from "query-string"
+import { useEffect, useState } from "react"
+import { Link, useLocation } from "react-router-dom"
 import { ScrollToTopOnMount } from "~/components/ScrollToTopOnMount"
+import { SliderHotSale } from "~/components/bannerSale/SliderHotSale"
+import { getCategoriesById } from "~/services/categoryService"
+import { getProductsByCategory } from "~/services/productService"
+import { ProductItemHome } from "./ProductItemHome"
+import { SliderCategory } from "./SliderCategory"
+import { useDispatch, useSelector } from "react-redux"
+import { _getBannerCategory } from "~/slice/bannerSlice"
+import { _getCategoryById } from "~/slice/categorySlice"
 
 export const ProductHomePage = () => {
   const [categories, setCategories] = useState([])
@@ -30,7 +34,10 @@ export const ProductHomePage = () => {
     if (!success) throw new Error(message)
     setCategories(data)
   }
+  const { bannerCategory } = useSelector((state) => state.banner)
+  const { category } = useSelector((state) => state.category)
 
+  const dispatch = useDispatch()
   const _getProductById = async () => {
     const query = { id: sort, sort_by, order }
     setLoading(true)
@@ -46,7 +53,10 @@ export const ProductHomePage = () => {
     setPages(data.pages)
   }
   useEffect(() => {
-    _getCategoriesById()
+    dispatch(_getBannerCategory({ category: sort }))
+  }, [sort])
+  useEffect(() => {
+    dispatch(_getCategoryById(sort))
   }, [sort])
 
   useEffect(() => {
@@ -55,10 +65,20 @@ export const ProductHomePage = () => {
 
   return (
     <div className="ProductHomePage">
-      {/* <div className="row"> */}
       <ScrollToTopOnMount />
-      {categories.length > 0 &&
-        categories.slice(0, 2).map((category, key) => {
+      {bannerCategory[sort] && bannerCategory[sort].length > 0 && (
+        <div className="row">
+          <div className="col col-md-6 col-lg-6">
+            <SliderCategory bannerCategory={bannerCategory[sort]} />
+          </div>
+          <div className="col col-md-6 col-lg-6 SliderCategory2">
+            <SliderCategory bannerCategory={bannerCategory[sort]} />
+          </div>
+        </div>
+      )}
+      {category[sort] &&
+        category[sort].length > 0 &&
+        category[sort].slice(0, 2).map((category, key) => {
           return (
             <div
               key={key}
@@ -84,7 +104,7 @@ export const ProductHomePage = () => {
         })}
       {/* </div> */}
 
-      {categories.length > 0 && <SliderHotSale products={products} />}
+      {products.length > 0 && <SliderHotSale products={products} />}
       <div className="FilterProduct">
         <h3>Sắp Xếp Theo</h3>
         <div className="FilterList">

@@ -19,7 +19,7 @@ export const ImageSlideThumb = ({ product }) => {
         {product.images.map((item, key) => {
           return (
             <SwiperSlide key={key}>
-              <img src={process.env.REACT_APP_BASE_URL + "/" + item} alt="" />
+              <img src={item} alt="" />
             </SwiperSlide>
           )
         })}
@@ -38,7 +38,7 @@ export const ImageSlideThumb = ({ product }) => {
         {product.images.map((item, key) => {
           return (
             <SwiperSlide key={key}>
-              <img src={process.env.REACT_APP_BASE_URL + "/" + item} alt="" />
+              <img src={item} alt="" />
             </SwiperSlide>
           )
         })}

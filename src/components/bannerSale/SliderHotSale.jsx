@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { Swiper, SwiperSlide } from "swiper/react"
 
 // Import Swiper styles
 import "swiper/css"
-import "swiper/css/pagination"
 import "swiper/css/navigation"
+import "swiper/css/pagination"
 
 // import required modules
-import { Autoplay, Pagination, Navigation } from "swiper"
+import { Autoplay } from "swiper"
 import { SliderProductItem } from "~/app/Home/SliderProductItem"
 import moment from "moment"
 export const SliderHotSale = ({ products = [] }) => {
@@ -15,7 +15,7 @@ export const SliderHotSale = ({ products = [] }) => {
   useEffect(() => {
     const date = new Date()
     const day = date.getDay()
-    if (day === 5 || day === 0 || day === 6) {
+    if (day === 5 || day === 0 || day === 6 || day === 4) {
       setIsWeekend(true)
     }
   }, [])
@@ -23,7 +23,6 @@ export const SliderHotSale = ({ products = [] }) => {
   const [remainingTime, setRemainingTime] = useState(0)
 
   useEffect(() => {
-    // Tìm ngày gần nhất từ hôm nay đến thứ 5
     const now = new Date()
     const targetDate = new Date(
       now.getFullYear(),
@@ -33,9 +32,6 @@ export const SliderHotSale = ({ products = [] }) => {
       0,
       0
     )
-    console.log(now)
-    console.log(targetDate)
-
     const interval = setInterval(() => {
       setRemainingTime(targetDate - new Date().getTime())
     }, 1000)
@@ -50,8 +46,30 @@ export const SliderHotSale = ({ products = [] }) => {
   )
   const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60))
   const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000)
-
+  const date = new Date()
+  const day = date.getDay()
   // console.log(days, hours, minutes, seconds)
+
+  const [countdown, setCountdown] = useState(null)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const now = new Date()
+      const targetDay = 0 // Chủ Nhật = 0, Thứ Hai = 1, Thứ Ba = 2, ...
+      const daysLeft = (targetDay + 7 - now.getDay()) % 7
+      const hoursLeft = 23 - now.getHours()
+      const minutesLeft = 59 - now.getMinutes()
+      const secondsLeft = 59 - now.getSeconds()
+      setCountdown({
+        days: daysLeft,
+        hours: hoursLeft,
+        minutes: minutesLeft,
+        seconds: secondsLeft,
+      })
+    }, 1000)
+
+    return () => clearInterval(interval)
+  }, [])
   return (
     <>
       {isWeekend && (
@@ -63,20 +81,37 @@ export const SliderHotSale = ({ products = [] }) => {
                 alt=""
               />
             </div>
-            <div className="time_sale">
-              <h2>
-                Diễn ra sau <strong>:</strong>
-              </h2>
-              <div className="clock_banner">
-                <p>{`0${days}`.slice(-2)}</p>
-                <strong>:</strong>
-                <p>{`0${hours}`.slice(-2)}</p>
-                <strong>:</strong>
-                <p>{`0${minutes}`.slice(-2)}</p>
-                <strong>:</strong>
-                <p>{`0${seconds}`.slice(-2)}</p>
+            {(day === 6) | (day === 0) ? (
+              <div className="time_sale">
+                <h2>
+                  Kết thúc sau <strong>:</strong>
+                </h2>
+                <div className="clock_banner">
+                  <p>{`0${countdown.days}`.slice(-2)}</p>
+                  <strong>:</strong>
+                  <p>{`0${countdown.hours}`.slice(-2)}</p>
+                  <strong>:</strong>
+                  <p>{`0${countdown.minutes}`.slice(-2)}</p>
+                  <strong>:</strong>
+                  <p>{`0${countdown.seconds}`.slice(-2)}</p>
+                </div>
               </div>
-            </div>
+            ) : (
+              <div className="time_sale">
+                <h2>
+                  Diễn ra sau <strong>:</strong>
+                </h2>
+                <div className="clock_banner">
+                  <p>{`0${days}`.slice(-2)}</p>
+                  <strong>:</strong>
+                  <p>{`0${hours}`.slice(-2)}</p>
+                  <strong>:</strong>
+                  <p>{`0${minutes}`.slice(-2)}</p>
+                  <strong>:</strong>
+                  <p>{`0${seconds}`.slice(-2)}</p>
+                </div>
+              </div>
+            )}
           </div>
           <Swiper
             breakpoints={{

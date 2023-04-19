@@ -1,20 +1,16 @@
-import React, { useState } from "react"
 import { Autoplay } from "swiper"
 
-import { Post } from "./Post"
-import { Swiper, SwiperSlide } from "swiper/react"
-import { getPost } from "~/services/postService"
 import { useEffect } from "react"
 import { SkeletonTheme } from "react-loading-skeleton"
+import { useDispatch, useSelector } from "react-redux"
+import { Swiper, SwiperSlide } from "swiper/react"
+import { _getPost } from "~/slice/sliderSlice"
+import { Post } from "./Post"
 export const SliderPost = () => {
-  const [post, setPost] = useState([])
-  const _getPostHome = async () => {
-    const { data, success, message } = await getPost()
-    if (!success) throw new Error(message)
-    setPost(data)
-  }
+  const { post } = useSelector((state) => state.slider)
+  const dispatch = useDispatch()
   useEffect(() => {
-    _getPostHome()
+    dispatch(_getPost())
   }, [])
   return (
     <div className="SliderPostPage">

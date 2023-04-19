@@ -105,12 +105,7 @@ export const Search = ({ isLocationHome, isHidden, scrollY, show = false }) => {
                 return (
                   <Link className="d-flex" to="/">
                     <div className={cx("image")}>
-                      <img
-                        src={
-                          process.env.REACT_APP_BASE_URL + "/" + item.images[0]
-                        }
-                        alt=""
-                      />
+                      <img src={item.images[0]} alt="" />
                     </div>
                     <div className="d-flex flex-column">
                       <h4>{item.title}</h4>

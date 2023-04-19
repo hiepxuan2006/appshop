@@ -33,10 +33,7 @@ export const SliderBlog = ({ data = [] }) => {
                     to={`/hx-blog/bai-viet/${item.slug}?id=${item._id}`}
                     className="ImageItemSlider"
                   >
-                    <img
-                      src={process.env.REACT_APP_BASE_URL + "/" + item.image}
-                      alt=""
-                    />
+                    <img src={item.image} alt="" />
                   </Link>
                   <div className="DescriptionItemBlog">
                     <p className="TopicBlog">{item.topic_id.label}</p>

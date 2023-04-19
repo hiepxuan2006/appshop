@@ -1,4 +1,3 @@
-import React, { useRef, useState } from "react"
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react"
 
@@ -8,7 +7,7 @@ import "swiper/css/grid"
 import "swiper/css/pagination"
 
 // import required modules
-import { Autoplay, Grid, Pagination } from "swiper"
+import { Autoplay, Grid } from "swiper"
 import { SliderProductItem } from "./SliderProductItem"
 
 export function SliderRow() {

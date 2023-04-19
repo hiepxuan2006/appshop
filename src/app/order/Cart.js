@@ -19,11 +19,14 @@ export const Cart = () => {
   const [cartLocal, setCartLocal] = useState("")
   const [isUpdateCart, setIsUpdateCart] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [totalPrice, setTotalPrice] = useState(0)
   useEffect(() => {
     const cartLocal = getLocalData("cart-product-list")
-    setCart(cartLocal?.data?.productList)
-    setCartLocal(cartLocal)
-    setIsUpdateCart(false)
+    if (cartLocal) {
+      setCart(cartLocal?.data?.productList)
+      setCartLocal(cartLocal)
+      setIsUpdateCart(false)
+    }
   }, [isUpdateCart])
   const handleRemoveItemCart = (value) => {
     setLoading(true)
@@ -48,6 +51,16 @@ export const Cart = () => {
     }, 1000)
   }
 
+  const a =
+    cart.length > 0 &&
+    cart.reduce((prev, current) => {
+      return (
+        prev +
+        current.quantity *
+          (current.variants.retail_price -
+            (current.variants.sale * current.variants.retail_price) / 100)
+      )
+    }, 0)
   const changeQuantity = (value, type) => {
     setLoading(true)
     const { data } = cartLocal
@@ -94,6 +107,7 @@ export const Cart = () => {
       setLoading(false)
     }, 200)
   }
+
   return (
     <>
       <ScrollToTopOnMount />
@@ -118,25 +132,35 @@ export const Cart = () => {
                     <FontAwesomeIcon icon={faTrash} />
                   </div>
                   <div className="ImageItemCart">
-                    <img
-                      src="https://image.cellphones.com.vn/200x/media/catalog/product/x/_/x_m_25.png"
-                      alt=""
-                    />
+                    <img src={item.images[0]} alt="" />
                   </div>
                   <div className="InfoProductCartItem">
                     <Link to={item.link} className="NamProductCart">
                       <h4>{item.variants.title}</h4>
                     </Link>
 
-                    <div className="DiscountSale">Giảm 20%</div>
+                    {item.variants.sale !== 0 ? (
+                      <div className="DiscountSale">
+                        Giảm {item.variants.sale} %
+                      </div>
+                    ) : (
+                      ""
+                    )}
                   </div>
                   <div className="CartAction">
                     <div className="PriceProductCart ">
                       <p className="PriceProductCartNoSale">
-                        {formattedNumber(34990000)}
+                        {formattedNumber(item.variants.retail_price)}
                       </p>
                       <p className="PriceRetailProduct">
-                        {formattedNumber(item.variants.retail_price)}
+                        {item.variants.sale !== 0
+                          ? formattedNumber(
+                              item.variants.retail_price -
+                                (item.variants.sale *
+                                  item.variants.retail_price) /
+                                  100
+                            )
+                          : formattedNumber(item.variants.retail_price)}
                       </p>
                     </div>
                     <div className="QuantityCart">
@@ -161,7 +185,7 @@ export const Cart = () => {
           <div className="CartActionBuy">
             <div className="CountPriceTotal">
               <h3>Tổng tiền tạm tính</h3>
-              <p>{formattedNumber(56700000)}</p>
+              <p>{formattedNumber(a)}</p>
             </div>
             <Link to="/payment" className="ButtonBuyCart ButtonNext">
               Tiến Hành Đặt Hàng

@@ -3,7 +3,6 @@ import { faChevronRight } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useState } from "react"
 import { Link } from "react-router-dom"
-import { LoadingProcess } from "~/helper/LoadingProcess"
 
 export const ListCategory = ({ categories = [] }) => {
   const [modalIsOpen, setIsOpen] = useState(true)
@@ -17,9 +16,12 @@ export const ListCategory = ({ categories = [] }) => {
         categories.map((item, key) => {
           return (
             <li key={item._id + key} className="ItemCategoryHomePage">
+              <div className="IconCategory">
+                <img src={item.icon} alt="" />
+              </div>
               <Link
                 to={`/san-pham/danh-muc/${item.slug}?id=${item._id}`}
-                className="d-flex align-items-center gap-3"
+                className="d-flex align-items-center text-left flex-grow-1 gap-3"
               >
                 <p> {item.label}</p>
               </Link>

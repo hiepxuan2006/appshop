@@ -10,7 +10,7 @@ import { secretAccount } from "~/services/authService"
 export const DataContext = React.createContext()
 const AppContext = (props) => {
   const [isCollapsed, setIsCollapsed] = React.useState(true)
-  const [isLogin, setIsLogin] = React.useState(false)
+  const [isLogin, setIsLogin] = React.useState(true)
   const [loading, setLoading] = React.useState(false)
   const [cartTotal, setCartTotal] = React.useState(0)
 
@@ -30,6 +30,7 @@ const AppContext = (props) => {
     setCartTotal(cartLocal?.data?.totalQuantity)
   }, [])
   const secretLogin = async () => {
+    setLoading(true)
     try {
       const { data, success, message } = await secretAccount()
       if (!success) {
@@ -37,6 +38,7 @@ const AppContext = (props) => {
         removeLocalData("user")
         removeLocalData("roles")
         removeLocalData("is_admin")
+        setIsLogin(false)
         throw new Error(message)
       }
 
@@ -48,7 +50,7 @@ const AppContext = (props) => {
     }
   }
   useEffect(() => {
-    secretLogin()
+    if (isLogin) secretLogin()
   }, [])
   const value = {
     isCollapsed,

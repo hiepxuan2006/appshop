@@ -6,7 +6,7 @@
     right: 0;
     background-color: var(--primary-color);
     position: sticky;
-    z-index: 10100;
+    z-index: 1010;
 
     a {
         color: #fff !important;
@@ -200,15 +200,19 @@
 
     li {
         border-radius: 6px;
-        padding: 10px;
+        padding: 10px !important;
         color: #000;
 
         &:hover {
             background-color: rgb(168, 168, 168);
+            color:  #fff !important;
+        }
+         &:hover a {
+            color:  #fff !important;
         }
 
         a {
-            color: #000;
+            color: #000 !important;
         }
     }
 

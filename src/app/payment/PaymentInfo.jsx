@@ -54,7 +54,14 @@ export const PaymentInfo = () => {
 
   const totalPrice =
     cart.length &&
-    cart.reduce((acc, cur) => acc + cur.variants.retail_price * cur.quantity, 0)
+    cart.reduce(
+      (acc, cur) =>
+        acc +
+        (cur.variants.retail_price -
+          (cur.variants.sale * cur.variants.retail_price) / 100) *
+          cur.quantity,
+      0
+    )
   const handleRemoveItemCart = (value) => {
     setLoading(true)
     const { data } = cartLocal
@@ -229,10 +236,7 @@ export const PaymentInfo = () => {
                   <FontAwesomeIcon icon={faTrash} />
                 </div>
                 <div className="ImageItemCart">
-                  <img
-                    src="https://image.cellphones.com.vn/200x/media/catalog/product/x/_/x_m_25.png"
-                    alt=""
-                  />
+                  <img src={item.images[0]} alt="" />
                 </div>
                 <div className="InfoProductCartItem">
                   <Link to={item.link} className="NamProductCart">
@@ -243,10 +247,17 @@ export const PaymentInfo = () => {
                 <div className="CartAction">
                   <div className="PriceProductCart ">
                     <p className="PriceRetailProduct">
-                      {formattedNumber(item.variants.retail_price)}
+                      {item.variants.sale !== 0
+                        ? formattedNumber(
+                            item.variants.retail_price -
+                              (item.variants.sale *
+                                item.variants.retail_price) /
+                                100
+                          )
+                        : formattedNumber(item.variants.retail_price)}
                     </p>
                     <p className="PriceProductCartNoSale">
-                      {formattedNumber(34990000)}
+                      {formattedNumber(item.variants.retail_price)}
                     </p>
                   </div>
                   <div className="QuantityCart">

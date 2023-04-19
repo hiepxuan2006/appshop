@@ -32,31 +32,7 @@ const router = [
     component: Register,
     layout: HomeLayout,
   },
-  {
-    path: "/account/homepage",
-    component: HomeAccount,
-    layout: HomeLayout,
-  },
-  {
-    path: "/account/order",
-    component: HistoryAccount,
-    layout: HomeLayout,
-  },
-  {
-    path: "/account/promotion",
-    component: OfferAccount,
-    layout: HomeLayout,
-  },
-  {
-    path: "/account/user-info",
-    component: RankAccount,
-    layout: HomeLayout,
-  },
-  {
-    path: "/account/rank",
-    component: RankAccount,
-    layout: HomeLayout,
-  },
+
   {
     path: "/san-pham/:slug",
     component: ProductDetail,
@@ -109,4 +85,32 @@ const router = [
     layout: BlogLayout,
   },
 ]
-export { router }
+
+const routerPrivate = [
+  {
+    path: "/account/homepage",
+    component: HomeAccount,
+    layout: HomeLayout,
+  },
+  {
+    path: "/account/order",
+    component: HistoryAccount,
+    layout: HomeLayout,
+  },
+  {
+    path: "/account/promotion",
+    component: OfferAccount,
+    layout: HomeLayout,
+  },
+  {
+    path: "/account/user-info",
+    component: RankAccount,
+    layout: HomeLayout,
+  },
+  {
+    path: "/account/rank",
+    component: RankAccount,
+    layout: HomeLayout,
+  },
+]
+export { router, routerPrivate }

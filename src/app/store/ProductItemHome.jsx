@@ -16,10 +16,7 @@ export const ProductItemHome = ({ product }) => {
         </div>
       )}
       <div className="ImageProductItem">
-        <img
-          src={process.env.REACT_APP_BASE_URL + "/" + product.images[0]}
-          alt=""
-        />
+        <img src={product.images[0]} alt="" />
       </div>
       <div className="ProductItemInfo">
         <div className="ProductItemTitle">

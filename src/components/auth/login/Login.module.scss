@@ -2,7 +2,7 @@
     width: 700px;
     margin: 0 auto;
     background-color: #fff;
-    display: flex;
+    display: flex !important;
     flex-direction: column;
     align-items: center;
 }
@@ -64,6 +64,7 @@ h2{
         pointer-events: none;
         transition: all .25s linear;
         color: #ccc;
+        border-radius: 6px;
     }
     
 }

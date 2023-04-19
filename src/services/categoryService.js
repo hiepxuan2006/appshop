@@ -6,14 +6,14 @@ const api = createAPIServices({ baseUrl })
 
 export const getCategories = () => {
   return api.makeRequest({
-    url: "/get-category",
+    url: "/get-categories",
     method: "get",
   })
 }
 
 export const getCategoriesById = (params) => {
   return api.makeRequest({
-    url: `/get-category-id/${params}`,
+    url: `/get-category-children/${params}`,
     method: "get",
   })
 }

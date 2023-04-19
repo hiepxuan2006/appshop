@@ -35,10 +35,7 @@ export const BlogLayoutLeft = () => {
               <li className="" key={key}>
                 <NavLink to={`/hx-blog/${item.slug}`} className="TopicBlogItem">
                   <div className="ImageTopic">
-                    <img
-                      src={process.env.REACT_APP_BASE_URL + "/" + item.image}
-                      alt=""
-                    />
+                    <img src={item.image} alt="" />
                   </div>
                   <p>{item.title}</p>
                 </NavLink>

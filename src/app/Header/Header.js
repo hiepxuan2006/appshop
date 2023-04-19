@@ -8,12 +8,13 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import classNames from "classnames/bind"
 import { Fragment, useContext, useEffect, useState } from "react"
-import { Link } from "react-router-dom"
-import AppContext, { DataContext } from "~/context/AppContext"
-import { getLocalData } from "~/services/StoreageServices"
+import { Link, useNavigate } from "react-router-dom"
+import { DataContext } from "~/context/AppContext"
+import { getLocalData, removeLocalData } from "~/services/StoreageServices"
 import { getCategories } from "~/services/categoryService"
 import style from "./Header.module.scss"
 import { Search } from "./Search"
+import { useRef } from "react"
 const cx = classNames.bind(style)
 const logo = require("~/assets/logo.png")
 const Header = ({ isHidden = true, show = false }) => {
@@ -22,6 +23,8 @@ const Header = ({ isHidden = true, show = false }) => {
   const [hideOn, setHideOn] = useState(false)
   const [totalCart, setTotalCart] = useState(0)
   const { isLogin } = useContext(DataContext)
+
+  const navigate = useNavigate()
 
   const handleCategory = () => {
     setIsOpen(!modalIsOpen)
@@ -55,6 +58,25 @@ const Header = ({ isHidden = true, show = false }) => {
     }
   }, [])
 
+  const ref = useRef()
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setHideOn(false)
+      }
+    }
+    document.addEventListener("click", handleClickOutside)
+    return () => {
+      document.removeEventListener("click", handleClickOutside)
+    }
+  }, [ref])
+  const handleLogout = () => {
+    removeLocalData("access_token")
+    removeLocalData("user")
+    removeLocalData("roles")
+    removeLocalData("is_admin")
+    window.location.href = "/"
+  }
   const isLocationHome = window.location.pathname === "/"
   return (
     <div className={`${cx("wrapper")}  ${scrollY > 0 ? cx("zIndex") : ""}`}>
@@ -85,15 +107,21 @@ const Header = ({ isHidden = true, show = false }) => {
         </Link>
         {isLogin ? (
           <Fragment>
-            <div className={cx("account")} onClick={() => setHideOn(!hideOn)}>
+            <div
+              ref={ref}
+              className={cx("account")}
+              onClick={() => setHideOn(!hideOn)}
+            >
               <FontAwesomeIcon icon={faUserCircle} />
               <p>name</p>
             </div>
             <ul className={`${hideOn ? cx("tooltipAccount") : "d-none"}`}>
               <li>
-                <Link to={"/account/homepage"}>Smember</Link>
+                <Link onClick={() => setHideOn(false)} to={"/account/homepage"}>
+                  Smember
+                </Link>
               </li>
-              <li>Đăng xuất</li>
+              <li onClick={() => handleLogout()}>Đăng xuất</li>
             </ul>
           </Fragment>
         ) : (
