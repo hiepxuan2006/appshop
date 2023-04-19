@@ -86,7 +86,7 @@ export const ProductHomePage = () => {
       )}
       {category[sort] &&
         category[sort].length > 0 &&
-        category[sort].slice(0, 2).map((category, key) => {
+        category[sort].map((category, key) => {
           return (
             <div
               key={key}
