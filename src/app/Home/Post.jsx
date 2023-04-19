@@ -11,7 +11,7 @@ export const Post = ({ item }) => {
         <img src={item.image} alt="" />
       </div>
       <div className="TitlePost">
-        <h3 className="TitleTileContent">{item.title}</h3>
+        <p className="TitleTileContent">{item.title}</p>
       </div>
     </Link>
   )

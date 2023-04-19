@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Swiper, SwiperSlide } from "swiper/react"
 
 // Import Swiper styles
@@ -9,9 +9,10 @@ import "swiper/css/pagination"
 // import required modules
 import { Autoplay } from "swiper"
 import { SliderProductItem } from "~/app/Home/SliderProductItem"
-import moment from "moment"
+import { DataContext } from "~/context/AppContext"
 export const SliderHotSale = ({ products = [] }) => {
   const [isWeekend, setIsWeekend] = useState(false)
+  const { windowWidth } = useContext(DataContext)
   useEffect(() => {
     const date = new Date()
     const day = date.getDay()
@@ -36,7 +37,6 @@ export const SliderHotSale = ({ products = [] }) => {
       setRemainingTime(targetDate - new Date().getTime())
     }, 1000)
 
-    // Xóa interval khi component bị unmount
     return () => clearInterval(interval)
   }, [targetDays])
 
@@ -48,14 +48,13 @@ export const SliderHotSale = ({ products = [] }) => {
   const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000)
   const date = new Date()
   const day = date.getDay()
-  // console.log(days, hours, minutes, seconds)
 
   const [countdown, setCountdown] = useState(null)
 
   useEffect(() => {
     const interval = setInterval(() => {
       const now = new Date()
-      const targetDay = 0 // Chủ Nhật = 0, Thứ Hai = 1, Thứ Ba = 2, ...
+      const targetDay = 0
       const daysLeft = (targetDay + 7 - now.getDay()) % 7
       const hoursLeft = 23 - now.getHours()
       const minutesLeft = 59 - now.getMinutes()
@@ -69,12 +68,16 @@ export const SliderHotSale = ({ products = [] }) => {
     }, 1000)
 
     return () => clearInterval(interval)
-  }, [])
+  }, [countdown])
   return (
     <>
       {isWeekend && (
         <div className="SliderHotSale">
-          <div className="heading_banner">
+          <div
+            className={`heading_banner mb-3 ${
+              windowWidth < 1200 ? "flex-column" : ""
+            }`}
+          >
             <div className="Title">
               <img
                 src="https://cdn2.cellphones.com.vn/600x,webp/media/wysiwyg/hst.png"
@@ -83,9 +86,7 @@ export const SliderHotSale = ({ products = [] }) => {
             </div>
             {(day === 6) | (day === 0) ? (
               <div className="time_sale">
-                <h2>
-                  Kết thúc sau <strong>:</strong>
-                </h2>
+                <h3>Kết thúc sau :</h3>
                 <div className="clock_banner">
                   <p>{`0${countdown.days}`.slice(-2)}</p>
                   <strong>:</strong>
@@ -98,9 +99,9 @@ export const SliderHotSale = ({ products = [] }) => {
               </div>
             ) : (
               <div className="time_sale">
-                <h2>
+                <h3>
                   Diễn ra sau <strong>:</strong>
-                </h2>
+                </h3>
                 <div className="clock_banner">
                   <p>{`0${days}`.slice(-2)}</p>
                   <strong>:</strong>
@@ -116,7 +117,7 @@ export const SliderHotSale = ({ products = [] }) => {
           <Swiper
             breakpoints={{
               0: {
-                slidesPerView: 2.5,
+                slidesPerView: 2,
               },
               400: {
                 slidesPerView: 2.5,
@@ -126,6 +127,9 @@ export const SliderHotSale = ({ products = [] }) => {
               },
               865: {
                 slidesPerView: 4,
+              },
+              1080: {
+                slidesPerView: 5,
               },
               1280: {
                 slidesPerView: 5,
@@ -144,7 +148,7 @@ export const SliderHotSale = ({ products = [] }) => {
               disableOnInteraction: true,
             }}
             // modules={[Autoplay, Pagination, Navigation]}
-            className="mySwiper mySwiperSliderHotSale"
+            className="mySwiperSliderHost mySwiperSliderHotSale"
           >
             {products.length > 0 &&
               products.map((item, key) => {

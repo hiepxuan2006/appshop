@@ -9,7 +9,6 @@ padding: 10px;
 .heading_banner{
     display: flex;
     justify-content: space-between;
-    align-items: center;
 }
 .time_sale{
     display: flex;
@@ -30,8 +29,8 @@ padding: 10px;
         background-color: #ffffff;
         color: var(--primary-color);
         font-weight: 600;
-        height: 50px;
-        width: 50px;
+        height: 40px;
+        width: 40px;
         text-align: center;
         border-radius: 10px;
         font-size: 20px;
@@ -59,6 +58,20 @@ padding: 10px;
         img{
             height: 100%;
             width: 100%;object-fit: contain;
+        }
+    }
+}
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 740px) {
+
+    .clock_banner{
+        p{
+            height: 30px !important;
+            width: 30px !important;
+            padding: 0 !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
     }
 }

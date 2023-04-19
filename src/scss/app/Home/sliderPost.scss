@@ -56,3 +56,10 @@
     display: -webkit-box;
     word-wrap: break-word;
 }
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 740px) {
+
+    .TitleTileContent{
+        line-height: 1.4;
+    }
+}

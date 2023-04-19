@@ -13,6 +13,16 @@ const AppContext = (props) => {
   const [isLogin, setIsLogin] = React.useState(true)
   const [loading, setLoading] = React.useState(false)
   const [cartTotal, setCartTotal] = React.useState(0)
+  const [windowWidth, setWindowWidth] = React.useState(window.innerWidth)
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth)
+    }
+    window.addEventListener("resize", handleResize)
+    return () => {
+      window.removeEventListener("resize", handleResize)
+    }
+  }, [])
 
   useEffect(() => {
     const cartLocal = getLocalData("cart-product-list")
@@ -61,6 +71,7 @@ const AppContext = (props) => {
     setLoading,
     cartTotal,
     setCartTotal,
+    windowWidth,
   }
   return (
     <DataContext.Provider value={value}>{props.children}</DataContext.Provider>

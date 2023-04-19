@@ -6,7 +6,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import queryString from "query-string"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Link, useLocation } from "react-router-dom"
 import { ScrollToTopOnMount } from "~/components/ScrollToTopOnMount"
 import { SliderHotSale } from "~/components/bannerSale/SliderHotSale"
@@ -17,6 +17,8 @@ import { SliderCategory } from "./SliderCategory"
 import { useDispatch, useSelector } from "react-redux"
 import { _getBannerCategory } from "~/slice/bannerSlice"
 import { _getCategoryById } from "~/slice/categorySlice"
+import { Loading } from "~/components/Loading"
+import { DataContext } from "~/context/AppContext"
 
 export const ProductHomePage = () => {
   const [categories, setCategories] = useState([])
@@ -29,14 +31,11 @@ export const ProductHomePage = () => {
   const queryParams = new URLSearchParams(location.search)
 
   const sort = queryParams.get("id")
-  const _getCategoriesById = async () => {
-    const { data, success, message } = await getCategoriesById(sort)
-    if (!success) throw new Error(message)
-    setCategories(data)
-  }
+
   const { bannerCategory } = useSelector((state) => state.banner)
   const { category } = useSelector((state) => state.category)
 
+  const { windowWidth } = useContext(DataContext)
   const dispatch = useDispatch()
   const _getProductById = async () => {
     const query = { id: sort, sort_by, order }
@@ -52,6 +51,7 @@ export const ProductHomePage = () => {
     setProducts(data.data)
     setPages(data.pages)
   }
+
   useEffect(() => {
     dispatch(_getBannerCategory({ category: sort }))
   }, [sort])
@@ -65,13 +65,18 @@ export const ProductHomePage = () => {
 
   return (
     <div className="ProductHomePage">
+      {loading && <Loading />}
       <ScrollToTopOnMount />
       {bannerCategory[sort] && bannerCategory[sort].length > 0 && (
-        <div className="row">
-          <div className="col col-md-6 col-lg-6">
+        <div className="row p-0 m-0">
+          <div className={`col ${windowWidth < 1200 ? "col-12" : "col-lg-6"}`}>
             <SliderCategory bannerCategory={bannerCategory[sort]} />
           </div>
-          <div className="col col-md-6 col-lg-6 SliderCategory2">
+          <div
+            className={`col col-lg-6  ${
+              windowWidth < 1200 ? "d-none" : "SliderCategory2"
+            }`}
+          >
             <SliderCategory bannerCategory={bannerCategory[sort]} />
           </div>
         </div>

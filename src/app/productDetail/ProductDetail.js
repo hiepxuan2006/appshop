@@ -1,24 +1,19 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import {
-  faCartPlus,
-  faCheck,
-  faTicket,
-} from "@fortawesome/free-solid-svg-icons"
+import { faCartPlus, faCheck } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import _ from "lodash"
 import React, { useContext, useEffect, useState } from "react"
-import { Link, useLocation, useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { toast } from "react-toastify"
+import { Loading } from "~/components/Loading"
 import { ScrollToTopOnMount } from "~/components/ScrollToTopOnMount"
 import { DataContext } from "~/context/AppContext"
 import { DocTitle } from "~/helper/DocTitle"
-import { LoadingProcess } from "~/helper/LoadingProcess"
 import { formattedNumber } from "~/helper/formatCurentcy"
 import { getLocalData, setLocalData } from "~/services/StoreageServices"
 import { getProductBySlug } from "~/services/productService"
 import { PreviewListPost } from "../blog/PreviewListPost"
 import { ImageSlideThumb } from "./ImageSlideThumb"
-import { Loading } from "~/components/Loading"
 export const ProductDetail = () => {
   const { slug } = useParams()
   const [product, setProduct] = useState({})
