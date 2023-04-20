@@ -21,7 +21,9 @@ export const SliderBanner = () => {
   }, [dispatch])
   SwiperCore.use([Autoplay])
   return (
-    <>
+    <div
+      className={`h-100 ${sliders.length === 0 ? "bg-color-animation " : ""}`}
+    >
       <Swiper
         style={{
           "--swiper-navigation-color": "#fff",
@@ -75,6 +77,6 @@ export const SliderBanner = () => {
             )
           })}
       </Swiper>
-    </>
+    </div>
   )
 }

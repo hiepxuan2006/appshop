@@ -14,6 +14,24 @@
 
 
 }
+
+.bg-color-animation {
+    background-image: linear-gradient(-45deg, rgb(215, 0, 24,0.05), rgb(215, 0, 24,0.1),rgb(215, 0, 24,0.05));
+    animation: bg-color-animation 2s ease infinite;
+    background-size: 400%;
+  }
+  
+  @keyframes bg-color-animation {
+    0% {
+        background-position: left ; 
+      }
+      50% {
+        background-position: right ; 
+      }
+      100% {
+        background-position: left ; 
+      }
+  }
 .banner-promotion{
     height: 75px;
     width: 100%;

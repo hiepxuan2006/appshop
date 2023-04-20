@@ -38,9 +38,7 @@ export const ProductDetail = () => {
     productRelation.sort((a, b) =>
       a.product_class.localeCompare(b.product_class)
     )
-    // setVariantChose(data?.variants[0])
   }
-  console.log(productRelation)
   useEffect(() => {
     _getProductBySlugId()
   }, [slug])
@@ -148,7 +146,7 @@ export const ProductDetail = () => {
   return (
     <>
       <ScrollToTopOnMount />
-      {product && Object.keys(product).length !== 0 && (
+      {product && Object.keys(product).length !== 0 ? (
         <div className="ProductDetailPage">
           {loading && <Loading />}
           <DocTitle title={product.title} />
@@ -317,6 +315,22 @@ export const ProductDetail = () => {
               <PreviewListPost />
             </div>
           </div>
+        </div>
+      ) : (
+        <div className="ProductDetailPage bg-color-animation mt-2 ">
+          <div className="bg-color-animation ProductDetailTitle "></div>
+          <div
+            className=" ProductDetailInfo row"
+            style={{ height: "420px", gap: "0" }}
+          >
+            <div className="col col-md-4 bg-color-animation"></div>
+            <div className="col col-md-5 bg-color-animation"></div>
+            <div className="col col-md-3 bg-color-animation  flex-grow-1"></div>
+          </div>
+          <div
+            className="bg-color-animation DescriptionProduct "
+            style={{ height: "200px" }}
+          ></div>
         </div>
       )}
     </>

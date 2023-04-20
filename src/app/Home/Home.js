@@ -1,25 +1,26 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { Loading } from "~/components/Loading"
 import { ScrollToTopOnMount } from "~/components/ScrollToTopOnMount"
 import { SliderBanner } from "~/components/Slider/SliderReact"
 import { DocTitle } from "~/helper/DocTitle"
-import { LoadingProcess } from "~/helper/LoadingProcess"
+import { _getBannerAds, _getBannerSlider } from "~/slice/bannerSlice"
 import { _getCategory, _getProductGroupCategory } from "~/slice/productSlice"
 import { ListCategory } from "./ListCategory"
 import { SliderPost } from "./SliderPost"
 import { SliderProduct } from "./SliderProduct"
-import { _getBannerSlider } from "~/slice/bannerSlice"
 export const Home = ({ isOpenPage }) => {
   const { productsGroupCategory, categories, loading } = useSelector(
     (state) => state.product
   )
-  const { bannerSlider } = useSelector((state) => state.banner)
+  const { bannerSlider, banner } = useSelector((state) => state.banner)
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(_getProductGroupCategory())
     dispatch(_getCategory())
     dispatch(_getBannerSlider({ horizontal: false, category: false }))
+    dispatch(_getBannerAds({ horizontal: true }))
   }, [dispatch])
 
   const body = document.body
@@ -33,7 +34,7 @@ export const Home = ({ isOpenPage }) => {
       <ScrollToTopOnMount />
 
       {loading ? (
-        <LoadingProcess />
+        <Loading />
       ) : (
         <div className="HomePageWrapper">
           <DocTitle
@@ -41,12 +42,16 @@ export const Home = ({ isOpenPage }) => {
               "CellphoneS - Điện thoại, laptop, tablet, phụ kiện chính hãng"
             }
           />
-          <div className="HomePageSlider">
+          <div className={`HomePageSlider`}>
             <ListCategory categories={categories} />
             <div className="SliderHomePage">
               <SliderBanner />
             </div>
-            <div className="TicketHomePage">
+            <div
+              className={`TicketHomePage ${
+                bannerSlider.length === 0 ? "bg-color-animation " : ""
+              }`}
+            >
               {bannerSlider.length > 0 &&
                 bannerSlider.map((banner, key) => {
                   return (
@@ -63,19 +68,21 @@ export const Home = ({ isOpenPage }) => {
               alt=""
             />
           </div>
-          {productsGroupCategory.length > 0 &&
-            productsGroupCategory.map((product, key) => {
-              return (
-                <div key={key}>
-                  {product.products.length > 0 && (
-                    <SliderProduct
-                      data={product.products}
-                      category={product.category}
-                    />
-                  )}
-                </div>
-              )
-            })}
+          <div>
+            {productsGroupCategory.length > 0 &&
+              productsGroupCategory.map((product, key) => {
+                return (
+                  <div key={key}>
+                    {product.products.length > 0 && (
+                      <SliderProduct
+                        data={product.products}
+                        category={product.category}
+                      />
+                    )}
+                  </div>
+                )
+              })}
+          </div>
           <SliderPost />
         </div>
         // <Loading show={true} />

@@ -10,7 +10,7 @@ import { secretAccount } from "~/services/authService"
 export const DataContext = React.createContext()
 const AppContext = (props) => {
   const [isCollapsed, setIsCollapsed] = React.useState(true)
-  const [isLogin, setIsLogin] = React.useState(true)
+  const [isLogin, setIsLogin] = React.useState(false)
   const [loading, setLoading] = React.useState(false)
   const [cartTotal, setCartTotal] = React.useState(0)
   const [windowWidth, setWindowWidth] = React.useState(window.innerWidth)
@@ -60,7 +60,7 @@ const AppContext = (props) => {
     }
   }
   useEffect(() => {
-    if (isLogin) secretLogin()
+    // if (isLogin) secretLogin()
   }, [])
   const value = {
     isCollapsed,

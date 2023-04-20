@@ -36,6 +36,17 @@ export const _getBannerCategory = createAsyncThunk(
   }
 )
 
+export const _getBannerAds = createAsyncThunk(
+  "banner/bannerAds",
+  async (params, thunkAPI) => {
+    const { data, success, message } = await getBannerSlider(params)
+    if (!success) {
+      return thunkAPI.rejectWithValue()
+    }
+    return { list: data, success, message }
+  }
+)
+
 const product = createSlice({
   name: "banner",
 
@@ -67,6 +78,17 @@ const product = createSlice({
     },
     [_getBannerCategory.rejected]: (state, action) => {
       state.bannerCategory[action.payload.id] = []
+      state.loading = false
+    },
+    [_getBannerAds.fulfilled]: (state, action) => {
+      state.banner = action.payload.list
+      state.loading = false
+    },
+    [_getBannerAds.pending]: (state, action) => {
+      state.loading = false
+    },
+    [_getBannerAds.rejected]: (state, action) => {
+      state.banner = []
       state.loading = false
     },
   },

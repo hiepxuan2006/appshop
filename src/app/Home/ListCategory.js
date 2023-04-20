@@ -11,7 +11,11 @@ export const ListCategory = ({ categories = [] }) => {
     setIsOpen(false)
   }
   return (
-    <ul className="ListCategoryHomePage">
+    <ul
+      className={`ListCategoryHomePage  ${
+        categories.length === 0 ? "bg-color-animation" : ""
+      }`}
+    >
       {categories.length &&
         categories.map((item, key) => {
           return (

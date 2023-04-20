@@ -41,7 +41,11 @@ export const SliderProduct = ({ data = [], category }) => {
     autoplaySpeed: 3000, // Thiết lập thời gian chuyển đổi giữa các slide
   }
   return (
-    <div className="SliderProduct">
+    <div
+      className={`SliderProduct ${
+        data.length === 0 ? "bg-color-animation " : ""
+      }`}
+    >
       <div className="headingSliderProduct">
         <h2>{category.label}</h2>
         <div className="BrandProduct">
@@ -93,7 +97,9 @@ export const SliderProduct = ({ data = [], category }) => {
             delay: 3000,
             disableOnInteraction: false,
           }}
-          className="mySwiperSliderProduct"
+          className={`mySwiperSliderProduct ${
+            data.length === 0 ? "bg-color-animation " : ""
+          }`}
         >
           {data.length > 0 &&
             data.map((item, key) => {
