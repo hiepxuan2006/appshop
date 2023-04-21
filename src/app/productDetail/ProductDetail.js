@@ -14,6 +14,8 @@ import { getLocalData, setLocalData } from "~/services/StoreageServices"
 import { getProductBySlug } from "~/services/productService"
 import { PreviewListPost } from "../blog/PreviewListPost"
 import { ImageSlideThumb } from "./ImageSlideThumb"
+import { setRecentlyViewedProducts } from "~/helper/recentlyViewedProduct"
+import { SliderProduct } from "../Home/SliderProduct"
 export const ProductDetail = () => {
   const { slug } = useParams()
   const [product, setProduct] = useState({})
@@ -23,7 +25,7 @@ export const ProductDetail = () => {
   const [more, setMore] = useState(false)
   const [loading, setLoading] = React.useState(false)
   const [productRelation, setProductRelation] = useState([])
-
+  const [recentlyViewed, setRecentlyViewed] = useState([])
   const { setCartTotal } = useContext(DataContext)
   const _getProductBySlugId = async () => {
     setLoading(true)
@@ -35,6 +37,8 @@ export const ProductDetail = () => {
 
     setProductRelation(_.sortBy([data, ...relation], "product_class"))
     setProduct(data)
+    setRecentlyViewed(setRecentlyViewedProducts(data))
+
     productRelation.sort((a, b) =>
       a.product_class.localeCompare(b.product_class)
     )
@@ -51,7 +55,6 @@ export const ProductDetail = () => {
       .map((item) => item.slug)
       .sort()
       .join("/")
-    console.log("1", test)
     const variant =
       product.variants &&
       product.variants.length &&
@@ -331,6 +334,13 @@ export const ProductDetail = () => {
             className="bg-color-animation DescriptionProduct "
             style={{ height: "200px" }}
           ></div>
+        </div>
+      )}
+
+      {recentlyViewed.length > 0 && (
+        <div className="recentlyViewedProducts">
+          <h2>Sản phẩm vừa xem</h2>
+          <SliderProduct data={recentlyViewed} />
         </div>
       )}
     </>

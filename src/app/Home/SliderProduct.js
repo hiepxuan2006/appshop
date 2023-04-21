@@ -9,10 +9,11 @@ import { Link } from "react-router-dom"
 import { SliderProductItem } from "./SliderProductItem"
 import { Autoplay } from "swiper"
 // import required modules
-export const SliderProduct = ({ data = [], category }) => {
+export const SliderProduct = ({ data = [], category = "" }) => {
   const [options, setOptions] = useState([])
   useEffect(() => {
-    const brand = category.children.filter((item) => item.key === "brand")
+    const brand =
+      category && category.children.filter((item) => item.key === "brand")
     if (brand.length > 0) {
       setOptions(brand)
     }
