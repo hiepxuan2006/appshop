@@ -20,7 +20,7 @@ export const SliderHotSale = ({ products = [] }) => {
       setIsWeekend(true)
     }
   }, [])
-  const targetDays = [6] // 0: Chủ nhật, 1: Thứ 2, ..., 6: Thứ 7
+  const targetDays = [6]
   const [remainingTime, setRemainingTime] = useState(0)
 
   useEffect(() => {
@@ -69,6 +69,7 @@ export const SliderHotSale = ({ products = [] }) => {
 
     return () => clearInterval(interval)
   }, [countdown])
+  console.log(countdown)
   return (
     <>
       {isWeekend && (
@@ -84,7 +85,7 @@ export const SliderHotSale = ({ products = [] }) => {
                 alt=""
               />
             </div>
-            {(day === 6) | (day === 0) ? (
+            {(day === 6) | (day === 0) && countdown ? (
               <div className="time_sale">
                 <h3>Kết thúc sau :</h3>
                 <div className="clock_banner">
