@@ -9,6 +9,7 @@ import { _getCategory, _getProductGroupCategory } from "~/slice/productSlice"
 import { ListCategory } from "./ListCategory"
 import { SliderPost } from "./SliderPost"
 import { SliderProduct } from "./SliderProduct"
+import { LoadingProcess } from "~/helper/LoadingProcess"
 export const Home = ({ isOpenPage }) => {
   const { productsGroupCategory, categories, loading } = useSelector(
     (state) => state.product
@@ -34,7 +35,7 @@ export const Home = ({ isOpenPage }) => {
       <ScrollToTopOnMount />
 
       {loading ? (
-        <Loading />
+        <LoadingProcess />
       ) : (
         <div className="HomePageWrapper">
           <DocTitle

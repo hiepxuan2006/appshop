@@ -7,13 +7,14 @@ import { DataContext } from "./context/AppContext"
 import { HomeLayout } from "./layout"
 import { router } from "./router"
 import { routerPrivate } from "./router/router"
+import { LoadingProcess } from "./helper/LoadingProcess"
 
 function App() {
   const { loading, setLoading } = useContext(DataContext)
   return (
     <Router>
       <div className="app">
-        {loading && <Loading />}
+        {loading && <LoadingProcess />}
         <Routes>
           {routerPrivate.map((route, key) => {
             const Page = route.component

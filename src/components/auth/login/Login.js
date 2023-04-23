@@ -1,19 +1,18 @@
 import classNames from "classnames/bind"
 import { gapi } from "gapi-script"
 import { useContext, useEffect, useState } from "react"
-import { GoogleLogin } from "react-google-login"
-import { Link, useNavigate } from "react-router-dom"
-import { DocTitle } from "~/helper/DocTitle"
-import style from "./Login.module.scss"
 import { Spinner } from "react-bootstrap"
+import { GoogleLogin } from "react-google-login"
 import Modal from "react-modal"
-import { authGoogle, loginLocal } from "~/services/authService"
-import { toast } from "react-toastify"
-import AppContext, { DataContext } from "~/context/AppContext"
-import { setLocalData } from "~/services/StoreageServices"
-import { setAccessToken, setRoles, setUserData } from "~/services/localStoreage"
+import { Link, useNavigate } from "react-router-dom"
+import { DataContext } from "~/context/AppContext"
+import { DocTitle } from "~/helper/DocTitle"
+import { Loading } from "~/helper/Loading"
 import { toastAlert } from "~/helper/toast"
-import { LoadingProcess } from "~/helper/LoadingProcess"
+import { setLocalData } from "~/services/StoreageServices"
+import { authGoogle, loginLocal } from "~/services/authService"
+import { setAccessToken, setRoles, setUserData } from "~/services/localStoreage"
+import style from "./Login.module.scss"
 
 const loginImg = require("~/assets/login.png")
 const cx = classNames.bind(style)
@@ -93,7 +92,7 @@ export const Login = () => {
     if (isLogin) navigation("/account/homepage")
   }, [])
   return loading ? (
-    <LoadingProcess />
+    <Loading />
   ) : (
     <div className={cx("login")}>
       <DocTitle title={"Smember | Tri ân khách hàng thân thiết"} />
