@@ -148,9 +148,20 @@ h2 {
     border: 1px solid #ccc;
     border-radius: 10px;
     padding: 6px 10px;
+    height: 100%;
+    position: relative;
     cursor:  pointer   ;
 }
-
+.DescriptionProduct{
+    flex-wrap: nowrap;
+}
+.ProductSpecification{
+    box-shadow: var(--boxShadow);
+    border-radius: 10px;
+    margin: 0 10px;
+    padding: 10px;
+    flex: 1;
+}
 @media (max-width:740px) {
     .ProductDetailPage{
         width: 100vw;
@@ -285,5 +296,8 @@ h2 {
     }
     .ProductDescription{
         max-height: 400px;
+    }
+    .ProductSpecification{
+        display: none;
     }
 }

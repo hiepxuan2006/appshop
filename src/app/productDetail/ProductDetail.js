@@ -10,15 +10,14 @@ import { ScrollToTopOnMount } from "~/components/ScrollToTopOnMount"
 import { DataContext } from "~/context/AppContext"
 import { DocTitle } from "~/helper/DocTitle"
 import { formattedNumber } from "~/helper/formatCurentcy"
+import { setRecentlyViewedProducts } from "~/helper/recentlyViewedProduct"
 import { getLocalData, setLocalData } from "~/services/StoreageServices"
 import { getProductBySlug } from "~/services/productService"
-import { PreviewListPost } from "../blog/PreviewListPost"
-import { ImageSlideThumb } from "./ImageSlideThumb"
-import { setRecentlyViewedProducts } from "~/helper/recentlyViewedProduct"
 import { SliderProduct } from "../Home/SliderProduct"
+import { ImageSlideThumb } from "./ImageSlideThumb"
 export const ProductDetail = () => {
   const { slug } = useParams()
-  const [product, setProduct] = useState({})
+  const [product, setProduct] = useState("")
   const [attributesChose, setAttributesChose] = useState({})
   const [variantChose, setVariantChose] = useState("")
   const [isChoseAttribute, setIsChoseAttribute] = useState(false)
@@ -27,6 +26,8 @@ export const ProductDetail = () => {
   const [productRelation, setProductRelation] = useState([])
   const [recentlyViewed, setRecentlyViewed] = useState([])
   const { setCartTotal } = useContext(DataContext)
+  const [specification, setSpecification] = useState([])
+  const [speBasic, setSpeBasic] = useState([])
   const _getProductBySlugId = async () => {
     setLoading(true)
     const params = { slug }
@@ -38,10 +39,6 @@ export const ProductDetail = () => {
     setProductRelation(_.sortBy([data, ...relation], "product_class"))
     setProduct(data)
     setRecentlyViewed(setRecentlyViewedProducts(data))
-
-    productRelation.sort((a, b) =>
-      a.product_class.localeCompare(b.product_class)
-    )
   }
   useEffect(() => {
     _getProductBySlugId()
@@ -145,7 +142,15 @@ export const ProductDetail = () => {
   const handleReadMore = () => {
     setMore(true)
   }
+  useEffect(() => {
+    if (!!product && !!product.specification) {
+      const data = product.specification.map((item) => item.value[0])
 
+      setSpeBasic(data)
+    } else {
+      setSpeBasic([])
+    }
+  }, [slug, product])
   return (
     <>
       <ScrollToTopOnMount />
@@ -295,11 +300,9 @@ export const ProductDetail = () => {
           )}
           <div className="DescriptionProduct row me-2 ms-2">
             <div
-              className={
-                more
-                  ? "col col-md-8 ProductDescription MW-100"
-                  : "col col-md-8 ProductDescription"
-              }
+              className={` col-lg-8 col-md-8 col-sm-12 ${
+                more ? "ProductDescription MW-100" : "ProductDescription"
+              }`}
             >
               <div className="SalientFeatures flex-column mt-3 mb-3 d-flex">
                 <h1 className="w-100 text-center">Đặc Điểm Nổi Bật</h1>
@@ -320,8 +323,27 @@ export const ProductDetail = () => {
                 <p>Xem thêm</p>
               </div>
             </div>
-            <div className="col col-md-4 ProductPreviewListPost">
-              <PreviewListPost />
+            <div className="col-lg-4 col-md-4 col-sm-0 ">
+              <div className="ProductSpecification">
+                <h2 className="text-center">Thông số kỹ thuật</h2>
+                {speBasic.length > 0 &&
+                  speBasic.map((spe, key) => {
+                    return (
+                      <div key={key} className="d-flex mt-2">
+                        <p className="col col-6">
+                          <strong>{spe.label}</strong>
+                        </p>
+                        <p
+                          className="fs-4"
+                          dangerouslySetInnerHTML={{ __html: spe.data }}
+                        ></p>
+                      </div>
+                    )
+                  })}
+                <div className="btn mt-4 fs-4 border text-center d-flex justify-content-center">
+                  <p>Xem chi tiết</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
