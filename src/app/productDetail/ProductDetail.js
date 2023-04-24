@@ -287,6 +287,12 @@ export const ProductDetail = () => {
               </div>
             </div>
           </div>
+          {recentlyViewed.length > 0 && (
+            <div className="recentlyViewedProducts">
+              <h2>Sản phẩm vừa xem</h2>
+              <SliderProduct data={recentlyViewed} />
+            </div>
+          )}
           <div className="DescriptionProduct row me-2 ms-2">
             <div
               className={
@@ -337,12 +343,12 @@ export const ProductDetail = () => {
         </div>
       )}
 
-      {recentlyViewed.length > 0 && (
+      {/* {recentlyViewed.length > 0 && (
         <div className="recentlyViewedProducts">
           <h2>Sản phẩm vừa xem</h2>
           <SliderProduct data={recentlyViewed} />
         </div>
-      )}
+      )} */}
     </>
   )
 }
