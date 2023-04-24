@@ -348,7 +348,7 @@ export const ProductDetail = () => {
           </div>
         </div>
       ) : (
-        <div className="ProductDetailPage bg-color-animation mt-2 ">
+        <div className="ProductDetailPage mt-2 ">
           <div className="bg-color-animation ProductDetailTitle "></div>
           <div
             className=" ProductDetailInfo row"
