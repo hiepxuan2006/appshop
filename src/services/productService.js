@@ -22,7 +22,7 @@ export const getProductBySlug = (data) => {
 export const searchProducts = (params) => {
   return api.makeRequest({
     url: `/search-product?${params}`,
-    method: "get",
+    method: "post",
   })
 }
 

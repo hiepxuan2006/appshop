@@ -14,6 +14,7 @@ const AppContext = (props) => {
   const [loading, setLoading] = React.useState(true)
   const [cartTotal, setCartTotal] = React.useState(0)
   const [windowWidth, setWindowWidth] = React.useState(window.innerWidth)
+  const [visible, setVisible] = React.useState(false)
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth)
@@ -72,6 +73,8 @@ const AppContext = (props) => {
     cartTotal,
     setCartTotal,
     windowWidth,
+    visible,
+    setVisible,
   }
   return (
     <DataContext.Provider value={value}>{props.children}</DataContext.Provider>

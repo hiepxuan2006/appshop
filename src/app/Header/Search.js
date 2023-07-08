@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import classNames from "classnames/bind"
-import { useEffect, useRef, useState } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
 import useDebounce from "~/hook/useDebounce"
 
 import {
@@ -14,13 +14,15 @@ import { toastAlert } from "~/helper/toast"
 import { searchProducts } from "~/services/productService"
 import style from "./Header.module.scss"
 import { Link } from "react-router-dom"
+import { formattedNumber } from "~/helper/formatCurentcy"
+import { DataContext } from "~/context/AppContext"
 const cx = classNames.bind(style)
 export const Search = ({ isLocationHome, isHidden, scrollY, show = false }) => {
   const [value, setValue] = useState("")
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(false)
   const inputRef = useRef()
-  const [visible, setVisible] = useState(false)
+  const { visible, setVisible } = useContext(DataContext)
   const onChangeSearch = (e) => {
     setValue(e.target.value)
   }
@@ -103,15 +105,25 @@ export const Search = ({ isLocationHome, isHidden, scrollY, show = false }) => {
             <li>
               {products.map((item, key) => {
                 return (
-                  <Link className="d-flex" to="/">
+                  <Link
+                    className="d-flex align-items-center gap-1"
+                    to={`/san-pham/${item.slug}`}
+                  >
                     <div className={cx("image")}>
                       <img src={item.images[0]} alt="" />
                     </div>
-                    <div className="d-flex flex-column">
-                      <h4>{item.title}</h4>
+                    <div className="d-flex flex-column w-100 flex-shrink-1 pe-2">
+                      <h4 className="TitleResultsItem">{item.title}</h4>
                       <div className="d-flex justify-content-between">
-                        <p>10000</p>
-                        <p className="text-decoration-line-through">10000</p>
+                        <p>
+                          {formattedNumber(
+                            item.retail_price -
+                              (item.retail_price * item.sale) / 100
+                          )}
+                        </p>
+                        <p className="text-decoration-line-through">
+                          {formattedNumber(item.retail_price)}
+                        </p>
                       </div>
                     </div>
                   </Link>

@@ -8,11 +8,12 @@
 
 .ProductDetailTitle {
     position: relative;
+    font-weight: 400;
 
     &::after {
         content: '';
         position: absolute;
-        height: 2px;
+        height: 1px;
         width: 100%;
         background-color: var(--primary-color);
     }
@@ -28,14 +29,16 @@
         content: '';
         position: absolute;
         left: 0;
-        height: 2px;
+        height: 1px;
         bottom: 0;
 
         width: 100%;
         background-color: var(--primary-color);
     }
 
-
+    .ProductTitle {
+        font-weight: 400;
+    }
 }
 
 // ///////////
@@ -43,8 +46,8 @@
     display: flex;
     gap: 10px;
 
-    .active{
-        border: 2px solid var(--primary-color);
+    .active {
+        border: 1px solid var(--primary-color);
     }
 }
 
@@ -58,10 +61,12 @@ h2 {
     border: 1px solid #ccc;
     border-radius: 12px;
     cursor: pointer;
-    display: flex; align-items: center;
+    display: flex;
+    align-items: center;
     gap: 4px;
 }
-.StyleColor{
+
+.StyleColor {
     border: 1px solid var(--primary-color);
     height: 20px;
     width: 20px;
@@ -72,13 +77,12 @@ h2 {
     display: flex;
     gap: 10px;
     align-items: center;
-    width: 100%;
-
+    justify-content: center;
 }
 
 .BuyNow {
     padding: 10px;
-    flex: 1;
+    flex: 1 1;
     border: 1px solid #ccc;
     border-radius: 10px;
 
@@ -86,9 +90,9 @@ h2 {
     color: #fff;
     cursor: pointer;
 
-    p {
-        font-weight: 600;
-    }
+    // p {
+    //     font-weight: 600;
+    // }
 }
 
 .AddTocart {
@@ -144,100 +148,130 @@ h2 {
     overflow: hidden;
 }
 
-.ProductRelationItem{
+.ProductRelationItem {
     border: 1px solid #ccc;
     border-radius: 10px;
-    padding: 6px 10px;
-    height: 100%;
     position: relative;
-    cursor:  pointer   ;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 12px;
+    padding: 0 10px;
+    overflow: hidden;
+    min-height: 30px;
 }
-.DescriptionProduct{
+
+.DescriptionProduct {
     flex-wrap: nowrap;
 }
-.ProductSpecification{
+
+.ProductSpecification {
     box-shadow: var(--boxShadow);
     border-radius: 10px;
     margin: 0 10px;
     padding: 10px;
     flex: 1;
 }
+
+.EvaluateProduct {
+    border-radius: 10px;
+    padding: 0 10px;
+    margin: 10px;
+    border: 1px solid var(--primary-color);
+}
+
 @media (max-width:740px) {
-    .ProductDetailPage{
+    .ProductDetailPage {
         width: 100vw;
     }
-    .ProductDetailInfoBody{
+
+    .ProductDetailInfoBody {
         flex-wrap: wrap !important;
         display: flex;
         flex-direction: column;
     }
-    .ProductDetailContent{
-    }
-    .PriceProductDetail{
+
+    .ProductDetailContent {}
+
+    .PriceProductDetail {
         padding: 0 4px;
         justify-content: flex-start !important;
         gap: 20px !important;
         justify-content: flex-start;
         font-size: 1.6rem;
         align-items: center;
+        flex-direction: column;
+
     }
-    .AttributeProduct{
+
+    .AttributeProduct {
         padding: 0 4px;
     }
+
     .valueAttributeItem {
         padding: 12px !important;
     }
-    .ActionBuyProduct{
+
+    .ActionBuyProduct {
         gap: 4px;
-        padding:0 4px;
+        padding: 0 4px;
     }
-    .BuyNow{
+
+    .BuyNow {
         padding: 4px 0;
-        span{
+
+        span {
             white-space: nowrap;
             font-size: 14px;
         }
     }
-    .AddTocart{
+
+    .AddTocart {
         padding: 4px;
         font-size: 28px !important;
         height: 60px;
         width: 60px;
-        span{
+
+        span {
             display: none;
         }
     }
-    .ActionAmortization{
+
+    .ActionAmortization {
         padding: 0 4px;
         gap: 4px;
         font-size: 16px;
     }
-    .ActionAmortizationItem{
+
+    .ActionAmortizationItem {
         padding: 6px;
-        span{
+
+        span {
             width: 100%;
             white-space: nowrap;
             font-size: 14px;
         }
     }
 }
+
 // //////////////////
-.ProductDescription{
+.ProductDescription {
     text-align: justify;
-    box-shadow: 0 1px 2px 0 rgba(60,64,67,.1), 0 2px 6px 2px rgba(60,64,67,.15);;
-    padding:0 10px;
+    box-shadow: 0 1px 2px 0 rgba(60, 64, 67, .1), 0 2px 6px 2px rgba(60, 64, 67, .15);
+    ;
+    padding: 0 10px;
     // margin: 20px 10px;
     border-radius: 10px;
     max-height: 600px;
     overflow: hidden;
     position: relative;
-    img{
+
+    img {
         width: 100% !important;
     }
 }
 
-.ReadMore{
-    background: linear-gradient(180deg,hsla(0,0%,100%,0),hsla(0,0%,100%,.91) 50%,#fff 55%);
+.ReadMore {
+    background: linear-gradient(180deg, hsla(0, 0%, 100%, 0), hsla(0, 0%, 100%, .91) 50%, #fff 55%);
     border-radius: 10px;
     bottom: 0;
     display: block;
@@ -251,53 +285,60 @@ h2 {
     display: flex;
     align-items: center;
     justify-content: center;
-    p{
+
+    p {
         width: 30%;
         padding: 4px 10px;
-        box-shadow: 0 1px 2px 0 rgba(60,64,67,.1), 0 2px 6px 2px rgba(60,64,67,.15);
+        box-shadow: 0 1px 2px 0 rgba(60, 64, 67, .1), 0 2px 6px 2px rgba(60, 64, 67, .15);
         margin-bottom: 15px !important;
         border-radius: 0 0 10px 10px;
         cursor: pointer;
     }
 }
 
-.SalientFeatures{
-    background-color: rgb(237, 237, 237 , 0.9);
+.SalientFeatures {
+    background-color: rgb(237, 237, 237, 0.9);
     border-radius: 10px;
     padding: 10px;
-    h1{
+
+    h1 {
         color: var(--primary-color);
     }
+
     margin-bottom: 20px;
 }
 
 
-.ProductPreviewListPost{
+.ProductPreviewListPost {
     // box-shadow: var(--boxShadow);
     border-radius: 10px;
     margin-bottom: 20px;
 }
 
-.MW-100{
+.MW-100 {
     max-height: 100% !important;
 }
 
 
-.recentlyViewedProducts{
-    width: min(100% , 1200px);
-    margin-inline:auto;
+.recentlyViewedProducts {
+    width: min(100%, 1200px);
+    margin-inline: auto;
     padding: 10px;
     margin-top: 20px;
+
 }
+
 @media (max-width:740px) {
-    
-    .DescriptionProduct{
+
+    .DescriptionProduct {
         flex-direction: column;
     }
-    .ProductDescription{
+
+    .ProductDescription {
         max-height: 400px;
     }
-    .ProductSpecification{
+
+    .ProductSpecification {
         display: none;
     }
 }

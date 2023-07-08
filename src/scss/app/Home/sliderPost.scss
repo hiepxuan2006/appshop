@@ -1,6 +1,6 @@
 .SliderPostPage {
     width: 100%;
-
+    height: 100%;
     .swiper-slide {
         padding: 0 8px !important;
     }
@@ -10,9 +10,11 @@
     width: 100%;
     height: 300px;
     margin-top: 20px;
+    padding: 10px 0;
 }
 
 .PostItem {
+    height: 100%;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -22,7 +24,7 @@
     border-radius: 10px;
     cursor: pointer;
 
-    &:hover {
+    &:hover .ImagePost{
         transform: scale(1.02);
         transition: all .2s linear;
         z-index: 100;
@@ -51,6 +53,7 @@
 .TitleTileContent {
     line-height: 1.6;
     overflow: hidden;
+    font-weight: 500;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
     display: -webkit-box;

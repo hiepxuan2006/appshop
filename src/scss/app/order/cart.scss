@@ -1,8 +1,9 @@
 .CartHomePage {
-    width: 700px;
+    width: 100%;
     margin: 20px auto;
     user-select: none;
     min-height: calc(100vh - 100px);
+    position: relative;
     
 }
 
@@ -124,8 +125,9 @@
     flex-direction: column;
     gap: 4px;
     height: 180px;
+    position: sticky;
     box-shadow: var(--boxShadow);
-    bottom: 4px;
+    bottom: 0;
     margin: 0 auto;
     width: 100%;
     background-color: #fff;

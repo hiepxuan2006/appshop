@@ -6,20 +6,21 @@ import {
   faTrash,
 } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import React, { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { toast } from "react-toastify"
 import { ScrollToTopOnMount } from "~/components/ScrollToTopOnMount"
+import { DataContext } from "~/context/AppContext"
+import { DocTitle } from "~/helper/DocTitle"
 import { Loading } from "~/helper/Loading"
 import { formattedNumber } from "~/helper/formatCurentcy"
 import { getLocalData, setLocalData } from "~/services/StoreageServices"
-
 export const Cart = () => {
   const [cart, setCart] = useState([])
   const [cartLocal, setCartLocal] = useState("")
   const [isUpdateCart, setIsUpdateCart] = useState(false)
   const [loading, setLoading] = useState(false)
-  const [totalPrice, setTotalPrice] = useState(0)
+  const { setCartTotal } = useContext(DataContext)
   useEffect(() => {
     const cartLocal = getLocalData("cart-product-list")
     if (cartLocal) {
@@ -45,6 +46,7 @@ export const Cart = () => {
       __expires: Date.now() + 86400000,
     }
     setLocalData("cart-product-list", dataCart)
+    setCartTotal(dataCart.data.totalQuantity)
     setIsUpdateCart(true)
     setTimeout(() => {
       setLoading(false)
@@ -110,6 +112,7 @@ export const Cart = () => {
 
   return (
     <>
+      <DocTitle title="Giỏ hàng" />
       <ScrollToTopOnMount />
       {cart && cart.length ? (
         <div className="CartHomePage">

@@ -26,8 +26,9 @@ export const ProductDetail = () => {
   const [productRelation, setProductRelation] = useState([])
   const [recentlyViewed, setRecentlyViewed] = useState([])
   const { setCartTotal } = useContext(DataContext)
-  const [specification, setSpecification] = useState([])
   const [speBasic, setSpeBasic] = useState([])
+  const { visible, setVisible } = useContext(DataContext)
+
   const _getProductBySlugId = async () => {
     setLoading(true)
     const params = { slug }
@@ -43,8 +44,11 @@ export const ProductDetail = () => {
   useEffect(() => {
     _getProductBySlugId()
   }, [slug])
+  useEffect(() => {
+    setVisible(false)
+  }, [])
   const handleChoseAttributes = (att = {}, item) => {
-    setAttributesChose({ ...attributesChose, [item._id]: att })
+    setAttributesChose({ [item._id]: att })
     setIsChoseAttribute(false)
   }
   useEffect(() => {
@@ -52,6 +56,7 @@ export const ProductDetail = () => {
       .map((item) => item.slug)
       .sort()
       .join("/")
+
     const variant =
       product.variants &&
       product.variants.length &&
@@ -63,8 +68,10 @@ export const ProductDetail = () => {
           .join("/")
         return test === slug
       })
+    console.log("======", attributesChose)
     if (variant) setVariantChose(variant[0])
-  }, [attributesChose])
+  }, [attributesChose, slug])
+  console.log(variantChose)
   const handleAddToCart = () => {
     if (!variantChose) setIsChoseAttribute(true)
     else {
@@ -159,20 +166,24 @@ export const ProductDetail = () => {
           {loading && <Loading />}
           <DocTitle title={product.title} />
           <div className="ProductDetailTitle">
-            {variantChose ? (
-              <h2>{variantChose.title}</h2>
-            ) : (
-              <h2>{product.title}</h2>
-            )}
+            {variantChose ? <p>{product.title}</p> : <p>{product.title}</p>}
           </div>
           <div className="ProductDetailInfo container">
-            <div className="row flex-nowrap ProductDetailInfoBody gap-3">
-              <div className="col col-md-4">
+            <div className="row flex-nowrap ProductDetailInfoBody ">
+              <div className="col-sm-7 ">
                 <ImageSlideThumb product={product} />
               </div>
-              <div className="col ProductDetailContent col-md-5">
-                <div className="PriceProductDetail d-flex gap-3 ">
-                  <h2>
+              <div className=" ProductDetailContent col-sm-5">
+                <div className="ProductTitle mb-3">
+                  {variantChose ? (
+                    <h2>{product.title}</h2>
+                  ) : (
+                    <h2>{product.title}</h2>
+                  )}
+                </div>
+                <div className="PriceProductDetail d-flex gap-3 mb-3">
+                  <h2>Giá:</h2>
+                  <p className="d-flex gap-5 w-100">
                     {variantChose
                       ? formattedNumber(
                           variantChose.retail_price -
@@ -182,20 +193,22 @@ export const ProductDetail = () => {
                           product.retail_price -
                             (product.retail_price * product.sale) / 100
                         )}
-                  </h2>
-                  <h3 className="text-decoration-line-through">
-                    {variantChose
-                      ? formattedNumber(variantChose.retail_price)
-                      : formattedNumber(product.retail_price)}
-                  </h3>
+                    <p className="text-decoration-line-through">
+                      {variantChose
+                        ? formattedNumber(variantChose.retail_price)
+                        : formattedNumber(product.retail_price)}
+                    </p>
+                  </p>
                 </div>
-                <div className="ProductRelation mt-3 d-flex gap-3 ">
+                <h2>Loại sản phẩm:</h2>
+                <div className="ProductRelation  row m-0">
                   {productRelation.length > 0 &&
                     productRelation.map((item, key) => {
+                      console.log(item.product_class)
                       return (
                         <Link
                           to={`/san-pham/${item.slug}`}
-                          className="ProductRelationItem d-flex gap-5 "
+                          className="ProductRelationItem col col-md-4 d-flex gap-5 "
                         >
                           <p
                             key={key}
@@ -219,11 +232,11 @@ export const ProductDetail = () => {
                       return (
                         <div className="AttributeProductItem">
                           <h2 className="mb-4">{item.name} :</h2>
-                          <ul className="valueAttribute mb-4">
+                          <ul className="row valueAttribute mb-4">
                             {item.values.map((value, key) => {
                               return (
                                 <li
-                                  className={`valueAttributeItem ${
+                                  className={`valueAttributeItem col col-md-4 ${
                                     attributesChose[item._id] &&
                                     attributesChose[item._id].position ===
                                       value.position
@@ -281,20 +294,11 @@ export const ProductDetail = () => {
                   </div>
                 </div>
               </div>
-              <div className="col col-md-3 flex-shrink-1">
-                <div className="InfoProduct">
-                  <h1>Thông tin sản phẩm</h1>
-                  <p>
-                    Bảo hành chính hãng 12 tháng tại trung tâm bảo hành ủy
-                    quyền, 1 đổi 1 trong 30 ngày nếu có lỗi phần cứng từ NSX.
-                  </p>
-                </div>
-              </div>
             </div>
           </div>
           {recentlyViewed.length > 0 && (
             <div className="recentlyViewedProducts">
-              <h2>Sản phẩm vừa xem</h2>
+              <h>Sản phẩm vừa xem</h>
               <SliderProduct data={recentlyViewed} />
             </div>
           )}
@@ -346,6 +350,9 @@ export const ProductDetail = () => {
               </div>
             </div>
           </div>
+          <div className="EvaluateProduct">
+            <h1>Đánh giá và nhận xét về {product.title}</h1>
+          </div>
         </div>
       ) : (
         <div className="ProductDetailPage mt-2 ">
@@ -364,13 +371,6 @@ export const ProductDetail = () => {
           ></div>
         </div>
       )}
-
-      {/* {recentlyViewed.length > 0 && (
-        <div className="recentlyViewedProducts">
-          <h2>Sản phẩm vừa xem</h2>
-          <SliderProduct data={recentlyViewed} />
-        </div>
-      )} */}
     </>
   )
 }
