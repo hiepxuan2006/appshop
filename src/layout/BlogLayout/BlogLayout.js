@@ -1,10 +1,13 @@
 import { Footer } from "~/components/footer/Footer"
 import { HeaderBlog } from "./HeaderBlog"
 import { BlogLayoutLeft } from "./BlogLayoutLeft"
+import { ScrollToTopOnMount } from "~/components/ScrollToTopOnMount"
 
 const BlogLayout = ({ children }) => {
   return (
     <div className="WrapperBlog">
+      <ScrollToTopOnMount />
+
       <HeaderBlog />
       <div className="ContainerBlog">
         <div className="row ContainerBlogRow gap-3 w-100">

@@ -6,3 +6,17 @@
 .wrapper{
     height: 100%;
 }
+.Top{
+    background-color: #e9efff;
+}
+.TopBanner{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.TopBannerItem{
+    flex: 1;
+}

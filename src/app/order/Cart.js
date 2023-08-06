@@ -9,7 +9,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useContext, useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { toast } from "react-toastify"
-import { ScrollToTopOnMount } from "~/components/ScrollToTopOnMount"
 import { DataContext } from "~/context/AppContext"
 import { DocTitle } from "~/helper/DocTitle"
 import { Loading } from "~/helper/Loading"
@@ -113,7 +112,6 @@ export const Cart = () => {
   return (
     <>
       <DocTitle title="Giỏ hàng" />
-      <ScrollToTopOnMount />
       {cart && cart.length ? (
         <div className="CartHomePage">
           <div className="CartHeading d-flex align-items-center justify-content-between fw-bold">

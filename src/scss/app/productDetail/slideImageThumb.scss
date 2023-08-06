@@ -47,7 +47,7 @@
 }
 
 .mySwiperImageProductThumb {
-   height: 20%;
+   height: 15%;
    margin-top: 10px;
     .swiper-wrapper {
         align-items: center;
@@ -60,10 +60,11 @@
         height: 100%;
         overflow: hidden;
         padding: 10px;
+        width: 75px !important;
         img{
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
         }
     }
 

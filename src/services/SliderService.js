@@ -1,6 +1,8 @@
 import createAPIServices from "./httpRequest"
 
-const baseUrl = `${process.env.REACT_APP_BASE_URL_API}/slider`
+const baseUrl = "production"
+  ? `${process.env.REACT_APP_BASE_URL_DEV}/slider`
+  : `${process.env.REACT_APP_BASE_URL_API}/slider`
 
 const api = createAPIServices({ baseUrl })
 

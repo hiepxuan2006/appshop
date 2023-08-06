@@ -6,7 +6,6 @@ import React, { useContext, useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import { toast } from "react-toastify"
 import { Loading } from "~/components/Loading"
-import { ScrollToTopOnMount } from "~/components/ScrollToTopOnMount"
 import { DataContext } from "~/context/AppContext"
 import { DocTitle } from "~/helper/DocTitle"
 import { formattedNumber } from "~/helper/formatCurentcy"
@@ -15,6 +14,7 @@ import { getLocalData, setLocalData } from "~/services/StoreageServices"
 import { getProductBySlug } from "~/services/productService"
 import { SliderProduct } from "../Home/SliderProduct"
 import { ImageSlideThumb } from "./ImageSlideThumb"
+import { ScrollToTopOnMount } from "~/components/ScrollToTopOnMount"
 export const ProductDetail = () => {
   const { slug } = useParams()
   const [product, setProduct] = useState("")
@@ -160,11 +160,12 @@ export const ProductDetail = () => {
   }, [slug, product])
   return (
     <>
-      <ScrollToTopOnMount />
       {product && Object.keys(product).length !== 0 ? (
         <div className="ProductDetailPage">
           {loading && <Loading />}
           <DocTitle title={product.title} />
+          <ScrollToTopOnMount />
+
           <div className="ProductDetailTitle">
             {variantChose ? <p>{product.title}</p> : <p>{product.title}</p>}
           </div>
@@ -174,54 +175,37 @@ export const ProductDetail = () => {
                 <ImageSlideThumb product={product} />
               </div>
               <div className=" ProductDetailContent col-sm-5">
-                <div className="ProductTitle mb-3">
-                  {variantChose ? (
-                    <h2>{product.title}</h2>
-                  ) : (
-                    <h2>{product.title}</h2>
-                  )}
-                </div>
-                <div className="PriceProductDetail d-flex gap-3 mb-3">
-                  <h2>Giá:</h2>
-                  <p className="d-flex gap-5 w-100">
-                    {variantChose
-                      ? formattedNumber(
-                          variantChose.retail_price -
-                            (variantChose.retail_price * product.sale) / 100
-                        )
-                      : formattedNumber(
-                          product.retail_price -
-                            (product.retail_price * product.sale) / 100
-                        )}
-                    <p className="text-decoration-line-through">
-                      {variantChose
-                        ? formattedNumber(variantChose.retail_price)
-                        : formattedNumber(product.retail_price)}
-                    </p>
-                  </p>
-                </div>
-                <h2>Loại sản phẩm:</h2>
                 <div className="ProductRelation  row m-0">
                   {productRelation.length > 0 &&
                     productRelation.map((item, key) => {
-                      console.log(item.product_class)
                       return (
                         <Link
                           to={`/san-pham/${item.slug}`}
-                          className="ProductRelationItem col col-md-4 d-flex gap-5 "
+                          className={`ProductRelationItem col col-md-4 ${
+                            item._id === product._id
+                              ? "ProductRelationChose"
+                              : ""
+                          }`}
+                          key={key}
                         >
-                          <p
-                            key={key}
-                            dangerouslySetInnerHTML={{
-                              __html: item.product_class,
-                            }}
-                          ></p>
                           {item._id === product._id && (
                             <FontAwesomeIcon
                               icon={faCheck}
-                              className="text-danger"
+                              className="text-white IconCheckProduct"
                             />
                           )}
+                          <div className="d-flex gap-3">
+                            <p
+                              className="ProductRelationTag"
+                              key={key}
+                              dangerouslySetInnerHTML={{
+                                __html: item.product_class,
+                              }}
+                            ></p>
+                          </div>
+                          <div className="">
+                            {formattedNumber(product.sale)}
+                          </div>
                         </Link>
                       )
                     })}
@@ -247,15 +231,22 @@ export const ProductDetail = () => {
                                     handleChoseAttributes(value, item)
                                   }
                                 >
-                                  <p>{value.name}:</p>
-                                  {item.type === "color" && (
-                                    <p
-                                      className="StyleColor"
-                                      style={{
-                                        backgroundColor: `${value.value}`,
-                                      }}
-                                    ></p>
-                                  )}
+                                  <div className="d-flex gap-1">
+                                    <p>{value.name}</p>
+                                    {item.type === "color" && (
+                                      <p
+                                        className="StyleColor"
+                                        style={{
+                                          backgroundColor: `${value.value}`,
+                                        }}
+                                      ></p>
+                                    )}
+                                  </div>
+                                  <div className="PriceVariant">
+                                    {product.sale === "0"
+                                      ? formattedNumber(product.retail_price)
+                                      : formattedNumber(product.sale)}
+                                  </div>
                                 </li>
                               )
                             })}

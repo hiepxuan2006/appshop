@@ -9,7 +9,7 @@ export const ImageSlideThumb = ({ product }) => {
     <div className="ImageSlideThumbs">
       <Swiper
         spaceBetween={10}
-        navigation={true}
+        navigation={false}
         thumbs={{
           swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
         }}

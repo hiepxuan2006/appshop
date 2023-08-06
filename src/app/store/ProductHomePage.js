@@ -10,14 +10,15 @@ import { useContext, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link, useLocation } from "react-router-dom"
 import { Loading } from "~/components/Loading"
-import { ScrollToTopOnMount } from "~/components/ScrollToTopOnMount"
 import { SliderHotSale } from "~/components/bannerSale/SliderHotSale"
 import { DataContext } from "~/context/AppContext"
 import { getProductsByCategory } from "~/services/productService"
 import { _getBannerCategory } from "~/slice/bannerSlice"
 import { _getCategoryById } from "~/slice/categorySlice"
+import { _getProductSpecial } from "~/slice/productSlice"
 import { ProductItemHome } from "./ProductItemHome"
 import { SliderCategory } from "./SliderCategory"
+import { ScrollToTopOnMount } from "~/components/ScrollToTopOnMount"
 
 export const ProductHomePage = () => {
   const [categories, setCategories] = useState([])
@@ -33,7 +34,7 @@ export const ProductHomePage = () => {
 
   const { bannerCategory } = useSelector((state) => state.banner)
   const { category } = useSelector((state) => state.category)
-
+  const { productSpecial } = useSelector((state) => state.product)
   const { windowWidth } = useContext(DataContext)
   const dispatch = useDispatch()
   const _getProductById = async () => {
@@ -52,6 +53,9 @@ export const ProductHomePage = () => {
   }
 
   useEffect(() => {
+    dispatch(_getProductSpecial(sort))
+  }, [sort])
+  useEffect(() => {
     dispatch(_getBannerCategory({ category: sort }))
   }, [sort])
   useEffect(() => {
@@ -61,11 +65,12 @@ export const ProductHomePage = () => {
   useEffect(() => {
     _getProductById()
   }, [sort_by, sort, order])
-
+  console.log(category)
   return (
     <div className="ProductHomePage">
       {loading && <Loading />}
       <ScrollToTopOnMount />
+
       {bannerCategory[sort] && bannerCategory[sort].length > 0 && (
         <div className="row p-0 m-0">
           <div
@@ -84,35 +89,40 @@ export const ProductHomePage = () => {
           </div>
         </div>
       )}
-      {category[sort] &&
-        category[sort].length > 0 &&
-        category[sort].map((category, key) => {
-          return (
-            <div
-              key={key}
-              className=" col col-md-6 d-flex flex-column gap-3 mb-5"
-            >
-              <h2>{category.label}</h2>
-              <div className="BrandProductHome ">
-                {category.children &&
-                  category.children.map((value, key) => {
-                    return (
-                      <Link
-                        key={key}
-                        to={`/san-pham/danh-muc/${value.slug}?id=${value._id}`}
-                        className="BrandProductItemHome"
-                      >
-                        <p>{value.label}</p>
-                      </Link>
-                    )
-                  })}
+      <div className="row">
+        {category[sort] &&
+          category[sort].length > 0 &&
+          category[sort].map((category, key) => {
+            return (
+              <div
+                key={key}
+                className=" col col-md-6 d-flex flex-column gap-3 mb-5"
+              >
+                <h2>{category.label}</h2>
+                <div className="BrandProductHome ">
+                  {category.children &&
+                    category.children.map((value, key) => {
+                      return (
+                        <Link
+                          key={key}
+                          to={`/san-pham/danh-muc/${value.slug}?id=${value._id}`}
+                          className="BrandProductItemHome"
+                        >
+                          <p>{value.label}</p>
+                        </Link>
+                      )
+                    })}
+                </div>
               </div>
-            </div>
-          )
-        })}
-      {/* </div> */}
+            )
+          })}
+      </div>
 
-      {products.length > 0 && <SliderHotSale products={products} />}
+      {productSpecial &&
+        productSpecial[sort] &&
+        productSpecial[sort].length > 0 && (
+          <SliderHotSale products={productSpecial[sort]} />
+        )}
       <div className="FilterProduct">
         <h3>Sắp Xếp Theo</h3>
         <div className="FilterList">

@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import queryString from "query-string"
 import { getCategoriesById } from "~/services/categoryService"
 
 export const _getCategoryById = createAsyncThunk(

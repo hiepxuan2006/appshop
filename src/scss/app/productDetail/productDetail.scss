@@ -63,7 +63,12 @@ h2 {
     cursor: pointer;
     display: flex;
     align-items: center;
+    justify-content: center;
+    flex-direction: column;
     gap: 4px;
+}
+.PriceVariant{
+    font-size: 12px;
 }
 
 .StyleColor {
@@ -158,6 +163,28 @@ h2 {
     padding: 0 10px;
     overflow: hidden;
     min-height: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.ProductRelationChose {
+    border: 1px solid var(--primary-color);
+
+}
+
+.IconCheckProduct {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: var(--primary-color);
+    border-bottom-right-radius: 10px;
+    padding: 4px;
+}
+.ProductRelationTag{
+    font-weight: 500;
+    font-size: 16px;
 }
 
 .DescriptionProduct {
@@ -177,6 +204,7 @@ h2 {
     padding: 0 10px;
     margin: 10px;
     border: 1px solid var(--primary-color);
+
 }
 
 @media (max-width:740px) {

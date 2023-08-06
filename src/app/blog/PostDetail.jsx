@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react"
 import { useLocation } from "react-router-dom"
+import { ScrollToTopOnMount } from "~/components/ScrollToTopOnMount"
 import { getPostById } from "~/services/postService"
 
 export const PostDetail = () => {
@@ -21,6 +22,8 @@ export const PostDetail = () => {
   }, [sort])
   return (
     <div className="PostDetailPage">
+      <ScrollToTopOnMount />
+
       <div className="ImagePostDetail">
         <img src={post.image} alt="" />
       </div>

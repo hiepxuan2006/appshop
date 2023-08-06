@@ -129,11 +129,13 @@
         font-size: 12px;
     }
 
-    h3 {
-        font-weight: 400;
-        font-size: 14px;
+    .ProductItemName {
+        text-align: left;
+        height: 40px;
         line-height: 1.4;
+        font-size: 14px;
         overflow: hidden;
+        font-weight: 400;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 2;
         display: -webkit-box;

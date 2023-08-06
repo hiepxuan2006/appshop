@@ -1,71 +1,82 @@
 .SliderHotSale {
     height: 500px;
     width: 100%;
-    background-color: antiquewhite;
+    background: linear-gradient(rgb(138, 5, 5), rgb(0, 0, 0)) 0% 0% / cover;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-padding: 10px;
-.heading_banner{
-    display: flex;
-    justify-content: space-between;
-}
-.time_sale{
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    h2{
-        color: var(--primary-color);
-        font-weight: 600;
-        font-size: 24px;
+    padding: 10px;
+    border-radius: 10px;
+
+    .heading_banner {
+        display: flex;
+        justify-content: space-between;
     }
-}
-.clock_banner{
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    p{
-        padding: 10px ;
-        background-color: #ffffff;
-        color: var(--primary-color);
-        font-weight: 600;
-        height: 40px;
-        width: 40px;
-        text-align: center;
-        border-radius: 10px;
-        font-size: 20px;
-        box-shadow: var(--boxShadow);
+
+    .time_sale {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        h2 {
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 24px;
+        }
     }
-}
+
+    .clock_banner {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        p {
+            padding: 10px;
+            background-color: #ffffff;
+            color: var(--primary-color);
+            font-weight: 600;
+            height: 40px;
+            width: 40px;
+            text-align: center;
+            border-radius: 10px;
+            font-size: 20px;
+            box-shadow: var(--boxShadow);
+        }
+    }
 
     .mySwiperSliderHotSale {
         height: 400px;
         width: 100%;
     }
-    .swiper-wrapper{
+
+    .swiper-wrapper {
         gap: 0;
     }
+
     .swiper-slide {
         padding: 6px;
         border-radius: 10px;
     }
-    .Title{
+
+    .Title {
         height: 100px;
         width: 50%;
         display: flex;
         align-items: flex-start;
         justify-content: flex-start;
-        img{
+
+        img {
             height: 100%;
-            width: 100%;object-fit: contain;
+            width: 100%;
+            object-fit: contain;
         }
     }
 }
 
 @media only screen and (min-device-width : 320px) and (max-device-width : 740px) {
 
-    .clock_banner{
-        p{
+    .clock_banner {
+        p {
             height: 30px !important;
             width: 30px !important;
             padding: 0 !important;

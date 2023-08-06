@@ -1,15 +1,14 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { Loading } from "~/components/Loading"
-import { ScrollToTopOnMount } from "~/components/ScrollToTopOnMount"
 import { SliderBanner } from "~/components/Slider/SliderReact"
 import { DocTitle } from "~/helper/DocTitle"
+import { LoadingProcess } from "~/helper/LoadingProcess"
 import { _getBannerAds, _getBannerSlider } from "~/slice/bannerSlice"
 import { _getCategory, _getProductGroupCategory } from "~/slice/productSlice"
 import { ListCategory } from "./ListCategory"
 import { SliderPost } from "./SliderPost"
 import { SliderProduct } from "./SliderProduct"
-import { LoadingProcess } from "~/helper/LoadingProcess"
+import { ScrollToTopOnMount } from "~/components/ScrollToTopOnMount"
 export const Home = ({ isOpenPage }) => {
   const { productsGroupCategory, categories, loading } = useSelector(
     (state) => state.product
@@ -32,8 +31,6 @@ export const Home = ({ isOpenPage }) => {
   }
   return (
     <>
-      <ScrollToTopOnMount />
-
       {loading ? (
         <LoadingProcess />
       ) : (
@@ -43,6 +40,8 @@ export const Home = ({ isOpenPage }) => {
               "CellphoneS - Điện thoại, laptop, tablet, phụ kiện chính hãng"
             }
           />
+          <ScrollToTopOnMount />
+
           <div className={`HomePageSlider`}>
             <ListCategory categories={categories} />
             <div className="SliderHomePage">
@@ -65,10 +64,11 @@ export const Home = ({ isOpenPage }) => {
           </div>
           <div className="banner-promotion">
             <img
-              src="https://cdn2.cellphones.com.vn/1200x75,webp,q100/https://dashboard.cellphones.com.vn/storage/banner-special-desktop-pkchaohe.png"
+              src="https://cdn2.cellphones.com.vn/1200x75,webp,q100/https://dashboard.cellphones.com.vn/storage/b2s-special-desktop-dday-p1.png"
               alt=""
             />
           </div>
+
           <div>
             {productsGroupCategory.length > 0 &&
               productsGroupCategory.map((product, key) => {

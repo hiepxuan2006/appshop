@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react"
-import { SliderBlog } from "./SliderBlog"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faClockRotateLeft } from "@fortawesome/free-solid-svg-icons"
-import { PreviewListPost } from "./PreviewListPost"
-import { getPost, getPostGroup } from "~/services/postService"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import moment from "moment/moment"
+import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
+import { getPost, getPostGroup } from "~/services/postService"
+import { PreviewListPost } from "./PreviewListPost"
+import { SliderBlog } from "./SliderBlog"
+import { ScrollToTopOnMount } from "~/components/ScrollToTopOnMount"
 
 export const HomeBlog = () => {
   const [post, setPost] = useState([])
@@ -26,6 +27,8 @@ export const HomeBlog = () => {
   }, [])
   return (
     <div className="HomeBlog">
+      <ScrollToTopOnMount />
+
       <SliderBlog data={post.length > 0 && post.slice(0, 4)} />
       <div className="mt-5">
         <h3 className="mb-5">Tin tức cập nhật</h3>

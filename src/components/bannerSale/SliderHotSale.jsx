@@ -69,7 +69,6 @@ export const SliderHotSale = ({ products = [] }) => {
 
     return () => clearInterval(interval)
   }, [countdown])
-  console.log(countdown)
   return (
     <>
       {isWeekend && (

@@ -51,11 +51,13 @@
 }
 
 .TitleTileContent {
-    line-height: 1.6;
+    line-height: 1.4;
     overflow: hidden;
+    font-size: 14px;
+    height: 40px;
     font-weight: 500;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 2;
     display: -webkit-box;
     word-wrap: break-word;
 }

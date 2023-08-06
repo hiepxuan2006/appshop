@@ -1,6 +1,8 @@
 import createAPIServices from "./httpRequest"
 
-const baseUrl = `${process.env.REACT_APP_BASE_URL_API}/product`
+const baseUrl = "production"
+  ? `${process.env.REACT_APP_BASE_URL_DEV}/product`
+  : `${process.env.REACT_APP_BASE_URL_API}/product`
 
 const api = createAPIServices({ baseUrl })
 
@@ -36,6 +38,13 @@ export const getProductsByCategory = (params) => {
 export const getProductGroupCategory = (params) => {
   return api.makeRequest({
     url: `/get-product-group`,
+    method: "get",
+  })
+}
+
+export const getProductSpecial = (params) => {
+  return api.makeRequest({
+    url: `/get-product-special?category=${params}`,
     method: "get",
   })
 }

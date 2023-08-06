@@ -1,6 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { getCategories } from "~/services/categoryService"
-import { getProductGroupCategory } from "~/services/productService"
+import {
+  getProductGroupCategory,
+  getProductSpecial,
+} from "~/services/productService"
 
 export const _getProductGroupCategory = createAsyncThunk(
   "product/getProductCategory",
@@ -24,6 +27,16 @@ export const _getCategory = createAsyncThunk(
   }
 )
 
+export const _getProductSpecial = createAsyncThunk(
+  "product/getProductSpecial",
+  async (params, thunkAPI) => {
+    const { data, success, message } = await getProductSpecial(params)
+    if (!success) {
+      return thunkAPI.rejectWithValue()
+    }
+    return { list: data, categoryId: params, success, message }
+  }
+)
 const product = createSlice({
   name: "product",
 
@@ -31,6 +44,7 @@ const product = createSlice({
     loading: false,
     productsGroupCategory: [],
     categories: [],
+    productSpecial: {},
   },
 
   extraReducers: {
@@ -54,6 +68,17 @@ const product = createSlice({
     },
     [_getCategory.rejected]: (state, action) => {
       state.categories = []
+      state.loading = false
+    },
+    [_getProductSpecial.fulfilled]: (state, action) => {
+      state.productSpecial[action.payload.categoryId] = action.payload.list
+      state.loading = false
+    },
+    [_getProductSpecial.pending]: (state, action) => {
+      state.loading = false
+    },
+    [_getProductSpecial.rejected]: (state, action) => {
+      state.productSpecial = { ...state.productSpecial }
       state.loading = false
     },
   },

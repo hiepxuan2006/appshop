@@ -12,25 +12,21 @@ export const ProductItemHome = ({ product }) => {
     >
       {product.is_Sale && (
         <div className="ProductDiscount">
-          <p>{product.sale}</p>
+          {/* <p>{(product.sale / product.retail_price) * 100} %</p> */}
         </div>
       )}
       <div className="ImageProductItem">
         <img src={product.images[0]} alt="" />
       </div>
       <div className="ProductItemInfo">
-        <div className="ProductItemTitle">
-          <h4>{product.title}</h4>
-        </div>
+        <div className="ProductItemTitle">{product.title}</div>
         <div className="ProductItemPrice">
-          <p className="PriceAfterSale">
-            {formattedNumber(
-              product.retail_price - (product.retail_price * product.sale) / 100
-            )}
-          </p>
-          <p className="PriceRetail text-decoration-line-through">
-            {formattedNumber(product.retail_price)}
-          </p>
+          <p className="PriceAfterSale">{formattedNumber(product.sale)}</p>
+          {product.sale !== product.retail_price && (
+            <p className="PriceRetail text-decoration-line-through">
+              {formattedNumber(product.retail_price)}
+            </p>
+          )}
         </div>
         <div className="AddCart">
           <p>Thêm vào giỏ</p>
