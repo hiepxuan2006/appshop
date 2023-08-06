@@ -19,7 +19,7 @@ export const ProductItemHome = ({ product }) => {
         <img src={product.images[0]} alt="" />
       </div>
       <div className="ProductItemInfo">
-        <div className="ProductItemTitle">{product.title}</div>
+        <h4 className="ProductItemTitle">{product.title}</h4>
         <div className="ProductItemPrice">
           <p className="PriceAfterSale">{formattedNumber(product.sale)}</p>
           {product.sale !== product.retail_price && (
