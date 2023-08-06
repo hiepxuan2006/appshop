@@ -204,9 +204,7 @@ export const ProductDetail = () => {
                               }}
                             ></p>
                           </div>
-                          <div className="">
-                            {formattedNumber(product.sale)}
-                          </div>
+                          <div className="">{formattedNumber(item.sale)}</div>
                         </Link>
                       )
                     })}

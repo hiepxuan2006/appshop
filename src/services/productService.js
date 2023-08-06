@@ -1,8 +1,9 @@
 import createAPIServices from "./httpRequest"
 
-const baseUrl = "production"
-  ? `${process.env.REACT_APP_BASE_URL_DEV}/product`
-  : `${process.env.REACT_APP_BASE_URL_API}/product`
+const baseUrl =
+  process.env.NODE_ENV !== "production"
+    ? `${process.env.REACT_APP_BASE_URL_DEV}/product`
+    : `${process.env.REACT_APP_BASE_URL_API}/product`
 
 const api = createAPIServices({ baseUrl })
 

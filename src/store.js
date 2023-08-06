@@ -1,9 +1,9 @@
-import { configureStore, compose } from "@reduxjs/toolkit"
+import { configureStore } from "@reduxjs/toolkit"
 
-import productReducer from "~/slice/productSlice"
-import sliderReducer from "~/slice/sliderSlice"
 import bannerSlice from "~/slice/bannerSlice"
 import categorySlice from "~/slice/categorySlice"
+import productReducer from "~/slice/productSlice"
+import sliderReducer from "~/slice/sliderSlice"
 
 const rootReducer = {
   product: productReducer,

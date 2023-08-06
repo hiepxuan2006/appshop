@@ -9,6 +9,7 @@ export const _getBannerSlider = createAsyncThunk(
       skipNull: true,
       skipEmptyString: true,
     })
+
     const { data, success, message } = await getBannerSlider(query)
     if (!success) {
       return thunkAPI.rejectWithValue()
@@ -39,7 +40,12 @@ export const _getBannerCategory = createAsyncThunk(
 export const _getBannerAds = createAsyncThunk(
   "banner/bannerAds",
   async (params, thunkAPI) => {
-    const { data, success, message } = await getBannerSlider(params)
+    const query = queryString.stringify(params, {
+      skipNull: true,
+      skipEmptyString: true,
+    })
+
+    const { data, success, message } = await getBannerSlider(query)
     if (!success) {
       return thunkAPI.rejectWithValue()
     }
