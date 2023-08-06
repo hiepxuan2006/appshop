@@ -22,7 +22,7 @@ export function validatePassword(password) {
   }
 
   // Kiểm tra ký tự đặc biệt
-  if (!password.match(/[!@#$%^&*()_+~`\-={}\[\]\\|:;"'<>,.?/]/)) {
+  if (!password.match(/[!@#$%^&*()_+~`\-={}[\]\\|:;"'<>,.?/]/)) {
     errors.characters = "Mật khẩu phải chứa ít nhất một ký tự đặc biệt."
   }
 

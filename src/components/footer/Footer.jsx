@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import {
   faFacebook,
   faGithub,
@@ -5,9 +6,7 @@ import {
   faLinkedin,
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons"
-import { faVoicemail } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import React from "react"
 import { Link } from "react-router-dom"
 const logo = require("~/assets/Shipper.png")
 export const Footer = () => {

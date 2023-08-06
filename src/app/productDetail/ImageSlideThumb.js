@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Autoplay, FreeMode, Navigation, Pagination, Thumbs } from "swiper"
+import { FreeMode, Navigation, Pagination, Thumbs } from "swiper"
 import { Swiper, SwiperSlide } from "swiper/react"
 
 export const ImageSlideThumb = ({ product }) => {

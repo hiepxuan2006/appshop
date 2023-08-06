@@ -6,10 +6,7 @@ import {
   faCreditCard,
 } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import React from "react"
-import { useParams } from "react-router-dom"
 import { DocTitle } from "~/helper/DocTitle"
-import { formattedNumber } from "~/helper/formatCurentcy"
 
 export const Payment = ({ children }) => {
   return (

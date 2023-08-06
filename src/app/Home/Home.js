@@ -1,5 +1,6 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { ScrollToTopOnMount } from "~/components/ScrollToTopOnMount"
 import { SliderBanner } from "~/components/Slider/SliderReact"
 import { DocTitle } from "~/helper/DocTitle"
 import { LoadingProcess } from "~/helper/LoadingProcess"
@@ -8,12 +9,11 @@ import { _getCategory, _getProductGroupCategory } from "~/slice/productSlice"
 import { ListCategory } from "./ListCategory"
 import { SliderPost } from "./SliderPost"
 import { SliderProduct } from "./SliderProduct"
-import { ScrollToTopOnMount } from "~/components/ScrollToTopOnMount"
 export const Home = ({ isOpenPage }) => {
   const { productsGroupCategory, categories, loading } = useSelector(
     (state) => state.product
   )
-  const { bannerSlider, banner } = useSelector((state) => state.banner)
+  const { bannerSlider } = useSelector((state) => state.banner)
   const dispatch = useDispatch()
 
   useEffect(() => {

@@ -4,9 +4,9 @@ import {
   faSackDollar,
 } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { Slider, SliderBanner } from "~/components/Slider/SliderReact"
-import { HomePageAccount } from "./HomePageAccount"
 import { Link } from "react-router-dom"
+import { SliderBanner } from "~/components/Slider/SliderReact"
+import { HomePageAccount } from "./HomePageAccount"
 const logo = require("~/assets/login.png")
 const gift = require("~/assets/gift-box(1)1.ad696df.png")
 const shipper = require("~/assets/Shipper_CPS 3.1905116.png")

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Autoplay } from "swiper"
 
 import { useEffect } from "react"

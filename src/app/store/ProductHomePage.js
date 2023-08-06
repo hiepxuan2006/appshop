@@ -10,6 +10,7 @@ import { useContext, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link, useLocation } from "react-router-dom"
 import { Loading } from "~/components/Loading"
+import { ScrollToTopOnMount } from "~/components/ScrollToTopOnMount"
 import { SliderHotSale } from "~/components/bannerSale/SliderHotSale"
 import { DataContext } from "~/context/AppContext"
 import { getProductsByCategory } from "~/services/productService"
@@ -18,10 +19,8 @@ import { _getCategoryById } from "~/slice/categorySlice"
 import { _getProductSpecial } from "~/slice/productSlice"
 import { ProductItemHome } from "./ProductItemHome"
 import { SliderCategory } from "./SliderCategory"
-import { ScrollToTopOnMount } from "~/components/ScrollToTopOnMount"
 
 export const ProductHomePage = () => {
-  const [categories, setCategories] = useState([])
   const [products, setProducts] = useState([])
   const [sort_by, setSort_by] = useState("")
   const [order, setOrder] = useState("")

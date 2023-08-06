@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import { useEffect, useState } from "react"
 import { Swiper, SwiperSlide } from "swiper/react"
 
@@ -8,8 +9,8 @@ import "swiper/css/navigation"
 import "swiper/css/thumbs"
 // import required modules
 
-import SwiperCore, { Autoplay, FreeMode, Navigation, Thumbs } from "swiper"
 import { useDispatch, useSelector } from "react-redux"
+import SwiperCore, { Autoplay, FreeMode, Navigation, Thumbs } from "swiper"
 import { _getSliders } from "~/slice/sliderSlice"
 export const SliderBanner = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null)

@@ -1,13 +1,11 @@
-import React from "react"
 import { Swiper, SwiperSlide } from "swiper/react"
 
 // Import Swiper styles
-import "swiper/css"
-import "swiper/css/pagination"
-import "swiper/css/navigation"
-import { Autoplay, Pagination, Navigation } from "swiper"
-import { slidersBlog } from "~/fetchData"
 import { Link } from "react-router-dom"
+import { Autoplay, Navigation, Pagination } from "swiper"
+import "swiper/css"
+import "swiper/css/navigation"
+import "swiper/css/pagination"
 export const SliderBlog = ({ data = [] }) => {
   return (
     <div className="SliderBlog">

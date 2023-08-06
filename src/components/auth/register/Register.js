@@ -7,9 +7,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import classNames from "classnames/bind"
 import { useState } from "react"
 import { Link } from "react-router-dom"
+import { DocTitle } from "~/helper/DocTitle"
 import { validatePassword } from "~/helper/regexPassword"
 import style from "./Register.module.scss"
-import { DocTitle } from "~/helper/DocTitle"
 const loginImg = require("~/assets/login.png")
 const cx = classNames.bind(style)
 export const Register = () => {
@@ -20,7 +20,7 @@ export const Register = () => {
     passwordConfirm: "",
     error: {},
   })
-  const { phone, email, password, passwordConfirm, error } = data
+  const { password, passwordConfirm, error } = data
 
   const handleChage = (e) => {
     setData({ ...data, error: "", [e.target.name]: e.target.value })

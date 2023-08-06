@@ -43,7 +43,7 @@ const AppContext = (props) => {
   const secretLogin = async () => {
     setLoading(true)
     try {
-      const { data, success, message } = await secretAccount()
+      const { success, message } = await secretAccount()
       if (!success) {
         removeLocalData("access_token")
         removeLocalData("user")

@@ -1,13 +1,13 @@
+/* eslint-disable no-unused-vars */
 import { useContext } from "react"
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom"
 import { Gototop } from "./components/Gototop"
-import { Loading } from "./components/Loading"
 import { Notfound } from "./components/Notfound"
 import { DataContext } from "./context/AppContext"
+import { LoadingProcess } from "./helper/LoadingProcess"
 import { HomeLayout } from "./layout"
 import { router } from "./router"
 import { routerPrivate } from "./router/router"
-import { LoadingProcess } from "./helper/LoadingProcess"
 
 function App() {
   const { loading, setLoading } = useContext(DataContext)

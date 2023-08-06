@@ -1,4 +1,3 @@
-const loading = require("~/assets/gg.gif")
 export const Loading = ({ show = false }) => {
   return (
     <>

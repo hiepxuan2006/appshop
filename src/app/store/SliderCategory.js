@@ -7,7 +7,6 @@ export const SliderCategory = ({ bannerCategory = [] }) => {
   const settings = {
     dots: true,
     infinite: true,
-    dots: false,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -15,8 +14,6 @@ export const SliderCategory = ({ bannerCategory = [] }) => {
     autoplay: true,
     pauseOnHover: false,
     autoplaySpeed: 3000,
-
-    autoplaySpeed: 3000, // Thiết lập thời gian chuyển đổi giữa các slide
   }
   return (
     <div className="SliderCategory ">

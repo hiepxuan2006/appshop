@@ -35,6 +35,6 @@ const category = createSlice({
     },
   },
 })
-const { reducer, actions } = category
+const { reducer } = category
 
 export default reducer

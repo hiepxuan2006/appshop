@@ -1,13 +1,13 @@
 /* eslint-disable react/jsx-no-duplicate-props */
 // Import Swiper React components
-import { Swiper, SwiperSlide } from "swiper/react"
 import Slider from "react-slick"
+import { Swiper, SwiperSlide } from "swiper/react"
 // Import Swiper styles
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 
-import { SliderProductItem } from "./SliderProductItem"
 import { Autoplay } from "swiper"
+import { SliderProductItem } from "./SliderProductItem"
 // import required modules
 export const SliderProduct = ({ data = [], category = "" }) => {
   const [options, setOptions] = useState([])
@@ -21,14 +21,12 @@ export const SliderProduct = ({ data = [], category = "" }) => {
   const settings = {
     dots: true,
     infinite: true,
-    dots: false,
     speed: 500,
     slidesToShow: 5,
     slidesToScroll: 1,
     arrows: false,
     autoplay: true,
     pauseOnHover: false,
-    autoplaySpeed: 3000,
     responsive: [
       {
         breakpoint: 768,

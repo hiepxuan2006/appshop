@@ -48,6 +48,6 @@ const slider = createSlice({
   },
 })
 
-const { reducer, actions } = slider
+const { reducer } = slider
 
 export default reducer

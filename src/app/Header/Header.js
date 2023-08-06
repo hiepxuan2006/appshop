@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {
   faBarsStaggered,
   faCartFlatbed,
@@ -7,14 +8,13 @@ import {
 } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import classNames from "classnames/bind"
-import { Fragment, useContext, useEffect, useState } from "react"
+import { Fragment, useContext, useEffect, useRef, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { DataContext } from "~/context/AppContext"
 import { getLocalData, removeLocalData } from "~/services/StoreageServices"
 import { getCategories } from "~/services/categoryService"
 import style from "./Header.module.scss"
 import { Search } from "./Search"
-import { useRef } from "react"
 const cx = classNames.bind(style)
 const logo = require("~/assets/logo.png")
 const Header = ({ isHidden = true, show = false }) => {
@@ -23,8 +23,6 @@ const Header = ({ isHidden = true, show = false }) => {
   const [hideOn, setHideOn] = useState(false)
   const [totalCart, setTotalCart] = useState(0)
   const { isLogin } = useContext(DataContext)
-
-  const navigate = useNavigate()
 
   const handleCategory = () => {
     setIsOpen(!modalIsOpen)

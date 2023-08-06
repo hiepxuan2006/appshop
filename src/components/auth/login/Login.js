@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import classNames from "classnames/bind"
 import { gapi } from "gapi-script"
 import { useContext, useEffect, useState } from "react"
@@ -90,7 +91,7 @@ export const Login = () => {
   console.log(isLogin)
   useEffect(() => {
     if (isLogin) navigation("/account/homepage")
-  }, [])
+  }, [isLogin])
   return loading ? (
     <Loading />
   ) : (

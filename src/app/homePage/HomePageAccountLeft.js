@@ -1,4 +1,3 @@
-import React from "react"
 import {
   faGift,
   faHistory,
@@ -8,7 +7,7 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { NavL, NavLink, NavLinkinkNavLink } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 
 export const HomePageAccountLeft = () => {
   return (

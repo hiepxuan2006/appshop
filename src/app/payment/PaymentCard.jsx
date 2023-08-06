@@ -1,14 +1,11 @@
-import React from "react"
-import { Payment } from "./Payment"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faPaypal } from "@fortawesome/free-brands-svg-icons"
 import {
   faHomeUser,
   faM,
-  faMoneyBill,
   faMoneyBillTransfer,
-  faMoneyBillWave,
 } from "@fortawesome/free-solid-svg-icons"
-import { faPaypal } from "@fortawesome/free-brands-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { Payment } from "./Payment"
 
 export const PaymentCard = () => {
   return (

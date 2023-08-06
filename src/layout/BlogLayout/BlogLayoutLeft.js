@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { NavLink } from "react-router-dom"
 import { getAllTopic } from "~/services/postService"
 const home = require("~/assets/homeBlog.png")
-const discovery = require("~/assets/discover.png")
-const smartphone = require("~/assets/smartphone.png")
-const paper = require("~/assets/newspaper.png")
-const promotion = require("~/assets/promotion.png")
+// const discovery = require("~/assets/discover.png")
+// const smartphone = require("~/assets/smartphone.png")
+// const paper = require("~/assets/newspaper.png")
+// const promotion = require("~/assets/promotion.png")
 
 export const BlogLayoutLeft = () => {
   const [topic, setTopic] = useState([])

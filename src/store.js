@@ -1,4 +1,4 @@
-import { configureStore, applyMiddleware, compose } from "@reduxjs/toolkit"
+import { configureStore, compose } from "@reduxjs/toolkit"
 
 import productReducer from "~/slice/productSlice"
 import sliderReducer from "~/slice/sliderSlice"
